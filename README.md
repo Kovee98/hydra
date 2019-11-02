@@ -1,4 +1,4 @@
-# Hydra (hydra-2)
+# Hydra
 
 A minimal Http client.
 

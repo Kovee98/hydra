@@ -1,9 +1,6 @@
 <template>
     <div>
-        <div id="response-bar">
-            <p class="no-select">Response</p>
-        </div>
-        <pre id="response">No response (send a request)</pre>
+        <pre ref="response" class="text-body1">No response (send a request)</pre>
     </div>
 </template>
 

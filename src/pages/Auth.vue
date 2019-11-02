@@ -1,7 +1,5 @@
 <template>
     <div>
-        {{ params }}
-        {{ headers }}
     </div>
 </template>
 
@@ -9,8 +7,6 @@
 export default {
     data () {
         return {
-            params: this.$store.getters['params/get'],
-            headers: this.$store.getters['headers/get']
         };
     }
 };

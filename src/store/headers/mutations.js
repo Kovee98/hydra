@@ -5,3 +5,7 @@ export function remove (state, index) {
 export function add (state, header) {
     state.headers.push(header);
 }
+
+export function update (state, header) {
+    state.headers[header.index] = header.arg;
+}

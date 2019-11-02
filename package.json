@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "A minimal Http client.",
     "productName": "Hydra",
-    "cordovaId": "org.cordova.quasar.app",
+    "cordovaId": "com.jkovalchik.hydra",
     "capacitorId": "",
     "author": "Joshua Kovalchik",
     "private": true,

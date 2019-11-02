@@ -6,9 +6,9 @@
                   :i="i"
                   :name="name" />
 
-        <div class="row q-py-md q-pr-md">
-            <div class="col">
-                <q-btn push @click="add" dense color="primary" class="q-pa-sm full-width">
+        <div class="row q-py-md q-pr-md justify-center">
+            <div class="col justify-center">
+                <q-btn @click="add" dense color="primary" class="q-pa-sm">
                     <q-icon size="xs" name="fas fa-plus" />
                 </q-btn>
             </div>

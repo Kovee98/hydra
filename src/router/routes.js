@@ -22,10 +22,10 @@ const routes = [
         ]
     },
     {
-        path: '/auth',
+        path: '/response',
         component: () => import('layouts/Layout.vue'),
         children: [
-            { path: '', component: () => import('pages/Auth.vue') }
+            { path: '', component: () => import('pages/Response.vue') }
         ]
     }
 ];

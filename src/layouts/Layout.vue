@@ -2,17 +2,7 @@
     <q-layout view="hHh lpR fFf">
         <q-header elevated class="bg-blue-grey-8 text-white">
             <q-toolbar class="bg-grey-2 q-pa-none justify-center">
-                <div class="row fit">
-                    <div class="col-2 q-px-sm">
-                        <q-select borderless v-model="method" :options="options" label="Method" class="text-h6" />
-                    </div>
-                    <div class="col q-px-sm border-left">
-                        <q-input borderless v-model="text" label="URL" class="text-h6" />
-                    </div>
-                    <div class="col-1 q-ma-none">
-                        <q-btn color="primary" icon="fas fa-arrow-right" class="no-border-radius no-shadow fit" />
-                    </div>
-                </div>
+                <inputs />
             </q-toolbar>
 
             <div class="row">
@@ -21,14 +11,17 @@
                         <q-route-tab to="/" label="Body" />
                         <q-route-tab to="/params" label="Parameters" />
                         <q-route-tab to="/headers" label="Headers" />
-                        <q-route-tab to="/auth" label="Authorization" />
                     </q-tabs>
                 </div>
-                <div class="col border-left q-pa-sm">
+                <q-separator inset dark vertical />
+                <div class="col">
                     <div class="row">
-                        <div class="col">
-                            <div class="text-h5 full-height vertical-middle">Response</div>
+                        <div class="col-3">
+                            <q-tabs indicator-color="transparent" align="left">
+                                <q-route-tab to label="Response" />
+                            </q-tabs>
                         </div>
+                        <div class="col"></div>
                     </div>
                 </div>
             </div>
@@ -47,9 +40,7 @@
 
         <q-footer elevated class="bg-blue-grey-8 text-white">
             <q-toolbar class="justify-between">
-                <q-btn dense flat>
-                    <q-icon name="fas fa-cog" size="xs" />
-                </q-btn>
+                <settings />
                 <q-btn dense flat>
                     <q-icon name="far fa-question-circle" size="xs" />
                 </q-btn>
@@ -60,27 +51,17 @@
 </template>
 
 <script>
-import Results from 'components/Response';
+import Results from 'pages/Response';
+import Settings from 'components/Settings';
+import Inputs from 'components/Inputs';
 
 export default {
-    components: { Results },
-    data () {
-        return {
-            method: 'GET',
-            options: [
-                'GET', 'POST', 'PUT', 'PATCH', 'DELETE'
-            ],
-            text: 'https://'
-        };
-    }
+    components: { Results, Settings, Inputs }
 };
 </script>
 
 <style lang="scss">
     .q-toolbar {
         min-height: 0px;
-    }
-    .border-left {
-        border-left: solid 1px $blue-grey;
     }
 </style>

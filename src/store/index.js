@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import params from './params';
 import headers from './headers';
+import settings from './settings';
 
 Vue.use(Vuex);
 
@@ -11,7 +12,8 @@ export default new Vuex.Store({
     mutations: {},
     modules: {
         params,
-        headers
+        headers,
+        settings
     },
 
     // enable strict mode (adds overhead!)

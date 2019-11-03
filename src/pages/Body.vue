@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <q-input borderless autogrow ref="body" v-model="body" placeholder="{...}" class="q-px-sm text-body1" />
-    </div>
+    <q-input borderless autogrow ref="body" v-model="body" placeholder="{...}" class="text-body1 fill scroll" />
+    <!-- <q-virtual-scroll separator>
+    </q-virtual-scroll> -->
 </template>
 
 <script>
@@ -13,10 +13,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss">
-    .body {
-        height: 100%;
-        max-height: 100%;
-    }
-</style>

@@ -4,7 +4,11 @@
             <q-select borderless v-model="method" :options="options" label="Method" class="text-h6" />
         </div>
         <div class="col q-px-sm border-left">
-            <q-input borderless v-model="url" label="URL" class="text-h6" />
+            <q-input borderless v-model="url" label="URL" class="text-h6">
+                <template v-slot:append>
+                    <q-icon name="close" @click="url = ''" class="cursor-pointer" />
+                </template>
+            </q-input>
         </div>
         <div class="col-2 q-ma-none">
             <q-btn color="primary" icon="fas fa-arrow-right" class="no-border-radius no-shadow fit" />

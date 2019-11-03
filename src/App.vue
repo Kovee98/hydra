@@ -9,3 +9,9 @@ export default {
     name: 'App'
 };
 </script>
+
+<style lang="scss">
+    .fill {
+        height: calc(100vh - 150px);
+    }
+</style>

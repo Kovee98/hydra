@@ -1,14 +1,14 @@
 <template>
-    <q-input borderless autogrow ref="body" v-model="body" placeholder="{...}" class="text-body1 fill scroll" />
-    <!-- <q-virtual-scroll separator>
-    </q-virtual-scroll> -->
+    <q-scroll-area class="fill scroll q-px-sm">
+        <q-input borderless autogrow ref="body" v-model="body" placeholder="{...}" class="text-body1" />
+    </q-scroll-area>
 </template>
 
 <script>
 export default {
     data () {
         return {
-            body: ''
+            body: 'asdfasdf'
         };
     }
 };

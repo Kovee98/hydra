@@ -30,7 +30,7 @@
         <q-page-container>
             <q-splitter v-model="splitter" class="fill">
                 <template v-slot:before>
-                    <div class="q-pa-md">
+                    <div class="q-px-md">
                         <router-view />
                     </div>
                 </template>

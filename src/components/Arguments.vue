@@ -1,17 +1,18 @@
 <template>
-    <div class="q-pa-md">
+    <div class="q-py-md">
         <argument v-for="(arg, i) in args"
                   :key="arg.id"
                   :arg="arg"
                   :i="i"
                   :name="name" />
 
-        <div class="row q-py-md q-pr-md justify-center">
-            <div class="col justify-center">
-                <q-btn @click="add" dense color="primary" class="q-pa-sm">
+        <div class="row">
+            <div class="col q-py-md">
+                <q-btn flat dense @click="add" color="primary" class="q-pa-sm full-width">
                     <q-icon size="xs" name="fas fa-plus" />
                 </q-btn>
             </div>
+            <div class="col-1" />
         </div>
     </div>
 </template>

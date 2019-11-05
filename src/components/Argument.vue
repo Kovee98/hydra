@@ -1,16 +1,16 @@
 <template>
-    <div class="row items-center justify-around q-col-gutter-md q-py-md">
-        <div class="col q-ma-none">
+    <div class="row items-center justify-around q-py-md">
+        <div class="col q-pa-none q-ma-none">
             <q-input @input="update" v-model="key" />
         </div>
-        <div class="col-1 q-ma-none text-center">
+        <div class="col-1 q-pa-none q-ma-none text-center">
             <q-icon name="fas fa-equals" class="text-blue-grey-8" />
         </div>
-        <div class="col q-ma-none">
+        <div class="col q-pa-none q-ma-none">
             <q-input @input="update" v-model="value" />
         </div>
-        <div class="col-1">
-            <q-btn dense @click="remove" color="red">
+        <div class="col-1 q-pa-none q-ma-none">
+            <q-btn flat dense @click="remove" color="red">
                 <q-icon size="xs" name="fas fa-minus" />
             </q-btn>
         </div>

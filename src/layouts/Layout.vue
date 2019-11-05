@@ -13,7 +13,7 @@
                         <q-route-tab to="/headers" label="Headers" />
                     </q-tabs>
                 </div>
-                <q-separator dark vertical />
+                <q-separator dark vertical inset />
                 <div class="col">
                     <div class="row">
                         <div class="col-3">
@@ -28,15 +28,19 @@
         </q-header>
 
         <q-page-container>
-            <div class="row">
-                <div class="col">
-                    <router-view />
-                </div>
-                <q-separator vertical class="fill" />
-                <div class="col">
-                    <response />
-                </div>
-            </div>
+            <q-splitter v-model="splitter" class="fill">
+                <template v-slot:before>
+                    <div class="q-pa-md">
+                        <router-view />
+                    </div>
+                </template>
+
+                <template v-slot:after>
+                    <div class="q-pa-md">
+                        <response />
+                    </div>
+                </template>
+            </q-splitter>
         </q-page-container>
 
         <q-footer elevated class="bg-blue-grey-8 text-white">
@@ -69,6 +73,7 @@ export default {
     components: { Response, Settings, Inputs },
     data () {
         return {
+            splitter: 50
         };
     }
 };

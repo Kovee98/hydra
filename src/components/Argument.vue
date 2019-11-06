@@ -34,8 +34,8 @@ export default {
             this.$store.dispatch(this.name + '/update', {
                 index: this.i,
                 arg: {
-                    key: this.key,
-                    value: this.value
+                    key: this.key ? this.key.trim() : '',
+                    value: this.value ? this.value.trim() : ''
                 }
             });
         }

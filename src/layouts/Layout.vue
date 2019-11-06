@@ -15,13 +15,22 @@
                 </div>
                 <q-separator dark vertical inset />
                 <div class="col">
-                    <div class="row">
+                    <div class="row items-center justify-between">
                         <div class="col-3">
                             <q-tabs no-caps indicator-color="transparent" align="left">
                                 <q-route-tab to label="Response" />
                             </q-tabs>
                         </div>
-                        <div class="col" />
+                        <div class="col">
+                            <div class="row justify-end q-pr-sm">
+                                <div class="col text-right">
+                                    <q-chip square>{{this.$store.getters['response/get'].time}} ms</q-chip>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <q-chip square>{{this.$store.getters['response/get'].status}}</q-chip>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

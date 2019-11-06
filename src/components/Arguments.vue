@@ -25,7 +25,7 @@ export default {
     components: { Argument },
     methods: {
         add () {
-            this.$store.dispatch(this.name + '/add', { key: '', value: '' });
+            this.$store.dispatch(this.name + '/add', {});
         }
     }
 };

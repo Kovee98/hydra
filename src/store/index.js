@@ -4,6 +4,8 @@ import Vuex from 'vuex';
 import params from './params';
 import headers from './headers';
 import settings from './settings';
+import body from './body';
+import response from './response';
 
 Vue.use(Vuex);
 
@@ -13,7 +15,9 @@ export default new Vuex.Store({
     modules: {
         params,
         headers,
-        settings
+        settings,
+        body,
+        response
     },
 
     // enable strict mode (adds overhead!)

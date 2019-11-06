@@ -26,7 +26,7 @@
                                 <div class="col text-right">
                                     <q-chip square>{{this.$store.getters['response/get'].time}} ms</q-chip>
                                 </div>
-                                <div class="col-2 text-center">
+                                <div v-if="this.$store.getters['response/get'].status" class="col-2 text-center">
                                     <q-chip square>{{this.$store.getters['response/get'].status}}</q-chip>
                                 </div>
                             </div>
@@ -59,12 +59,8 @@
                     <q-icon name="far fa-question-circle" size="xs" />
                     <q-menu>
                         <q-list style="min-width: 100px">
-                            <q-item clickable v-close-popup>
-                                <q-item-section>Suggest a feature</q-item-section>
-                            </q-item>
-                            <q-item clickable v-close-popup>
-                                <q-item-section>Report a bug</q-item-section>
-                            </q-item>
+                            <suggest-feature />
+                            <report-bug />
                         </q-list>
                     </q-menu>
                 </q-btn>
@@ -77,12 +73,16 @@
 import Response from 'pages/Response';
 import Settings from 'components/Settings';
 import Inputs from 'components/Inputs';
+import SuggestFeature from 'components/SuggestFeature';
+import ReportBug from 'components/ReportBug';
 
 export default {
-    components: { Response, Settings, Inputs },
+    components: { Response, Settings, Inputs, SuggestFeature, ReportBug },
     data () {
         return {
-            splitter: 50
+            splitter: 50,
+            showBug: false,
+            showFeature: false
         };
     }
 };

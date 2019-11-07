@@ -59,8 +59,14 @@
                     <q-icon name="far fa-question-circle" size="xs" />
                     <q-menu>
                         <q-list style="min-width: 100px">
-                            <suggest-feature />
-                            <report-bug />
+                            <q-item clickable @click="suggestFeature">
+                                <q-item-section>Suggest a feature</q-item-section>
+                            </q-item>
+                            <q-item clickable @click="reportBug">
+                                <q-item-section>Report a bug</q-item-section>
+                            </q-item>
+                            <!-- <suggest-feature />
+                            <report-bug /> -->
                         </q-list>
                     </q-menu>
                 </q-btn>
@@ -73,17 +79,27 @@
 import Response from 'pages/Response';
 import Settings from 'components/Settings';
 import Inputs from 'components/Inputs';
-import SuggestFeature from 'components/SuggestFeature';
-import ReportBug from 'components/ReportBug';
+import { openURL } from 'quasar';
+// import SuggestFeature from 'components/SuggestFeature';
+// import ReportBug from 'components/ReportBug';
 
 export default {
-    components: { Response, Settings, Inputs, SuggestFeature, ReportBug },
+    components: { Response, Settings, Inputs },
     data () {
         return {
             splitter: 50,
             showBug: false,
-            showFeature: false
+            showFeature: false,
+            issuesUrl: 'https://github.com/Kovee98/hydra-2/issues/new'
         };
+    },
+    methods: {
+        suggestFeature () {
+            openURL(this.issuesUrl);
+        },
+        reportBug () {
+            openURL(this.issuesUrl);
+        }
     }
 };
 </script>

@@ -1,19 +1,19 @@
 <template>
     <q-layout view="hHh lpR fFf">
-        <q-header elevated class="bg-blue-grey-8 text-white">
+        <q-header bordered dark class="bg-grey-dark text-white">
             <q-toolbar class="bg-grey-2 q-pa-none justify-center">
                 <inputs />
             </q-toolbar>
 
             <div class="row">
                 <div class="col">
-                    <q-tabs no-caps align="left">
+                    <q-tabs no-caps indicator-color="primary" align="left">
                         <q-route-tab to="/" label="Body" />
                         <q-route-tab to="/params" label="Parameters" />
                         <q-route-tab to="/headers" label="Headers" />
                     </q-tabs>
                 </div>
-                <q-separator dark vertical inset />
+                <q-separator dark vertical />
                 <div class="col">
                     <div class="row items-center justify-between">
                         <div class="col-3">
@@ -36,8 +36,8 @@
             </div>
         </q-header>
 
-        <q-page-container>
-            <q-splitter v-model="splitter" class="fill">
+        <q-page-container class="bg-grey-dark">
+            <q-splitter dark v-model="splitter" class="fill">
                 <template v-slot:before>
                     <div class="q-px-md">
                         <router-view />
@@ -52,12 +52,12 @@
             </q-splitter>
         </q-page-container>
 
-        <q-footer elevated class="bg-blue-grey-8 text-white">
+        <q-footer dark>
             <q-toolbar class="justify-between q-pa-xs">
                 <settings />
                 <q-btn dense flat>
                     <q-icon name="far fa-question-circle" size="xs" />
-                    <q-menu>
+                    <q-menu dark>
                         <q-list style="min-width: 100px">
                             <q-item clickable @click="suggestFeature">
                                 <q-item-section>Suggest a feature</q-item-section>

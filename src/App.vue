@@ -12,6 +12,6 @@ export default {
 
 <style lang="scss">
     .fill {
-        height: calc(100vh - 150px);
+        height: calc(100vh - 141px);
     }
 </style>

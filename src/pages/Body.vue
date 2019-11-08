@@ -1,6 +1,6 @@
 <template>
     <div>
-        <q-input borderless autogrow ref="body" v-model="body" @input="input" placeholder="{...}" class="text-body1" />
+        <q-input borderless autogrow ref="body" v-model="body" @input="input" placeholder="{...}" dark />
     </div>
 </template>
 

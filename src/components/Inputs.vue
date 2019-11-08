@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { isValidUrl, notify } from '../js/util.js';
+
 export default {
     data () {
         return {
@@ -33,6 +35,11 @@ export default {
     },
     methods: {
         send () {
+            if (!isValidUrl(this.url)) {
+                notify({ msg: 'The url is invalid', isOk: false });
+                return;
+            }
+
             let body = this.$store.getters['body/get'];
 
             let params = {};
@@ -63,6 +70,8 @@ export default {
                         time: (endTime - startTime).toFixed(2)
                     });
                     this.isLoading = false;
+
+                    notify({ msg: 'Success!', isOk: true });
                 });
             } else {
                 this.isLoading = false;

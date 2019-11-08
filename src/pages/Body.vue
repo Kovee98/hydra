@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="code q-px-md">
         <q-input borderless autogrow ref="body" v-model="body" @input="input" placeholder="{...}" dark />
     </div>
 </template>
@@ -8,7 +8,8 @@
 export default {
     data () {
         return {
-            body: this.$store.getters['body/get']
+            body: this.$store.getters['body/get'],
+            code: 'something'
         };
     },
     methods: {
@@ -18,3 +19,9 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+    .code {
+        font-family: 'Consolas';
+    }
+</style>

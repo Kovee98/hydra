@@ -39,15 +39,11 @@
         <q-page-container class="bg-grey-dark">
             <q-splitter dark v-model="splitter" class="fill">
                 <template v-slot:before>
-                    <div class="q-px-md">
-                        <router-view />
-                    </div>
+                    <router-view />
                 </template>
 
                 <template v-slot:after>
-                    <div class="q-pa-md">
-                        <response />
-                    </div>
+                    <response />
                 </template>
             </q-splitter>
         </q-page-container>

@@ -1,3 +1,3 @@
-export function updateSettings (context, payload) {
-    context.commit('updateSettings', payload);
+export function update (context, payload) {
+    context.commit('update', payload);
 }

@@ -1,3 +1,3 @@
-export function updateSettings (state, settings) {
+export function update (state, settings) {
     state.settings = settings;
 }

@@ -15,9 +15,9 @@
                     <div class="text-h4">Settings</div>
                 </q-card-section>
 
-                <div class="row">
-                    <div class="col">
-                        <q-card-section class="column">
+                <div class="q-px-xl q-mx-xl">
+                    <div class="column q-px-xl q-mx-xl">
+                        <q-card-section class="col">
                             <span class="text-h6">Syntax Highlighting</span>
                             <div class="q-py-lg">
                                 <syntax-color v-for="color in settings.colors"
@@ -26,9 +26,7 @@
                                               :label="color.type" />
                             </div>
                         </q-card-section>
-                    </div>
-                    <div class="col">
-                        <q-card-section class="column">
+                        <q-card-section class="col">
                             <span class="text-h6">History</span>
                             <div class="q-py-lg">
                                 <q-checkbox dense v-model="settings.mostRecent" label="Save most recent" color="primary" />
@@ -57,6 +55,7 @@
 <script>
 import Confirm from 'components/Confirm';
 import SyntaxColor from 'components/SyntaxColor';
+import { notify } from '../js/util.js';
 
 export default {
     components: { Confirm, SyntaxColor },
@@ -68,12 +67,22 @@ export default {
     },
     methods: {
         restore () {
-            console.log('restoring...');
             this.show = false;
+            notify({ msg: 'Default settings have been restored' });
         },
         save () {
-            console.log('saving...');
             this.show = false;
+            this.$store.dispatch('settings/update', {
+                colors: [
+                    { type: 'Key', color: '#98e22b' },
+                    { type: 'String', color: '#e7db74' },
+                    { type: 'Number', color: '#ac80ff' },
+                    { type: 'Boolean', color: '#0a49cc' },
+                    { type: 'Null', color: '#ac80ff' }
+                ],
+                mostRecent: true
+            });
+            notify({ msg: 'Settings have been saved successfully' });
         }
     }
 };

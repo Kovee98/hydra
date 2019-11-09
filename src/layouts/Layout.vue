@@ -4,32 +4,19 @@
             <q-toolbar class="bg-grey-2 q-pa-none justify-center">
                 <inputs />
             </q-toolbar>
-
             <div class="row">
+                <q-tabs no-caps indicator-color="primary" align="left">
+                    <q-route-tab to="/" label="Body" />
+                    <q-route-tab to="/params" label="Parameters" />
+                    <q-route-tab to="/headers" label="Headers" />
+                </q-tabs>
                 <div class="col">
-                    <q-tabs no-caps indicator-color="primary" align="left">
-                        <q-route-tab to="/" label="Body" />
-                        <q-route-tab to="/params" label="Parameters" />
-                        <q-route-tab to="/headers" label="Headers" />
-                    </q-tabs>
-                </div>
-                <q-separator dark vertical />
-                <div class="col">
-                    <div class="row items-center justify-between">
-                        <div class="col-3">
-                            <q-tabs no-caps indicator-color="transparent" align="left">
-                                <q-route-tab to label="Response" />
-                            </q-tabs>
+                    <div class="row justify-end q-pr-sm">
+                        <div class="col text-right">
+                            <q-chip square>{{$store.getters['response/get'].time}} ms</q-chip>
                         </div>
-                        <div class="col">
-                            <div class="row justify-end q-pr-sm">
-                                <div class="col text-right">
-                                    <q-chip square>{{this.$store.getters['response/get'].time}} ms</q-chip>
-                                </div>
-                                <div v-if="this.$store.getters['response/get'].status" class="col-2 text-center">
-                                    <q-chip square>{{this.$store.getters['response/get'].status}}</q-chip>
-                                </div>
-                            </div>
+                        <div v-if="$store.getters['response/get'].status" class="col-2 text-center">
+                            <q-chip square>{{$store.getters['response/get'].status}}</q-chip>
                         </div>
                     </div>
                 </div>
@@ -41,7 +28,6 @@
                 <template v-slot:before>
                     <router-view />
                 </template>
-
                 <template v-slot:after>
                     <response />
                 </template>

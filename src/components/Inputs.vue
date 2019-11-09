@@ -41,6 +41,7 @@ export default {
             }
 
             let body = this.$store.getters['body/get'];
+            console.log('body:', body);
 
             let params = {};
             this.$store.getters['params/get'].forEach(param => {

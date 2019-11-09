@@ -1,5 +1,5 @@
 <template>
-    <div class="q-py-md">
+    <div class="column q-gutter-lg q-pa-md">
         <argument v-for="(arg, i) in args"
                   :key="arg.id"
                   :arg="arg"

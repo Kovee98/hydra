@@ -1,8 +1,8 @@
 <template>
-    <div class="q-pa-md">
+    <q-scroll-area dark class="code fill q-pa-md">
         <div v-html="style" />
-        <div v-html="data" class="code text-body1 q-ma-none text-grey-light" />
-    </div>
+        <div v-html="data" class="text-body1 q-ma-none text-grey-light" />
+    </q-scroll-area>
 </template>
 
 <script>

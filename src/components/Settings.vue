@@ -5,7 +5,7 @@
         </q-btn>
 
         <q-dialog v-model="show" persistent maximized transition-show="slide-up" transition-hide="slide-down">
-            <q-card class="bg-grey-dark" dark>
+            <q-card dark>
                 <q-bar class="q-pa-xs">
                     <q-space />
                     <q-btn dense flat icon="close" v-close-popup />
@@ -15,7 +15,7 @@
                     <div class="text-h4">Settings</div>
                 </q-card-section>
 
-                <div class="q-px-xl q-mx-xl">
+                <q-scroll-area class="q-px-xl q-mx-xl fill">
                     <div class="column q-px-xl q-mx-xl">
                         <q-card-section class="col">
                             <span class="text-h6">Syntax Highlighting</span>
@@ -32,8 +32,17 @@
                                 <q-checkbox dense v-model="mostRecent" label="Save most recent" color="primary" />
                             </div>
                         </q-card-section>
+                        <q-card-section class="col">
+                            <span class="text-h6">Notifications</span>
+                            <div class="q-py-lg">
+                                <q-checkbox dense v-model="notifySuccess" label="Successful response" color="primary" />
+                            </div>
+                            <div class="q-py-lg">
+                                <q-checkbox dense v-model="notifyError" label="General errors" color="primary" />
+                            </div>
+                        </q-card-section>
                     </div>
-                </div>
+                </q-scroll-area>
 
                 <div class="fixed-bottom">
                     <q-separator />
@@ -62,12 +71,9 @@ export default {
     data () {
         return {
             show: false,
-            mostRecent: this.$store.getters['settings/get'].mostRecent
-            // colors: this.$store.getters['settings/get'].colors,
-            // mostRecent: this.$store.getters['settings/get'].mostRecent
-            // settings: this.$store.getters['settings/get'],
-            // mostRecent: this.$store.getters['settings/get'].mostRecent
-
+            mostRecent: this.$store.getters['settings/get'].mostRecent,
+            notifySuccess: true,
+            notifyError: true
         };
     },
     computed: {

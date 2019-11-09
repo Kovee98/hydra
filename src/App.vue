@@ -14,4 +14,8 @@ export default {
     .fill {
         height: calc(100vh - 141px);
     }
+    .code {
+        font-family: 'Consolas';
+        white-space: pre;
+    }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <q-layout view="hHh lpR fFf">
-        <q-header bordered dark class="bg-grey-dark text-white">
+        <q-header bordered dark class="bg-grey-10 text-white">
             <q-toolbar class="bg-grey-2 q-pa-none justify-center">
                 <inputs />
             </q-toolbar>
@@ -36,7 +36,7 @@
             </div>
         </q-header>
 
-        <q-page-container class="bg-grey-dark">
+        <q-page-container class="bg-grey-10">
             <q-splitter dark v-model="splitter" class="fill">
                 <template v-slot:before>
                     <router-view />

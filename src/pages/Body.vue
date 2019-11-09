@@ -1,9 +1,10 @@
 <template>
-    <q-scroll-area dark class="code fill q-px-md">
+    <q-scroll-area class="code fill q-px-md">
         <q-input dark borderless autogrow
                  @keydown.tab.prevent="tabber"
                  @input="input"
                  v-model="body"
+                 class="text-body1"
                  placeholder="{...}" />
     </q-scroll-area>
 </template>
@@ -14,31 +15,6 @@ export default {
         return {
             body: this.$store.getters['body/get']
         };
-    },
-    computed: {
-        contentStyle () {
-            return {
-                backgroundColor: 'rgba(0,0,0,0.02)',
-                color: '#555'
-            };
-        },
-
-        contentActiveStyle () {
-            return {
-                backgroundColor: '#eee',
-                color: 'black'
-            };
-        },
-
-        thumbStyle () {
-            return {
-                right: '2px',
-                borderRadius: '5px',
-                backgroundColor: '#027be3',
-                width: '5px',
-                opacity: 0.75
-            };
-        }
     },
     methods: {
         input () {

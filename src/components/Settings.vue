@@ -16,8 +16,8 @@
                 </q-card-section>
 
                 <q-scroll-area class="q-px-xl q-mx-xl fill">
-                    <div class="column q-px-xl q-mx-xl">
-                        <q-card-section class="col">
+                    <div class="column q-gutter-lg q-px-xl q-mx-xl">
+                        <q-card-section class="col q-ml-none">
                             <span class="text-h6">Syntax Highlighting</span>
                             <div class="q-py-lg">
                                 <syntax-color ref="syntaxColors" v-for="color in colors"
@@ -26,19 +26,18 @@
                                               :label="color.type" />
                             </div>
                         </q-card-section>
-                        <q-card-section class="col">
+                        <q-card-section class="col q-ml-none">
                             <span class="text-h6">History</span>
                             <div class="q-py-lg">
                                 <q-checkbox dense v-model="mostRecent" label="Save most recent" color="primary" />
                             </div>
                         </q-card-section>
-                        <q-card-section class="col">
+                        <q-card-section class="col q-ml-none">
                             <span class="text-h6">Notifications</span>
-                            <div class="q-py-lg">
-                                <q-checkbox dense v-model="notifySuccess" label="Successful response" color="primary" />
-                            </div>
-                            <div class="q-py-lg">
-                                <q-checkbox dense v-model="notifyError" label="General errors" color="primary" />
+                            <div class="column q-col-gutter-md q-py-lg">
+                                <q-checkbox dense v-model="notifySuccess" label="On successful response" />
+                                <q-checkbox dense v-model="notifyError" label="On general errors" />
+                                <q-checkbox dense v-model="notifySettings" label="On settings change" />
                             </div>
                         </q-card-section>
                     </div>
@@ -72,8 +71,9 @@ export default {
         return {
             show: false,
             mostRecent: this.$store.getters['settings/get'].mostRecent,
-            notifySuccess: true,
-            notifyError: true
+            notifySuccess: false,
+            notifyError: true,
+            notifySettings: true
         };
     },
     computed: {

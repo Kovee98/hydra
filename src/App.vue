@@ -15,7 +15,7 @@ export default {
         height: calc(100vh - 141px);
     }
     .code {
-        font-family: 'Consolas';
+        font-family: 'Courier New';
         white-space: pre;
     }
 </style>

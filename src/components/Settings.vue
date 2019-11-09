@@ -20,7 +20,7 @@
                         <q-card-section class="col">
                             <span class="text-h6">Syntax Highlighting</span>
                             <div class="q-py-lg">
-                                <syntax-color v-for="color in settings.colors"
+                                <syntax-color ref="syntaxColors" v-for="color in colors"
                                               :key="color.id"
                                               :color="color.color"
                                               :label="color.type" />
@@ -29,7 +29,7 @@
                         <q-card-section class="col">
                             <span class="text-h6">History</span>
                             <div class="q-py-lg">
-                                <q-checkbox dense v-model="settings.mostRecent" label="Save most recent" color="primary" />
+                                <q-checkbox dense v-model="mostRecent" label="Save most recent" color="primary" />
                             </div>
                         </q-card-section>
                     </div>
@@ -62,8 +62,18 @@ export default {
     data () {
         return {
             show: false,
-            settings: this.$store.getters['settings/get']
+            mostRecent: this.$store.getters['settings/get'].mostRecent
+            // colors: this.$store.getters['settings/get'].colors,
+            // mostRecent: this.$store.getters['settings/get'].mostRecent
+            // settings: this.$store.getters['settings/get'],
+            // mostRecent: this.$store.getters['settings/get'].mostRecent
+
         };
+    },
+    computed: {
+        colors () {
+            return this.$store.getters['settings/get'].colors;
+        }
     },
     methods: {
         restore () {
@@ -71,18 +81,21 @@ export default {
             notify({ msg: 'Default settings have been restored' });
         },
         save () {
-            this.show = false;
-            this.$store.dispatch('settings/update', {
-                colors: [
-                    { type: 'Key', color: '#98e22b' },
-                    { type: 'String', color: '#e7db74' },
-                    { type: 'Number', color: '#ac80ff' },
-                    { type: 'Boolean', color: '#0a49cc' },
-                    { type: 'Null', color: '#ac80ff' }
-                ],
-                mostRecent: true
+            let newColors = [];
+            this.$refs.syntaxColors.forEach(syntaxColor => {
+                newColors.push({
+                    type: syntaxColor.label,
+                    color: syntaxColor.currentColor
+                });
             });
-            notify({ msg: 'Settings have been saved successfully' });
+
+            this.$store.dispatch('settings/update', {
+                colors: newColors,
+                mostRecent: this.mostRecent
+            }).then(() => {
+                this.show = false;
+                notify({ msg: 'Settings have been saved successfully' });
+            });
         }
     }
 };

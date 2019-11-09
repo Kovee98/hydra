@@ -84,8 +84,8 @@ export default {
     data () {
         return {
             splitter: 50,
-            showBug: false,
-            showFeature: false,
+            // showBug: false,
+            // showFeature: false,
             issuesUrl: 'https://github.com/Kovee98/hydra-2/issues/new'
         };
     },

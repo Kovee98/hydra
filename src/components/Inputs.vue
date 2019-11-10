@@ -41,7 +41,6 @@ export default {
             }
 
             let body = this.$store.getters['body/get'];
-            console.log('body:', body);
 
             let params = {};
             this.$store.getters['params/get'].forEach(param => {
@@ -67,12 +66,29 @@ export default {
                     let endTime = performance.now();
                     this.$store.dispatch('response/update', {
                         data: res.data,
-                        status: res.status,
+                        status: {
+                            code: res.status,
+                            text: res.statusText
+                        },
                         time: (endTime - startTime).toFixed(2)
                     });
-                    this.isLoading = false;
 
-                    notify({ msg: 'Success!', isOk: true });
+                    notify({ msg: 'Success!' });
+                }).catch(err => {
+                    console.log(err);
+                    let endTime = performance.now();
+                    this.$store.dispatch('response/update', {
+                        data: err.toString(),
+                        status: {
+                            code: '',
+                            text: ''
+                        },
+                        time: (endTime - startTime).toFixed(2)
+                    });
+
+                    notify({ msg: err.toString(), isOk: false });
+                }).finally(() => {
+                    this.isLoading = false;
                 });
             } else {
                 this.isLoading = false;

@@ -18,4 +18,9 @@ export default {
         font-family: 'Courier New';
         white-space: pre;
     }
+    .overflow-wrap {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
 </style>

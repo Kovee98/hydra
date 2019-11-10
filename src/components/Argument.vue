@@ -1,10 +1,10 @@
 <template>
-    <div class="row items-center justify-around q-gutter-xs q-pl-md">
+    <div class="row items-center justify-around q-gutter-sm">
         <div class="col">
             <q-input filled dense dark @input="update" v-model="key" />
         </div>
         <div class="col-1 text-center">
-            <q-icon name="fas fa-equals" class="text-grey-5" />
+            <q-icon name="fas fa-equals" class="text-grey-6" />
         </div>
         <div class="col">
             <q-input filled dense dark @input="update" v-model="value" />

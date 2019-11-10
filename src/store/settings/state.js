@@ -7,6 +7,13 @@ export default {
             { type: 'Boolean', color: '#0a49cc' },
             { type: 'Null', color: '#ac80ff' }
         ],
-        mostRecent: true
+        history: {
+            mostRecent: true
+        },
+        notifications: {
+            notifyResponseSuccess: false,
+            notifyResponseError: true,
+            notifySettingsUpdate: true
+        }
     }
 };

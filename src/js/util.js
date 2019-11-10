@@ -4,11 +4,11 @@
 
 import { Notify } from 'quasar';
 
-var notify = ({ msg, isError = false }) => {
+var notify = ({ msg, isOk = true }) => {
     Notify.create({
         message: msg,
-        color: isError ? 'negative' : 'default',
-        icon: isError ? 'report_problem' : 'info',
+        color: isOk ? 'default' : 'negative',
+        icon: isOk ? 'info' : 'report_problem',
         position: 'bottom-right',
         actions: [
             {

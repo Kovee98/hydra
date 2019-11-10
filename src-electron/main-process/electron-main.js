@@ -19,7 +19,7 @@ function createWindow () {
         width: 1400,
         height: 835,
         useContentSize: true,
-        icon: path.join(__dirname, '/assets/img/logo/logo_bg_sh.ico'),
+        icon: path.join(__dirname, 'src/assets/img/logo/logo_bg_sh.ico'),
         webPreferences: {
             nodeIntegration: true
         }

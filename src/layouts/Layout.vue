@@ -4,19 +4,21 @@
             <q-toolbar class="bg-grey-2 q-pa-none justify-center">
                 <inputs />
             </q-toolbar>
-            <div class="row">
-                <q-tabs no-caps indicator-color="primary" align="left">
+            <div class="row items-center">
+                <q-tabs no-caps indicator-color="white" align="left">
                     <q-route-tab to="/" label="Body" />
                     <q-route-tab to="/params" label="Parameters" />
                     <q-route-tab to="/headers" label="Headers" />
                 </q-tabs>
                 <div class="col">
-                    <div class="row justify-end q-pr-sm">
+                    <div class="row q-pr-sm">
                         <div class="col text-right">
-                            <q-chip square>{{$store.getters['response/get'].time}} ms</q-chip>
-                        </div>
-                        <div v-if="$store.getters['response/get'].status" class="col-2 text-center">
-                            <q-chip square>{{$store.getters['response/get'].status}}</q-chip>
+                            <q-chip square color="grey-1">
+                                {{time}} ms
+                            </q-chip>
+                            <q-chip v-if="status.code" square :color="status.color" class="text-white">
+                                {{status.code}}
+                            </q-chip>
                         </div>
                     </div>
                 </div>
@@ -75,6 +77,24 @@ export default {
             issuesUrl: 'https://github.com/Kovee98/hydra-2/issues/new'
         };
     },
+    computed: {
+        status () {
+            let status = this.$store.getters['response/get'].status;
+
+            if (status.code >= 200 && status.code <= 226) {
+                status.color = 'positive';
+            } else if (status.code >= 400) {
+                status.color = 'negative';
+            } else {
+                status.color = 'warning';
+            }
+
+            return status;
+        },
+        time () {
+            return this.$store.getters['response/get'].time;
+        }
+    },
     methods: {
         suggestFeature () {
             openURL(this.issuesUrl);
@@ -89,5 +109,8 @@ export default {
 <style lang="scss">
     .q-toolbar {
         min-height: 0px;
+    }
+    .q-header {
+        border-bottom: 1px solid $grey-7;
     }
 </style>

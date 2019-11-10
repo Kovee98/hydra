@@ -35,9 +35,9 @@
                         <q-card-section class="col q-ml-none">
                             <span class="text-h6">Notifications</span>
                             <div class="column q-col-gutter-md q-py-lg">
-                                <q-checkbox dense v-model="notifySuccess" label="On successful response" />
-                                <q-checkbox dense v-model="notifyError" label="On general errors" />
-                                <q-checkbox dense v-model="notifySettings" label="On settings change" />
+                                <q-checkbox dense v-model="notifications.notifyResponseSuccess" label="On response success" />
+                                <q-checkbox dense v-model="notifications.notifyResponseError" label="On response error" />
+                                <q-checkbox dense v-model="notifications.notifySettingsUpdate" label="On settings update" />
                             </div>
                         </q-card-section>
                     </div>
@@ -64,22 +64,55 @@
 import Confirm from 'components/Confirm';
 import SyntaxColor from 'components/SyntaxColor';
 import { notify } from '../js/util.js';
+import path from 'path';
+import { remote } from 'electron';
+import { mapState } from 'vuex';
 
 export default {
     components: { Confirm, SyntaxColor },
     data () {
         return {
-            show: false,
-            mostRecent: this.$store.getters['settings/get'].mostRecent,
-            notifySuccess: false,
-            notifyError: true,
-            notifySettings: true
+            show: false
+            // mostRecent: this.settings.history.mostRecent,
+            // mostRecentProxy: null,
+            // historyProxy: {},
+            // notifyResponseSuccess: this.settings.notifications.notifyResponseSuccess || false,
+            // notifyResponseError: this.settings.notifications.notifyResponseError,
+            // notifySettingsUpdate: this.settings.notifications.notifySettingsUpdate
+            // notificationsProxy: {}
         };
     },
     computed: {
+        ...mapState('settings', ['settings']),
         colors () {
-            return this.$store.getters['settings/get'].colors;
+            return this.settings.colors;
+        },
+        mostRecent: {
+            get () {
+                return this.settings.history.mostRecent;
+            },
+            set (mostRecent) {
+                this.$store.dispatch('settings/updateMostRecent', mostRecent);
+                // this.settings.history.mostRecent = mostRecent;
+            }
+        },
+        notifications: {
+            get () {
+                return this.settings.notifications;
+            },
+            set (notifications) {
+                this.$store.dispatch('settings/updateNotifications', notifications);
+            }
         }
+        // history: {
+        //     get () {
+        //         return this.settings.history;
+        //     },
+        //     set (history) {
+        //         // this.$store.dispatch('settings/updateHistory', history);
+        //         this.historyProxy = history;
+        //     }
+        // }
     },
     methods: {
         restore () {
@@ -95,14 +128,51 @@ export default {
                 });
             });
 
-            this.$store.dispatch('settings/update', {
+            let newSettings = {
                 colors: newColors,
-                mostRecent: this.mostRecent
-            }).then(() => {
-                this.show = false;
-                notify({ msg: 'Settings have been saved successfully' });
-            });
+                history: {
+                    mostRecent: this.mostRecent
+                },
+                notifications: {
+                    notifyResponseSuccess: this.notifyResponseSuccess,
+                    notifyResponseError: this.notifyResponseError,
+                    notifySettingsUpdate: this.notifySettingsUpdate
+                }
+            };
+
+            this.$store.dispatch('settings/update', newSettings)
+                .then(() => {
+                    this.show = false;
+                    notify({ msg: 'Settings have been saved successfully' });
+                })
+                .catch(err => {
+                    notify({ msg: err.toString(), isOk: false });
+                });
+
+            let settingsFile = path.join(remote.app.getPath('userData'), 'settings.json');
+            this.$jsonfile.writeFile(settingsFile, newSettings, { spaces: 4 })
+                .then(() => {
+                    console.log('Settings file updated');
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
+    },
+    mounted () {
+        let settingsFile = path.join(remote.app.getPath('userData'), 'settings.json');
+        this.$jsonfile.readFile(settingsFile)
+            .then(settings => {
+                this.$store.dispatch('settings/update', settings)
+                    .then(() => {
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 };
 </script>

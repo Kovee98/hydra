@@ -1,11 +1,11 @@
 <template>
     <q-layout view="hHh lpR fFf">
-        <q-header bordered dark class="bg-grey-10 text-white">
-            <q-toolbar class="bg-grey-2 q-pa-none justify-center">
+        <q-header elevated dark class="bg-grey-10 text-white">
+            <q-toolbar class="q-pa-none justify-center">
                 <inputs />
             </q-toolbar>
             <div class="row items-center">
-                <q-tabs no-caps indicator-color="white" align="left">
+                <q-tabs no-caps align="left">
                     <q-route-tab to="/" label="Body" />
                     <q-route-tab to="/params" label="Parameters" />
                     <q-route-tab to="/headers" label="Headers" />
@@ -13,7 +13,7 @@
                 <div class="col">
                     <div class="row q-pr-sm">
                         <div class="col text-right">
-                            <q-chip square color="grey-1">
+                            <q-chip square dark outline>
                                 {{time}} ms
                             </q-chip>
                             <q-chip v-if="status.code" square :color="status.color" class="text-white">
@@ -83,24 +83,6 @@ export default {
             'status',
             'time'
         ])
-        // status () {
-        //     let status = this.$store.getters['response/get'].status;
-
-        //     if (status.code >= 200 && status.code <= 226) {
-        //         status.color = 'positive';
-        //     } else if (status.code >= 400) {
-        //         status.color = 'negative';
-        //     } else {
-        //         status.color = 'warning';
-        //     }
-
-        //     return status;
-        // },
-        // time () {
-        //     let response = this.$store.getters['response/get'];
-        //     console.log('response:', response);
-        //     return response.time;
-        // }
     },
     methods: {
         suggestFeature () {
@@ -118,6 +100,6 @@ export default {
         min-height: 0px;
     }
     .q-header {
-        border-bottom: 1px solid $grey-7;
+        // border-bottom: 1px solid $grey-7;
     }
 </style>

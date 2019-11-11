@@ -7,7 +7,7 @@
 
 <script>
 import { colorize } from '../js/util.js';
-import { mapFields } from 'vuex-map-fields';
+import { mapMultiRowFields } from 'vuex-map-fields';
 
 export default {
     methods: {
@@ -15,18 +15,15 @@ export default {
     },
     computed: {
         style () {
-            let style = '<style>';
-            this.colors.forEach(color => {
-                style += '.' + color.type.toLowerCase() + '{';
-                style += 'color: ' + color.color + ' }';
-            });
-            style += '</style>';
-            return style;
+            let rules = this.colors.reduce((rules, color) => {
+                return `${rules} .${color.type.toLowerCase()} { color: ${color.color} } `;
+            }, '');
+            return `<style> ${rules} </style>`;
         },
         data () {
             return colorize(this.$store.getters['response/get'].data);
         },
-        ...mapFields('settings', ['colors'])
+        ...mapMultiRowFields('settings', ['colors'])
     }
 };
 </script>

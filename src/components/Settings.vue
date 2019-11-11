@@ -20,10 +20,10 @@
                         <q-card-section class="col q-ml-none">
                             <span class="text-h6">Syntax Highlighting</span>
                             <div class="q-py-lg">
-                                <syntax-color ref="syntaxColors" v-for="color in colors"
+                                <syntax-color ref="syntaxColors"
+                                              v-for="color in colors"
                                               :key="color.id"
-                                              :color="color.color"
-                                              :label="color.type" />
+                                              :color="color" />
                             </div>
                         </q-card-section>
                         <q-card-section class="col q-ml-none">
@@ -66,8 +66,8 @@ import SyntaxColor from 'components/SyntaxColor';
 import { notify } from '../js/util.js';
 import path from 'path';
 import { remote } from 'electron';
-// import { mapState } from 'vuex';
-import { mapFields } from 'vuex-map-fields';
+import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
+import { defaults } from '../js/settings/defaults.js';
 
 export default {
     components: { Confirm, SyntaxColor },
@@ -83,24 +83,36 @@ export default {
             'notifications.notifyResponseSuccess',
             'notifications.notifyResponseError',
             'notifications.notifySettingsUpdate'
-        ])
+        ]),
+        ...mapMultiRowFields('settings', ['colors'])
     },
     methods: {
         restore () {
-            this.show = false;
-            notify({ msg: 'Default settings have been restored' });
+            this.$store.dispatch('settings/update', defaults)
+                .then(() => {
+                    let settingsFile = path.join(remote.app.getPath('userData'), 'settings.json');
+                    this.$jsonfile.writeFile(settingsFile, defaults, { spaces: 4 })
+                        .then(() => {
+                            this.show = false;
+                            notify({ msg: 'Default settings have been restored' });
+                        })
+                        .catch(err => notify({ msg: err.toString(), isOk: false }));
+                })
+                .catch(err => notify({ msg: err.toString(), isOk: false }));
         },
         save () {
-            let newColors = [];
-            this.$refs.syntaxColors.forEach(syntaxColor => {
-                newColors.push({
-                    type: syntaxColor.label,
-                    color: syntaxColor.currentColor
-                });
-            });
+            // let newColors = [];
+            // this.$refs.syntaxColors.forEach(syntaxColor => {
+            //     newColors.push({
+            //         type: syntaxColor.label,
+            //         color: syntaxColor.currentColor
+            //     });
+            // });
+
+            console.log(this.colors);
 
             let newSettings = {
-                colors: newColors,
+                colors: this.colors,
                 history: {
                     mostRecent: this.mostRecent
                 },
@@ -113,21 +125,15 @@ export default {
 
             this.$store.dispatch('settings/update', newSettings)
                 .then(() => {
-                    this.show = false;
-                    notify({ msg: 'Settings have been saved successfully' });
+                    let settingsFile = path.join(remote.app.getPath('userData'), 'settings.json');
+                    this.$jsonfile.writeFile(settingsFile, newSettings, { spaces: 4 })
+                        .then(() => {
+                            this.show = false;
+                            notify({ msg: 'Settings have been saved successfully' });
+                        })
+                        .catch(err => notify({ msg: err.toString(), isOk: false }));
                 })
-                .catch(err => {
-                    notify({ msg: err.toString(), isOk: false });
-                });
-
-            let settingsFile = path.join(remote.app.getPath('userData'), 'settings.json');
-            this.$jsonfile.writeFile(settingsFile, newSettings, { spaces: 4 })
-                .then(() => {
-                    console.log('Settings file updated');
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+                .catch(err => notify({ msg: err.toString(), isOk: false }));
         }
     },
     mounted () {

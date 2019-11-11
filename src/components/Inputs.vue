@@ -1,10 +1,10 @@
 <template>
     <div class="row fit">
         <div class="col-2 q-px-sm">
-            <q-select borderless v-model="method" :options="options" label="Method" class="text-h6" />
+            <q-select dark borderless v-model="method" :options="options" label="Method" class="text-h6" />
         </div>
         <div class="col q-px-sm border-left">
-            <q-input borderless v-model="url" label="URL" class="text-h6">
+            <q-input dark borderless v-model="url" label="URL" class="text-h6">
                 <template v-slot:append>
                     <q-icon v-if="url" name="fas fa-times" @click="url = ''" class="cursor-pointer q-px-md" />
                 </template>

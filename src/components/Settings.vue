@@ -35,9 +35,9 @@
                         <q-card-section class="col q-ml-none">
                             <span class="text-h6">Notifications</span>
                             <div class="column q-col-gutter-md q-py-lg">
-                                <q-checkbox dense v-model="notifications.notifyResponseSuccess" label="On response success" />
-                                <q-checkbox dense v-model="notifications.notifyResponseError" label="On response error" />
-                                <q-checkbox dense v-model="notifications.notifySettingsUpdate" label="On settings update" />
+                                <q-checkbox dense v-model="notifyResponseSuccess" label="On response success" />
+                                <q-checkbox dense v-model="notifyResponseError" label="On response error" />
+                                <q-checkbox dense v-model="notifySettingsUpdate" label="On settings update" />
                             </div>
                         </q-card-section>
                     </div>
@@ -66,7 +66,8 @@ import SyntaxColor from 'components/SyntaxColor';
 import { notify } from '../js/util.js';
 import path from 'path';
 import { remote } from 'electron';
-import { mapState } from 'vuex';
+// import { mapState } from 'vuex';
+import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
 
 export default {
     components: { Confirm, SyntaxColor },
@@ -83,27 +84,36 @@ export default {
         };
     },
     computed: {
-        ...mapState('settings', ['settings']),
-        colors () {
-            return this.settings.colors;
-        },
-        mostRecent: {
-            get () {
-                return this.settings.history.mostRecent;
-            },
-            set (mostRecent) {
-                this.$store.dispatch('settings/updateMostRecent', mostRecent);
-                // this.settings.history.mostRecent = mostRecent;
-            }
-        },
-        notifications: {
-            get () {
-                return this.settings.notifications;
-            },
-            set (notifications) {
-                this.$store.dispatch('settings/updateNotifications', notifications);
-            }
-        }
+        // ...mapState('settings', ['settings']),
+        ...mapFields('settings', [
+            'settings.history.mostRecent',
+            'settings.notifications.notifyResponseSuccess',
+            'settings.notifications.notifyResponseError',
+            'settings.notifications.notifySettingsUpdate'
+        ]),
+        ...mapMultiRowFields('settings', [
+            'settings.colors'
+        ])
+        // colors () {
+        //     return this.settings.colors;
+        // }
+        // mostRecent: {
+        //     get () {
+        //         return this.settings.history.mostRecent;
+        //     },
+        //     set (mostRecent) {
+        //         // this.$store.dispatch('settings/updateMostRecent', mostRecent);
+        //         // this.settings.history.mostRecent = mostRecent;
+        //     }
+        // },
+        // notifications: {
+        //     get () {
+        //         return this.settings.notifications;
+        //     },
+        //     set (notifications) {
+        //         // this.$store.dispatch('settings/updateNotifications', notifications);
+        //     }
+        // }
         // history: {
         //     get () {
         //         return this.settings.history;
@@ -164,15 +174,10 @@ export default {
         this.$jsonfile.readFile(settingsFile)
             .then(settings => {
                 this.$store.dispatch('settings/update', settings)
-                    .then(() => {
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
+                    .then(() => {})
+                    .catch(err => console.log(err));
             })
-            .catch(err => {
-                console.log(err);
-            });
+            .catch(err => console.log(err));
     }
 };
 </script>

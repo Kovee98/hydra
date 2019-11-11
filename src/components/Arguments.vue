@@ -5,11 +5,12 @@
                       :key="arg.id"
                       :arg="arg"
                       :i="i"
-                      :name="name" />
+                      :remove="remove"
+                      :update="update" />
 
             <div class="row">
                 <div class="col q-px-md q-py-sm">
-                    <q-btn flat size="large" @click="add" color="primary" class="q-pa-sm full-width">
+                    <q-btn flat size="large" @click="addArg" color="primary" class="q-pa-sm full-width">
                         <q-icon size="xs" name="fas fa-plus" />
                     </q-btn>
                 </div>
@@ -22,11 +23,11 @@
 import Argument from 'components/Argument';
 
 export default {
-    props: ['args', 'name'],
+    props: ['args', 'update', 'remove', 'add'],
     components: { Argument },
     methods: {
-        add () {
-            this.$store.dispatch(this.name + '/add', { key: '', value: '' });
+        addArg () {
+            this.$store.dispatch(this.add, { key: '', value: '' });
         }
     }
 };

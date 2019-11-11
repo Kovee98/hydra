@@ -1,16 +1,16 @@
 <template>
     <div class="row items-center justify-around q-gutter-sm">
         <div class="col">
-            <q-input filled dense dark @input="update" v-model="key" />
+            <q-input filled dense dark @input="updateArg" v-model="key" />
         </div>
         <div class="col-1 text-center">
             <q-icon name="fas fa-equals" class="text-grey-6" />
         </div>
         <div class="col">
-            <q-input filled dense dark @input="update" v-model="value" />
+            <q-input filled dense dark @input="updateArg" v-model="value" />
         </div>
         <div class="col-1">
-            <q-btn dark flat dense @click="remove" color="red" tabindex="-1">
+            <q-btn dark flat dense @click="removeArg" color="red" tabindex="-1">
                 <q-icon size="xs" name="fas fa-minus" />
             </q-btn>
         </div>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    props: ['arg', 'updateName', 'removeName', 'i'],
+    props: ['arg', 'update', 'remove', 'i'],
     data () {
         return {
             key: this.arg.key,
@@ -27,11 +27,11 @@ export default {
         };
     },
     methods: {
-        remove () {
-            this.$store.dispatch(this.removeName, this.i);
+        removeArg () {
+            this.$store.dispatch(this.remove, this.i);
         },
-        update () {
-            this.$store.dispatch(this.updateName, {
+        updateArg () {
+            this.$store.dispatch(this.update, {
                 index: this.i,
                 arg: {
                     key: this.key ? this.key.trim() : '',

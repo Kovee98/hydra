@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    props: ['arg', 'name', 'i'],
+    props: ['arg', 'updateName', 'removeName', 'i'],
     data () {
         return {
             key: this.arg.key,
@@ -28,10 +28,10 @@ export default {
     },
     methods: {
         remove () {
-            this.$store.dispatch(this.name + '/remove', this.i);
+            this.$store.dispatch(this.removeName, this.i);
         },
         update () {
-            this.$store.dispatch(this.name + '/update', {
+            this.$store.dispatch(this.updateName, {
                 index: this.i,
                 arg: {
                     key: this.key ? this.key.trim() : '',

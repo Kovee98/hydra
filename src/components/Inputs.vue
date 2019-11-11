@@ -21,6 +21,7 @@
 
 <script>
 import { isValidUrl, notify } from '../js/util.js';
+import { mapFields } from 'vuex-map-fields';
 
 export default {
     data () {
@@ -33,6 +34,13 @@ export default {
             url: 'https://my-json-server.typicode.com/kovee98/json-server/posts'
         };
     },
+    computed: {
+        ...mapFields('request', [
+            'body',
+            'params',
+            'headers'
+        ])
+    },
     methods: {
         send () {
             if (!isValidUrl(this.url)) {
@@ -40,15 +48,13 @@ export default {
                 return;
             }
 
-            let body = this.$store.getters['body/get'];
-
             let params = {};
-            this.$store.getters['params/get'].forEach(param => {
+            this.params.forEach(param => {
                 params[param.key] = param.value;
             });
 
             let headers = {};
-            this.$store.getters['headers/get'].forEach(header => {
+            this.headers.forEach(header => {
                 headers[header.key] = header.value;
             });
 
@@ -56,11 +62,11 @@ export default {
             let startTime = performance.now();
 
             this.$axios({
-                method: this.method,
-                url: this.url,
-                data: body,
-                params: params,
-                headers: headers
+                method: this.method || '',
+                url: this.url || '',
+                data: this.body || {},
+                params: params || {},
+                headers: headers || {}
             }).then(res => {
                 let endTime = performance.now();
 

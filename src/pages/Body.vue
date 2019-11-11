@@ -2,7 +2,6 @@
     <q-scroll-area class="code fill q-px-md">
         <q-input dark borderless autogrow
                  @keydown.tab.prevent="tabber"
-                 @input="input"
                  v-model="body"
                  class="text-body1"
                  placeholder="{...}" />
@@ -10,16 +9,17 @@
 </template>
 
 <script>
+import { mapFields } from 'vuex-map-fields';
+
 export default {
     data () {
         return {
-            body: this.$store.getters['body/get']
         };
     },
+    computed: {
+        ...mapFields('request', ['body'])
+    },
     methods: {
-        input () {
-            this.$store.dispatch('body/update', this.body);
-        },
         tabber (e) {
             let text = this.body;
             let originalSelectionStart = e.target.selectionStart;

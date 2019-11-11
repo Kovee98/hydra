@@ -1,11 +1,5 @@
-export function update (state, settings) {
-    state.settings = settings;
+export function update (state, { colors, history, notifications }) {
+    state.colors = colors;
+    state.history = history;
+    state.notifications = notifications;
 }
-
-// export function updateMostRecent (state, mostRecent) {
-//     state.settings.history.mostRecent = mostRecent;
-// }
-
-// export function updateNotifications (state, notifications) {
-//     state.settings.notifications = notifications;
-// }

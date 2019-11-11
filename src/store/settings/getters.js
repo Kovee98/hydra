@@ -1,3 +1,1 @@
-export function get (state) {
-    return state.settings;
-}
+export let get = state => state;

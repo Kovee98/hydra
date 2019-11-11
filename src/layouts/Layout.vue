@@ -64,6 +64,7 @@ import Response from 'pages/Response';
 import Settings from 'components/Settings';
 import Inputs from 'components/Inputs';
 import { openURL } from 'quasar';
+import { mapFields } from 'vuex-map-fields';
 // import SuggestFeature from 'components/SuggestFeature';
 // import ReportBug from 'components/ReportBug';
 
@@ -78,22 +79,28 @@ export default {
         };
     },
     computed: {
-        status () {
-            let status = this.$store.getters['response/get'].status;
+        ...mapFields('response', [
+            'status',
+            'time'
+        ])
+        // status () {
+        //     let status = this.$store.getters['response/get'].status;
 
-            if (status.code >= 200 && status.code <= 226) {
-                status.color = 'positive';
-            } else if (status.code >= 400) {
-                status.color = 'negative';
-            } else {
-                status.color = 'warning';
-            }
+        //     if (status.code >= 200 && status.code <= 226) {
+        //         status.color = 'positive';
+        //     } else if (status.code >= 400) {
+        //         status.color = 'negative';
+        //     } else {
+        //         status.color = 'warning';
+        //     }
 
-            return status;
-        },
-        time () {
-            return this.$store.getters['response/get'].time;
-        }
+        //     return status;
+        // },
+        // time () {
+        //     let response = this.$store.getters['response/get'];
+        //     console.log('response:', response);
+        //     return response.time;
+        // }
     },
     methods: {
         suggestFeature () {

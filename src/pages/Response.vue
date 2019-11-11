@@ -7,18 +7,13 @@
 
 <script>
 import { colorize } from '../js/util.js';
+import { mapFields } from 'vuex-map-fields';
 
 export default {
     methods: {
         colorize: colorize
     },
     computed: {
-        colors () {
-            return this.$store.getters['settings/get'].colors;
-        },
-        data () {
-            return colorize(this.$store.getters['response/get'].data);
-        },
         style () {
             let style = '<style>';
             this.colors.forEach(color => {
@@ -27,7 +22,11 @@ export default {
             });
             style += '</style>';
             return style;
-        }
+        },
+        data () {
+            return colorize(this.$store.getters['response/get'].data);
+        },
+        ...mapFields('settings', ['colors'])
     }
 };
 </script>

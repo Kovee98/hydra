@@ -67,62 +67,23 @@ import { notify } from '../js/util.js';
 import path from 'path';
 import { remote } from 'electron';
 // import { mapState } from 'vuex';
-import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
+import { mapFields } from 'vuex-map-fields';
 
 export default {
     components: { Confirm, SyntaxColor },
     data () {
         return {
             show: false
-            // mostRecent: this.settings.history.mostRecent,
-            // mostRecentProxy: null,
-            // historyProxy: {},
-            // notifyResponseSuccess: this.settings.notifications.notifyResponseSuccess || false,
-            // notifyResponseError: this.settings.notifications.notifyResponseError,
-            // notifySettingsUpdate: this.settings.notifications.notifySettingsUpdate
-            // notificationsProxy: {}
         };
     },
     computed: {
-        // ...mapState('settings', ['settings']),
         ...mapFields('settings', [
-            'settings.history.mostRecent',
-            'settings.notifications.notifyResponseSuccess',
-            'settings.notifications.notifyResponseError',
-            'settings.notifications.notifySettingsUpdate'
-        ]),
-        ...mapMultiRowFields('settings', [
-            'settings.colors'
+            'colors',
+            'history.mostRecent',
+            'notifications.notifyResponseSuccess',
+            'notifications.notifyResponseError',
+            'notifications.notifySettingsUpdate'
         ])
-        // colors () {
-        //     return this.settings.colors;
-        // }
-        // mostRecent: {
-        //     get () {
-        //         return this.settings.history.mostRecent;
-        //     },
-        //     set (mostRecent) {
-        //         // this.$store.dispatch('settings/updateMostRecent', mostRecent);
-        //         // this.settings.history.mostRecent = mostRecent;
-        //     }
-        // },
-        // notifications: {
-        //     get () {
-        //         return this.settings.notifications;
-        //     },
-        //     set (notifications) {
-        //         // this.$store.dispatch('settings/updateNotifications', notifications);
-        //     }
-        // }
-        // history: {
-        //     get () {
-        //         return this.settings.history;
-        //     },
-        //     set (history) {
-        //         // this.$store.dispatch('settings/updateHistory', history);
-        //         this.historyProxy = history;
-        //     }
-        // }
     },
     methods: {
         restore () {

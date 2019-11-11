@@ -30,7 +30,7 @@ export default {
             options: [
                 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'
             ],
-            url: 'https://my-json-server.typicode.com/typicode/demo/posts'
+            url: 'https://my-json-server.typicode.com/kovee98/json-server/posts'
         };
     },
     methods: {
@@ -52,47 +52,52 @@ export default {
                 headers[header.key] = header.value;
             });
 
-            if (this.method && this.url) {
-                this.isLoading = true;
-                let startTime = performance.now();
+            this.isLoading = true;
+            let startTime = performance.now();
 
-                this.$axios({
-                    method: this.method,
-                    url: this.url,
-                    data: body,
-                    params: params,
-                    headers: headers
-                }).then(res => {
-                    let endTime = performance.now();
-                    this.$store.dispatch('response/update', {
-                        data: res.data,
-                        status: {
-                            code: res.status,
-                            text: res.statusText
-                        },
-                        time: (endTime - startTime).toFixed(2)
-                    });
+            this.$axios({
+                method: this.method,
+                url: this.url,
+                data: body,
+                params: params,
+                headers: headers
+            }).then(res => {
+                let endTime = performance.now();
 
-                    notify({ msg: 'Success!' });
-                }).catch(err => {
-                    console.log(err);
-                    let endTime = performance.now();
-                    this.$store.dispatch('response/update', {
-                        data: err.toString(),
-                        status: {
-                            code: '',
-                            text: ''
-                        },
-                        time: (endTime - startTime).toFixed(2)
-                    });
+                let color = 'warning';
+                if (res.status >= 200 && res.status <= 226) {
+                    color = 'positive';
+                } else if (res.status >= 400) {
+                    color = 'negative';
+                }
 
-                    notify({ msg: err.toString(), isOk: false });
-                }).finally(() => {
-                    this.isLoading = false;
+                this.$store.dispatch('response/update', {
+                    data: res.data,
+                    status: {
+                        code: res.status,
+                        text: res.statusText,
+                        color: color
+                    },
+                    time: (endTime - startTime).toFixed(2)
                 });
-            } else {
+
+                notify({ msg: 'Success!' });
+            }).catch(err => {
+                console.log(err);
+                let endTime = performance.now();
+                this.$store.dispatch('response/update', {
+                    data: err.toString(),
+                    status: {
+                        code: '',
+                        text: ''
+                    },
+                    time: (endTime - startTime).toFixed(2)
+                });
+
+                notify({ msg: err.toString(), isOk: false });
+            }).finally(() => {
                 this.isLoading = false;
-            }
+            });
         }
     }
 };

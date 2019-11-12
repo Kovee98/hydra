@@ -14,6 +14,7 @@ export default {
         colorize: colorize
     },
     computed: {
+        ...mapMultiRowFields('settings', ['colors']),
         style () {
             let rules = this.colors.reduce((rules, color) => {
                 return `${rules} .${color.type.toLowerCase()} { color: ${color.color} } `;
@@ -22,8 +23,7 @@ export default {
         },
         data () {
             return colorize(this.$store.getters['response/get'].data);
-        },
-        ...mapMultiRowFields('settings', ['colors'])
+        }
     }
 };
 </script>

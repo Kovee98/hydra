@@ -23,7 +23,7 @@
                                 <syntax-color ref="syntaxColors"
                                               v-for="color in colors"
                                               :key="color.id"
-                                              :color="color" />
+                                              v-model="color" />
                             </div>
                         </q-card-section>
                         <q-card-section class="col q-ml-none">
@@ -73,7 +73,8 @@ export default {
     components: { Confirm, SyntaxColor },
     data () {
         return {
-            show: false
+            show: false,
+            settingsFile: path.join(remote.app.getPath('userData'), 'settings.json')
         };
     },
     computed: {
@@ -90,8 +91,7 @@ export default {
         restore () {
             this.$store.dispatch('settings/update', defaults)
                 .then(() => {
-                    let settingsFile = path.join(remote.app.getPath('userData'), 'settings.json');
-                    this.$jsonfile.writeFile(settingsFile, defaults, { spaces: 4 })
+                    this.$jsonfile.writeFile(this.settingsFile, defaults, { spaces: 4 })
                         .then(() => {
                             this.show = false;
                             notify({ msg: 'Default settings have been restored' });
@@ -101,15 +101,7 @@ export default {
                 .catch(err => notify({ msg: err.toString(), isOk: false }));
         },
         save () {
-            // let newColors = [];
-            // this.$refs.syntaxColors.forEach(syntaxColor => {
-            //     newColors.push({
-            //         type: syntaxColor.label,
-            //         color: syntaxColor.currentColor
-            //     });
-            // });
-
-            console.log(this.colors);
+            console.log('colors:', this.colors);
 
             let newSettings = {
                 colors: this.colors,
@@ -125,8 +117,7 @@ export default {
 
             this.$store.dispatch('settings/update', newSettings)
                 .then(() => {
-                    let settingsFile = path.join(remote.app.getPath('userData'), 'settings.json');
-                    this.$jsonfile.writeFile(settingsFile, newSettings, { spaces: 4 })
+                    this.$jsonfile.writeFile(this.settingsFile, newSettings, { spaces: 4 })
                         .then(() => {
                             this.show = false;
                             notify({ msg: 'Settings have been saved successfully' });
@@ -137,8 +128,7 @@ export default {
         }
     },
     mounted () {
-        let settingsFile = path.join(remote.app.getPath('userData'), 'settings.json');
-        this.$jsonfile.readFile(settingsFile)
+        this.$jsonfile.readFile(this.settingsFile)
             .then(settings => {
                 this.$store.dispatch('settings/update', settings)
                     .then(() => {})

@@ -16,7 +16,9 @@ export default {
     computed: {
         ...mapMultiRowFields('settings', ['colors']),
         style () {
+            console.log('response colors:', this.colors);
             let rules = this.colors.reduce((rules, color) => {
+                console.log('response color:', color);
                 return `${rules} .${color.type.toLowerCase()} { color: ${color.color} } `;
             }, '');
             return `<style> ${rules} </style>`;

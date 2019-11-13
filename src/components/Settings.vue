@@ -25,7 +25,6 @@
                                               :key="i"
                                               v-model="colors[i]" />
                             </div>
-                            <q-btn @click="printColors">Print Colors</q-btn>
                         </q-card-section>
                         <q-card-section class="col q-ml-none">
                             <span class="text-h6">History</span>
@@ -54,7 +53,6 @@
                                  :msg="'save settings?'"
                                  :action="save"
                                  :color="'primary'" />
-                        <q-btn @click="save">Save Now</q-btn>
                     </q-card-actions>
                 </div>
             </q-card>
@@ -82,7 +80,7 @@ export default {
     },
     computed: {
         ...mapFields('settings', [
-            'colors',
+            // 'colors',
             'history.mostRecent',
             'notifications.notifyResponseSuccess',
             'notifications.notifyResponseError',
@@ -91,9 +89,6 @@ export default {
         ...mapMultiRowFields('settings', ['colors'])
     },
     methods: {
-        printColors () {
-            log('colors:', this.colors);
-        },
         restore () {
             log('defaults:', defaults);
             this.$store.dispatch('settings/update', defaults)
@@ -108,9 +103,6 @@ export default {
                 .catch(err => notify({ msg: err.toString(), isOk: false }));
         },
         save () {
-            log('colors:', this.colors);
-            debugger;
-
             var newSettings = {
                 colors: this.colors,
                 history: {
@@ -122,19 +114,17 @@ export default {
                     notifySettingsUpdate: this.notifySettingsUpdate
                 }
             };
-            log('newSettings:', newSettings);
-            debugger;
 
             this.$store.dispatch('settings/update', newSettings)
-                .then(() => {
+                .then((savedSettings) => {
                     debugger;
-                    log('dispatch successful, newSettings:', newSettings);
-                    // this.$jsonfile.writeFile(this.settingsFile, newSettings, { spaces: 4 })
-                    //     .then(() => {
-                    //         this.show = false;
-                    //         notify({ msg: 'Settings have been saved successfully' });
-                    //     })
-                    //     .catch(err => notify({ msg: err.toString(), isOk: false }));
+                    this.$jsonfile.writeFile(this.settingsFile, savedSettings)
+                        .then(res => {
+                            debugger;
+                            this.show = false;
+                            notify({ msg: 'Settings have been saved successfully' });
+                        })
+                        .catch(err => notify({ msg: err.toString(), isOk: false }));
                 })
                 .catch(err => notify({ msg: err.toString(), isOk: false }));
         }

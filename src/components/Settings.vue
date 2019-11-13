@@ -81,6 +81,8 @@ export default {
     computed: {
         ...mapFields('settings', [
             // 'colors',
+            '',
+            'settings',
             'history.mostRecent',
             'notifications.notifyResponseSuccess',
             'notifications.notifyResponseError',
@@ -115,12 +117,13 @@ export default {
                 }
             };
 
+            let settingsObj = this.settings;
+            console.log(settingsObj);
+
             this.$store.dispatch('settings/update', newSettings)
                 .then((savedSettings) => {
-                    debugger;
-                    this.$jsonfile.writeFile(this.settingsFile, savedSettings)
-                        .then(res => {
-                            debugger;
+                    this.$jsonfile.writeFile(this.settingsFile, this.$store.getters['settings/get'], { spaces: 4 })
+                        .then(() => {
                             this.show = false;
                             notify({ msg: 'Settings have been saved successfully' });
                         })
@@ -132,8 +135,11 @@ export default {
     mounted () {
         this.$jsonfile.readFile(this.settingsFile)
             .then(settings => {
+                debugger;
                 this.$store.dispatch('settings/update', settings)
-                    .then(() => {})
+                    .then((savedSettings) => {
+                        debugger;
+                    })
                     .catch(err => console.log(err));
             })
             .catch(err => console.log(err));

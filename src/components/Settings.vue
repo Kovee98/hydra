@@ -1,8 +1,8 @@
 <template>
     <div>
-        <q-btn dense flat @click="show = true">
-            <q-icon name="fas fa-cog" size="xs" />
-        </q-btn>
+        <q-item clickable>
+            <q-item-section @click="show = true">Preferences</q-item-section>
+        </q-item>
 
         <q-dialog v-model="show" persistent maximized transition-show="slide-up" transition-hide="slide-down">
             <q-card>

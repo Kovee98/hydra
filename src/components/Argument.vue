@@ -1,16 +1,16 @@
 <template>
     <div class="row items-center justify-around q-gutter-sm">
         <div class="col">
-            <q-input filled dense dark @input="updateArg" v-model="key" />
+            <q-input filled dense @input="updateArg" v-model="key" />
         </div>
         <div class="col-1 text-center">
             <q-icon name="fas fa-equals" class="text-grey-6" />
         </div>
         <div class="col">
-            <q-input filled dense dark @input="updateArg" v-model="value" />
+            <q-input filled dense @input="updateArg" v-model="value" />
         </div>
         <div class="col-1">
-            <q-btn dark flat dense @click="removeArg" color="red" tabindex="-1">
+            <q-btn flat dense @click="removeArg" color="red" tabindex="-1">
                 <q-icon size="xs" name="fas fa-minus" />
             </q-btn>
         </div>

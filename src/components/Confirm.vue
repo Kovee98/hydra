@@ -2,7 +2,7 @@
     <div>
         <q-btn flat :color="color" :label="btn" @click="confirm = true" />
         <q-dialog v-model="confirm" persistent>
-            <q-card dark>
+            <q-card>
                 <q-card-section class="row q-pa-lg">
                     <span class="text-body1">Are you sure you want to {{msg}}</span>
                 </q-card-section>

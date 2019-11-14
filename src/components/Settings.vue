@@ -5,7 +5,7 @@
         </q-btn>
 
         <q-dialog v-model="show" persistent maximized transition-show="slide-up" transition-hide="slide-down">
-            <q-card dark>
+            <q-card>
                 <q-bar class="q-pa-xs">
                     <q-space />
                     <q-btn dense flat icon="close" v-close-popup />

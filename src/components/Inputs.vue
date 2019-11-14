@@ -1,17 +1,17 @@
 <template>
-    <div class="row fit bg-grey-10">
+    <div class="row fit">
         <div class="col-2">
-            <q-select dark filled v-model="method" :options="options" label="Method" class="text-h6" />
+            <q-select filled v-model="method" :options="options" label="Method" class="text-h6" />
         </div>
         <div class="col">
-            <q-input dark filled v-model="url" label="URL" class="text-h6">
+            <q-input filled v-model="url" label="URL" class="text-h6">
                 <template v-slot:append>
                     <q-icon v-if="url" name="fas fa-times" @click="url = ''" class="cursor-pointer q-px-md" />
                 </template>
             </q-input>
         </div>
         <div class="col-1">
-            <q-btn dark filled @click="send" color="primary" class="no-border-radius no-shadow fit">
+            <q-btn filled @click="send" color="primary" class="no-border-radius no-shadow fit">
                 <q-icon v-if="!isLoading" name="fas fa-arrow-right" />
                 <q-spinner v-if="isLoading" color="white" />
             </q-btn>

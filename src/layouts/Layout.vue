@@ -1,6 +1,6 @@
 <template>
     <q-layout view="hHh lpR fFf">
-        <q-header bordered class="bg-grey-10 text-white border">
+        <q-header bordered class="bg-dark">
             <q-toolbar class="q-pa-none justify-center">
                 <inputs />
             </q-toolbar>
@@ -13,7 +13,7 @@
                 <div class="col">
                     <div class="row q-pr-sm">
                         <div class="col text-right">
-                            <q-chip square dark outline>
+                            <q-chip square outline>
                                 {{time}} ms
                             </q-chip>
                             <q-chip v-if="status.code" square :color="status.color" class="text-white">
@@ -26,7 +26,7 @@
         </q-header>
 
         <q-page-container>
-            <q-splitter dark v-model="splitter" class="fill">
+            <q-splitter v-model="splitter" class="fill">
                 <template v-slot:before>
                     <router-view />
                 </template>
@@ -36,12 +36,12 @@
             </q-splitter>
         </q-page-container>
 
-        <q-footer bordered class="border bg-grey-10">
+        <q-footer bordered class="">
             <q-toolbar class="justify-between q-pa-xs">
                 <settings />
                 <q-btn dense flat>
                     <q-icon name="far fa-question-circle" size="xs" />
-                    <q-menu dark>
+                    <q-menu>
                         <q-list style="min-width: 100px">
                             <q-item clickable @click="suggestFeature">
                                 <q-item-section>Suggest a feature</q-item-section>

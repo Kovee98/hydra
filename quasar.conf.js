@@ -44,8 +44,9 @@ module.exports = function (ctx) {
             all: 'auto',
             config: {
                 brand: {
-                    primary: 'rgba(39, 221, 255, 1)',
-                    secondary: '#cf6e00'
+                    // primary: '#27ddff',
+                    // primary: '#0097CC',
+                    // secondary: '#cf6e00'
                 }
             },
             components: [],

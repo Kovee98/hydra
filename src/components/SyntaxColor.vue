@@ -1,9 +1,9 @@
 <template>
-    <q-input filled dark v-model="value.color" :rules="['anyColor']" :label="value.type">
+    <q-input filled v-model="value.color" :rules="['anyColor']" :label="value.type">
         <template v-slot:append>
             <q-icon ref="sample" name="fas fa-square" class="cursor-pointer" :style="style">
                 <q-popup-proxy transition-show="scale" transition-hide="scale">
-                    <q-color dark v-model="value.color" />
+                    <q-color v-model="value.color" />
                 </q-popup-proxy>
             </q-icon>
         </template>

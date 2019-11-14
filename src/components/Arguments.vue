@@ -1,5 +1,5 @@
 <template>
-    <q-scroll-area dark class="fill q-pa-md">
+    <q-scroll-area class="fill q-pa-md">
         <div class="column q-gutter-lg">
             <argument v-for="(arg, i) in args"
                       :key="arg.id"

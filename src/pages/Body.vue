@@ -1,6 +1,6 @@
 <template>
     <q-scroll-area class="code fill q-px-md">
-        <q-input dark borderless autogrow
+        <q-input borderless autogrow
                  @keydown.tab.prevent="tabber"
                  v-model="body"
                  class="text-body1"

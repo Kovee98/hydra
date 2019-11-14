@@ -1,6 +1,15 @@
 <template>
     <q-layout view="hHh lpR fFf">
         <q-header bordered class="bg-dark">
+            <q-bar class="q-electron-drag text-grey-5 q-pa-sm">
+                <q-icon name="img:statics/logo/logo.png" />
+                <div class="cursor-pointer">File</div>
+                <div class="cursor-pointer">Help</div>
+                <q-space />
+                <q-btn dense flat icon="minimize" @click="minimize" />
+                <q-btn dense flat icon="crop_square" @click="maximize" />
+                <q-btn dense flat icon="close" @click="closeApp" />
+            </q-bar>
             <q-toolbar class="q-pa-none justify-center">
                 <inputs />
             </q-toolbar>
@@ -36,26 +45,22 @@
             </q-splitter>
         </q-page-container>
 
-        <q-footer bordered class="">
-            <q-toolbar class="justify-between q-pa-xs">
-                <settings />
-                <q-btn dense flat>
-                    <q-icon name="far fa-question-circle" size="xs" />
-                    <q-menu>
-                        <q-list style="min-width: 100px">
-                            <q-item clickable @click="suggestFeature">
-                                <q-item-section>Suggest a feature</q-item-section>
-                            </q-item>
-                            <q-item clickable @click="reportBug">
-                                <q-item-section>Report a bug</q-item-section>
-                            </q-item>
-                            <!-- <suggest-feature />
-                            <report-bug /> -->
-                        </q-list>
-                    </q-menu>
-                </q-btn>
-            </q-toolbar>
-        </q-footer>
+        <q-bar bordered class="fixed-bottom opaque justify-between q-pa-sm">
+            <settings />
+            <q-btn dense flat>
+                <q-icon name="far fa-question-circle" size="xs" />
+                <q-menu>
+                    <q-list style="min-width: 100px">
+                        <q-item clickable @click="suggestFeature">
+                            <q-item-section>Suggest a feature</q-item-section>
+                        </q-item>
+                        <q-item clickable @click="reportBug">
+                            <q-item-section>Report a bug</q-item-section>
+                        </q-item>
+                    </q-list>
+                </q-menu>
+            </q-btn>
+        </q-bar>
     </q-layout>
 </template>
 
@@ -65,16 +70,12 @@ import Settings from 'components/Settings';
 import Inputs from 'components/Inputs';
 import { openURL } from 'quasar';
 import { mapFields } from 'vuex-map-fields';
-// import SuggestFeature from 'components/SuggestFeature';
-// import ReportBug from 'components/ReportBug';
 
 export default {
     components: { Response, Settings, Inputs },
     data () {
         return {
             splitter: 50,
-            // showBug: false,
-            // showFeature: false,
             issuesUrl: 'https://github.com/Kovee98/hydra-2/issues/new'
         };
     },
@@ -90,19 +91,28 @@ export default {
         },
         reportBug () {
             openURL(this.issuesUrl);
+        },
+        minimize () {
+            if (process.env.MODE === 'electron') {
+                this.$q.electron.remote.BrowserWindow.getFocusedWindow().minimize();
+            }
+        },
+        maximize () {
+            if (process.env.MODE === 'electron') {
+                const win = this.$q.electron.remote.BrowserWindow.getFocusedWindow();
+
+                if (win.isMaximized()) {
+                    win.unmaximize();
+                } else {
+                    win.maximize();
+                }
+            }
+        },
+        closeApp () {
+            if (process.env.MODE === 'electron') {
+                this.$q.electron.remote.BrowserWindow.getFocusedWindow().close();
+            }
         }
     }
 };
 </script>
-
-<style lang="scss">
-    .q-toolbar {
-        min-height: 0px;
-    }
-    .q-header {
-        // border-bottom: 1px solid $grey-7;
-    }
-    .border {
-        border-color: $grey-7;
-    }
-</style>

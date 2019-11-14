@@ -1,22 +1,14 @@
 // app global css in SCSS form
 
-// .text-grey-dark {
-//     color: rgb(43, 48, 54);
-// }
-// .bg-grey-dark {
-//     background: rgb(43, 48, 54);
-// }
-
-// .text-grey-darker {
-//     color: rgb(37, 41, 46);
-// }
-// .bg-grey-darker {
-//     background: rgb(37, 41, 46);
-// }
-
-// .text-grey-light {
-//     color: rgb(148, 157, 170);
-// }
-// .bg-grey-light {
-//     background: rgb(148, 157, 170);
-// }
+.fill {
+    height: calc(100vh - 137px);
+}
+.code {
+    font-family: 'Courier New';
+    white-space: pre;
+}
+.overflow-wrap {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}

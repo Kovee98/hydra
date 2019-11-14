@@ -19,10 +19,11 @@ function createWindow () {
         width: 1400,
         height: 835,
         useContentSize: true,
-        icon: path.join(__dirname, 'src/assets/img/logo/logo_bg_sh.ico'),
+        icon: path.join(__dirname, '../icons/icon.ico'),
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        frame: false
     });
 
     mainWindow.removeMenu();

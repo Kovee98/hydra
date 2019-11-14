@@ -1,7 +1,7 @@
 <template>
     <div class="row fit">
-        <div class="col-2">
-            <q-select filled v-model="method" :options="options" label="Method" class="text-h6" />
+        <div class="set-width">
+            <q-select transition-show="flip-left" transition-hide="flip-right" filled v-model="method" :options="options" label="Method" class="text-h6" />
         </div>
         <div class="col">
             <q-input filled v-model="url" label="URL" class="text-h6">
@@ -10,7 +10,7 @@
                 </template>
             </q-input>
         </div>
-        <div class="col-1">
+        <div class="set-width">
             <q-btn filled @click="send" color="primary" class="no-border-radius no-shadow fit">
                 <q-icon v-if="!isLoading" name="fas fa-arrow-right" />
                 <q-spinner v-if="isLoading" color="white" />
@@ -108,3 +108,9 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+    .set-width {
+        width: 120px;
+    }
+</style>

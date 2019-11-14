@@ -42,13 +42,6 @@ module.exports = function (ctx) {
             // * true   - Import everything from Quasar
             //            (not treeshaking Quasar; biggest bundle size; convenient)
             all: 'auto',
-            config: {
-                brand: {
-                    // primary: '#27ddff',
-                    // primary: '#0097CC',
-                    // secondary: '#cf6e00'
-                }
-            },
             components: [],
             directives: [],
 
@@ -174,7 +167,7 @@ module.exports = function (ctx) {
             builder: {
                 // https://www.electron.build/configuration/configuration
 
-                // appId: 'hydra-2'
+                // appId: 'hydra-2',
             }
         }
     };

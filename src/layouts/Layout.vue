@@ -1,6 +1,6 @@
 <template>
     <q-layout view="hHh lpR fFf">
-        <q-header elevated dark class="bg-grey-10 text-white">
+        <q-header bordered class="bg-grey-10 text-white border">
             <q-toolbar class="q-pa-none justify-center">
                 <inputs />
             </q-toolbar>
@@ -25,7 +25,7 @@
             </div>
         </q-header>
 
-        <q-page-container class="bg-grey-10">
+        <q-page-container>
             <q-splitter dark v-model="splitter" class="fill">
                 <template v-slot:before>
                     <router-view />
@@ -36,7 +36,7 @@
             </q-splitter>
         </q-page-container>
 
-        <q-footer dark>
+        <q-footer bordered class="border bg-grey-10">
             <q-toolbar class="justify-between q-pa-xs">
                 <settings />
                 <q-btn dense flat>
@@ -101,5 +101,8 @@ export default {
     }
     .q-header {
         // border-bottom: 1px solid $grey-7;
+    }
+    .border {
+        border-color: $grey-7;
     }
 </style>

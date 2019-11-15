@@ -70,7 +70,6 @@ export default {
                 params: params || {},
                 headers: headers || {}
             }).then(res => {
-                debugger;
                 let endTime = performance.now();
 
                 let color = 'info';

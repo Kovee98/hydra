@@ -94,7 +94,7 @@ export default {
             if (res.status >= 200 && res.status <= 226) {
                 color = 'positive';
             } else if (res.status >= 400) {
-                color = 'negative';
+                color = 'red';
             }
 
             let time = (endTime - this.startTime);

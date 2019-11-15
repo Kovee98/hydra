@@ -1,24 +1,26 @@
 <template>
-    <div class="row fit">
-        <div class="select">
-            <q-select transition-show="flip-left" transition-hide="flip-right" filled v-model="method" :options="options" label="Method" class="text-h6" />
+    <q-toolbar class="q-pa-none">
+        <div class="row full-width">
+            <div class="select">
+                <q-select transition-show="flip-left" transition-hide="flip-right" filled v-model="method" :options="options" label="Method" class="text-h6" />
+            </div>
+            <div class="col">
+                <q-input filled v-model="url" label="URL" class="text-h6">
+                    <template v-slot:append>
+                        <q-btn v-if="url" dense flat @click="url = ''">
+                            <q-icon name="clear" />
+                        </q-btn>
+                    </template>
+                </q-input>
+            </div>
+            <div class="send">
+                <q-btn filled @click="send" color="primary" class="no-border-radius no-shadow fit">
+                    <q-icon v-if="!isLoading" size="md" name="double_arrow" />
+                    <q-spinner v-if="isLoading" color="white" />
+                </q-btn>
+            </div>
         </div>
-        <div class="col">
-            <q-input filled v-model="url" label="URL" class="text-h6">
-                <template v-slot:append>
-                    <q-btn v-if="url" dense flat @click="url = ''">
-                        <q-icon name="clear" />
-                    </q-btn>
-                </template>
-            </q-input>
-        </div>
-        <div class="send">
-            <q-btn filled @click="send" color="primary" class="no-border-radius no-shadow fit">
-                <q-icon v-if="!isLoading" size="md" name="double_arrow" />
-                <q-spinner v-if="isLoading" color="white" />
-            </q-btn>
-        </div>
-    </div>
+    </q-toolbar>
 </template>
 
 <script>

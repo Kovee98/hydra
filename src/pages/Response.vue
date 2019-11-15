@@ -1,7 +1,7 @@
 <template>
-    <q-scroll-area class="code fill q-pa-md overflow-wrap">
+    <q-scroll-area class="fill q-pa-md overflow-wrap">
         <div v-html="style" />
-        <div v-html="data" class="text-body1 q-ma-none text-grey-6 overflow-wrap" />
+        <div v-html="data" class="code q-ma-none text-grey-6 overflow-wrap" />
     </q-scroll-area>
 </template>
 

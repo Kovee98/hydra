@@ -19,10 +19,10 @@
                           :remove="remove"
                           v-model="value[i]" />
 
-                <div class="row">
+                <div class="row q-col-gutter-xs">
                     <div class="col-1" />
                     <div class="col">
-                        <q-btn flat size="large" @click="addArg" color="primary" class="q-pa-sm full-width">
+                        <q-btn flat size="large" @click="addArg" color="info" class="q-pa-sm full-width">
                             <q-icon size="md" name="add" />
                         </q-btn>
                     </div>

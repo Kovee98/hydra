@@ -4,11 +4,14 @@
     height: calc(100vh - 131px);
 }
 .code {
-    font-family: 'Courier New';
+    font-family: 'Consolas';
+    font-size: 1.3em;
+    letter-spacing: 0.075em;
+    line-height: 1.5em;
     white-space: pre;
 }
 .overflow-wrap {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
 }

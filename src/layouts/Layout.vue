@@ -7,7 +7,7 @@
             </q-toolbar>
         </q-header>
         <q-drawer v-model="menu" side="left" mini behavior="desktop">
-            <q-list>
+            <q-list class="q-gutter-sm">
                 <q-item clickable to="/" exact>
                     <q-item-section avatar>
                         <q-icon name="create" />
@@ -66,9 +66,15 @@ export default {
     computed: {
         footer () {
             return {
-                // height: '40px'
+                // height: '30px'
             };
         }
     }
 };
 </script>
+
+<style lang="scss">
+    .q-toolbar {
+        min-height: 40px;
+    }
+</style>

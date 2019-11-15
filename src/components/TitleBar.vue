@@ -1,46 +1,26 @@
 <template>
-    <q-bar class="q-electron-drag text-grey-5 q-pa-sm" :style="title">
-        <q-icon name="img:statics/logo/logo.svg" class="q-ml-lg" />
-        <q-btn size="medium" flat no-caps>
+    <q-bar class="q-electron-drag text-grey-5 q-pr-none inner-space" :style="title">
+        <q-icon name="img:statics/logo/logo.svg"/>
+        <q-btn size="medium" flat dense no-caps>
             File
-            <q-menu>
+            <q-menu auto-close>
                 <q-list :style="menu">
-                    <q-item clickable v-close-popup>
+                    <q-item clickable>
                         <q-item-section>New</q-item-section>
                     </q-item>
-                    <q-item clickable v-close-popup>
+                    <q-item clickable>
                         <q-item-section>Open...</q-item-section>
                     </q-item>
                     <q-separator />
                     <settings />
                     <q-separator />
-                    <q-item clickable v-close-popup @click="closeApp">
+                    <q-item clickable @click="closeApp">
                         <q-item-section>Quit</q-item-section>
                     </q-item>
                 </q-list>
             </q-menu>
         </q-btn>
-        <q-btn size="medium" flat no-caps>
-            Edit
-            <q-menu>
-                <q-list :style="menu">
-                    <q-item clickable v-close-popup>
-                        <q-item-section>Cut</q-item-section>
-                    </q-item>
-                    <q-item clickable v-close-popup>
-                        <q-item-section>Copy response</q-item-section>
-                    </q-item>
-                    <q-item clickable v-close-popup>
-                        <q-item-section>Paste request</q-item-section>
-                    </q-item>
-                    <q-separator />
-                    <q-item clickable v-close-popup>
-                        <q-item-section>Select All</q-item-section>
-                    </q-item>
-                </q-list>
-            </q-menu>
-        </q-btn>
-        <q-btn size="medium" flat no-caps>
+        <q-btn size="medium" flat dense no-caps>
             Help
             <q-menu auto-close>
                 <q-list :style="menu">
@@ -60,13 +40,13 @@
             </q-menu>
         </q-btn>
         <q-space />
-        <q-btn size="medium" flat @click="minimize">
+        <q-btn size="small" dense flat @click="minimize">
             <q-icon size="sm" name="minimize" />
         </q-btn>
-        <q-btn size="medium" flat @click="maximize">
+        <q-btn size="small" dense flat @click="maximize">
             <q-icon size="sm" name="crop_square" />
         </q-btn>
-        <q-btn size="medium" flat @click="closeApp">
+        <q-btn size="small" dense flat @click="closeApp">
             <q-icon size="sm" name="close" />
         </q-btn>
     </q-bar>
@@ -121,9 +101,17 @@ export default {
         },
         title () {
             return {
-                height: '40px'
+                height: '35px'
             };
         }
     }
 };
 </script>
+
+<style lang="scss">
+    .inner-space {
+        .q-btn {
+            margin-left: 10px;
+        }
+    }
+</style>

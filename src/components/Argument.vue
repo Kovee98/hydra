@@ -1,17 +1,17 @@
 <template>
     <div class="row items-center justify-around q-gutter-sm">
         <div class="col">
-            <q-input filled dense @input="updateArg" v-model="key" />
+            <q-input filled dense @input="updateArg" v-model="key" :placeholder="'key ' + (parseFloat(i) + 1)" />
         </div>
         <div class="col-1 text-center">
             <q-icon name="drag_handle" size="sm" />
         </div>
         <div class="col">
-            <q-input filled dense @input="updateArg" v-model="value" />
+            <q-input filled dense @input="updateArg" v-model="value" :placeholder="'value ' + (parseFloat(i) + 1)" />
         </div>
         <div class="col-1">
-            <q-btn flat dense @click="removeArg" color="red" tabindex="-1">
-                <q-icon name="remove" />
+            <q-btn flat dense @click="removeArg" tabindex="-1">
+                <q-icon name="delete" />
             </q-btn>
         </div>
     </div>

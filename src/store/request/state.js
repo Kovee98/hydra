@@ -1,5 +1,9 @@
 export default {
-    params: [],
-    headers: [],
+    params: [
+        { key: '', value: '' }
+    ],
+    headers: [
+        { key: '', value: '' }
+    ],
     body: ''
 };

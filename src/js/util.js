@@ -9,7 +9,7 @@ var notify = ({ msg, isOk = true }) => {
         message: msg,
         color: isOk ? 'default' : 'negative',
         icon: isOk ? 'info_outline' : 'report_problem',
-        position: 'bottom-right',
+        position: 'bottom-left',
         actions: [
             {
                 label: 'Dismiss',

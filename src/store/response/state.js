@@ -3,7 +3,8 @@ export default {
     status: {
         code: '',
         text: '',
-        color: ''
-    },
-    time: 0
+        color: '',
+        time: 0,
+        units: ''
+    }
 };

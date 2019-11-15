@@ -8,7 +8,7 @@ var notify = ({ msg, isOk = true }) => {
     Notify.create({
         message: msg,
         color: isOk ? 'default' : 'negative',
-        icon: isOk ? 'info' : 'report_problem',
+        icon: isOk ? 'info_outline' : 'report_problem',
         position: 'bottom-right',
         actions: [
             {

@@ -1,5 +1,4 @@
-export function update (state, { data, status, time }) {
+export function update (state, { data, status }) {
     state.data = data;
     state.status = status;
-    state.time = time;
 }

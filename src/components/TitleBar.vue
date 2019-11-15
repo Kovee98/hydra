@@ -1,6 +1,6 @@
 <template>
     <q-bar class="q-electron-drag text-grey-5 q-pa-sm" :style="title">
-        <q-icon name="img:statics/logo/logo.svg" />
+        <q-icon name="img:statics/logo/logo.svg" class="q-ml-lg" />
         <q-btn size="medium" flat no-caps>
             File
             <q-menu>
@@ -42,33 +42,31 @@
         </q-btn>
         <q-btn size="medium" flat no-caps>
             Help
-            <q-menu>
+            <q-menu auto-close>
                 <q-list :style="menu">
-                    <q-item clickable v-close-popup>
+                    <q-item clickable>
                         <q-item-section @click="suggestFeature">Suggest feature</q-item-section>
                     </q-item>
-                    <q-item clickable v-close-popup>
+                    <q-item clickable>
                         <q-item-section @click="reportBug">Report a bug</q-item-section>
                     </q-item>
                     <q-separator />
-                    <q-item clickable v-close-popup>
+                    <q-item clickable>
                         <q-item-section>Check for updates...</q-item-section>
                     </q-item>
                     <q-separator />
-                    <q-item clickable v-close-popup>
-                        <q-item-section>About</q-item-section>
-                    </q-item>
+                    <about />
                 </q-list>
             </q-menu>
         </q-btn>
         <q-space />
-        <q-btn size="medium" flat dense @click="minimize">
+        <q-btn size="medium" flat @click="minimize">
             <q-icon size="sm" name="minimize" />
         </q-btn>
-        <q-btn size="medium" flat dense @click="maximize">
+        <q-btn size="medium" flat @click="maximize">
             <q-icon size="sm" name="crop_square" />
         </q-btn>
-        <q-btn size="medium" flat dense @click="closeApp">
+        <q-btn size="medium" flat @click="closeApp">
             <q-icon size="sm" name="close" />
         </q-btn>
     </q-bar>
@@ -76,26 +74,15 @@
 
 <script>
 import Settings from 'components/Settings';
+import About from 'components/About';
 import { openURL } from 'quasar';
 
 export default {
-    components: { Settings },
+    components: { Settings, About },
     data () {
         return {
             issuesUrl: 'https://github.com/Kovee98/hydra-2/issues/new'
         };
-    },
-    computed: {
-        menu () {
-            return {
-                minWidth: '150px'
-            };
-        },
-        title () {
-            return {
-                height: '40px'
-            };
-        }
     },
     methods: {
         suggestFeature () {
@@ -124,6 +111,18 @@ export default {
             if (process.env.MODE === 'electron') {
                 this.$q.electron.remote.BrowserWindow.getFocusedWindow().close();
             }
+        }
+    },
+    computed: {
+        menu () {
+            return {
+                minWidth: '150px'
+            };
+        },
+        title () {
+            return {
+                height: '40px'
+            };
         }
     }
 };

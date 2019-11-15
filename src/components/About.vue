@@ -1,7 +1,9 @@
 <template>
     <div>
-        <q-btn label="Close Icon" color="primary" @click="icon = true" />
-        <q-dialog v-model="icon">
+        <q-item clickable @click="show = true">
+            <q-item-section>About</q-item-section>
+        </q-item>
+        <q-dialog v-model="show">
             <q-card>
                 <q-card-section class="row items-center">
                     <div class="text-h6">Close icon</div>
@@ -19,6 +21,10 @@
 
 <script>
 export default {
-
+    data () {
+        return {
+            show: false
+        };
+    }
 };
 </script>

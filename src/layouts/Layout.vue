@@ -40,7 +40,7 @@
                 </template>
             </q-splitter>
         </q-page-container>
-        <q-footer>
+        <q-footer :style="footer" class="bg-dark">
             <q-toolbar>
                 <q-space />
                 <status />
@@ -62,6 +62,13 @@ export default {
             menu: true,
             splitter: 50
         };
+    },
+    computed: {
+        footer () {
+            return {
+                // height: '40px'
+            };
+        }
     }
 };
 </script>

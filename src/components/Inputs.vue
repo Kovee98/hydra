@@ -1,6 +1,6 @@
 <template>
     <div class="row fit">
-        <div class="set-width">
+        <div class="select">
             <q-select transition-show="flip-left" transition-hide="flip-right" filled v-model="method" :options="options" label="Method" class="text-h6" />
         </div>
         <div class="col">
@@ -12,9 +12,9 @@
                 </template>
             </q-input>
         </div>
-        <div class="set-width">
+        <div class="send">
             <q-btn filled @click="send" color="primary" class="no-border-radius no-shadow fit">
-                <q-icon v-if="!isLoading" size="lg" name="double_arrow" />
+                <q-icon v-if="!isLoading" size="md" name="double_arrow" />
                 <q-spinner v-if="isLoading" color="white" />
             </q-btn>
         </div>
@@ -70,13 +70,25 @@ export default {
                 params: params || {},
                 headers: headers || {}
             }).then(res => {
+                debugger;
                 let endTime = performance.now();
 
-                let color = 'warning';
+                let color = 'info';
                 if (res.status >= 200 && res.status <= 226) {
                     color = 'positive';
                 } else if (res.status >= 400) {
                     color = 'negative';
+                }
+
+                let time = (endTime - startTime);
+                let units = 'ms';
+                if (time >= 1000) {
+                    time /= 1000;
+                    units = 's';
+                    if (time >= 60) {
+                        time /= 60;
+                        units = 'm';
+                    }
                 }
 
                 this.$store.dispatch('response/update', {
@@ -84,14 +96,15 @@ export default {
                     status: {
                         code: res.status,
                         text: res.statusText,
-                        color: color
-                    },
-                    time: (endTime - startTime).toFixed(2)
+                        color: color,
+                        time: time.toFixed(2),
+                        units: units
+                    }
                 });
 
                 notify({ msg: 'Success!' });
             }).catch(err => {
-                console.log(err);
+                debugger;
                 let endTime = performance.now();
                 this.$store.dispatch('response/update', {
                     data: err.toString(),
@@ -112,7 +125,10 @@ export default {
 </script>
 
 <style lang="scss">
-    .set-width {
+    .send {
         width: 120px;
+    }
+    .select {
+        width: 150px;
     }
 </style>

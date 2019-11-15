@@ -1,6 +1,6 @@
 <template>
     <q-bar class="q-electron-drag text-grey-5 q-pa-sm" :style="title">
-        <q-icon name="img:statics/logo/logo.png" />
+        <q-icon name="img:statics/logo/logo.svg" />
         <q-btn size="medium" flat no-caps>
             File
             <q-menu>

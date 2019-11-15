@@ -1,25 +1,23 @@
 <template>
-    <arguments :args="headers"
+    <arguments v-model="headers"
                :remove="remove"
-               :update="update"
                :add="add" />
 </template>
 
 <script>
 import Arguments from 'components/Arguments';
-import { mapFields } from 'vuex-map-fields';
+import { mapMultiRowFields } from 'vuex-map-fields';
 
 export default {
     components: { Arguments },
     data () {
         return {
             remove: 'request/removeHeader',
-            update: 'request/updateHeader',
             add: 'request/addHeader'
         };
     },
     computed: {
-        ...mapFields('request', ['headers'])
+        ...mapMultiRowFields('request', ['headers'])
     }
 };
 </script>

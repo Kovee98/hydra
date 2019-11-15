@@ -53,14 +53,14 @@ export default {
 
             let params = {};
             this.params.forEach(param => {
-                if (param.key && param.value) {
+                if (param.active && param.key && param.value) {
                     params[param.key] = param.value;
                 }
             });
 
             let headers = {};
             this.headers.forEach(header => {
-                if (header.key && header.value) {
+                if (header.active && header.key && header.value) {
                     headers[header.key] = header.value;
                 }
             });

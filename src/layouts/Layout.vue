@@ -15,7 +15,7 @@
                 </q-item>
                 <q-item clickable to="/params" exact>
                     <q-item-section avatar>
-                        <q-icon name="add_to_photos" />
+                        <q-icon name="add_box" />
                     </q-item-section>
                 </q-item>
                 <q-item clickable to="/headers" exact>

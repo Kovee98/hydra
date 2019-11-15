@@ -1,9 +1,9 @@
 export default {
     params: [
-        { key: '', value: '' }
+        { key: '', value: '', active: true }
     ],
     headers: [
-        { key: '', value: '' }
+        { key: '', value: '', active: true }
     ],
     body: ''
 };

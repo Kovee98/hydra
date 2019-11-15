@@ -1,15 +1,18 @@
 <template>
-    <div class="row items-center justify-around q-gutter-sm">
+    <div class="row items-center justify-around q-gutter-xs">
+        <div class="col-1 text-center">
+            <q-checkbox v-model="value.active" />
+        </div>
         <div class="col">
-            <q-input filled dense @input="updateArg" v-model="key" :placeholder="'key ' + (parseFloat(i) + 1)" />
+            <q-input filled dense v-model="value.key" placeholder="key" />
         </div>
         <div class="col-1 text-center">
-            <q-icon name="drag_handle" size="sm" />
+            <div class="text-h5">=</div>
         </div>
         <div class="col">
-            <q-input filled dense @input="updateArg" v-model="value" :placeholder="'value ' + (parseFloat(i) + 1)" />
+            <q-input filled dense v-model="value.value" placeholder="value" />
         </div>
-        <div class="col-1">
+        <div class="col-1 text-center">
             <q-btn flat dense @click="removeArg" tabindex="-1">
                 <q-icon name="delete" />
             </q-btn>
@@ -19,25 +22,14 @@
 
 <script>
 export default {
-    props: ['arg', 'update', 'remove', 'i'],
+    props: ['value', 'remove'],
     data () {
         return {
-            key: this.arg.key,
-            value: this.arg.value
         };
     },
     methods: {
         removeArg () {
             this.$store.dispatch(this.remove, this.i);
-        },
-        updateArg () {
-            this.$store.dispatch(this.update, {
-                index: this.i,
-                arg: {
-                    key: this.key ? this.key.trim() : '',
-                    value: this.value ? this.value.trim() : ''
-                }
-            });
         }
     }
 };

@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="116mm"
+   height="116mm"
+   viewBox="0 0 116 116"
    version="1.1"
    id="svg4544"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="433.70496"
-     inkscape:cy="629.23053"
+     inkscape:cx="292.41923"
+     inkscape:cy="203.60473"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -35,7 +35,11 @@
      inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata4541">
     <rdf:RDF>
@@ -51,25 +55,26 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-48.721134,-89.931152)">
     <path
        style="opacity:0.98000004;fill:#27ddff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="path4546"
        sodipodi:type="arc"
-       sodipodi:cx="105.76601"
+       sodipodi:cx="106.82434"
        sodipodi:cy="147.9743"
        sodipodi:rx="57.044872"
        sodipodi:ry="57.956848"
        sodipodi:start="1.0145424"
        sodipodi:end="0.87533847"
-       d="m 135.88619,197.19352 a 57.044872,57.956848 0 0 1 -77.487582,-16.9235 57.044872,57.956848 0 0 1 13.951017,-79.26754 57.044872,57.956848 0 0 1 78.458405,11.40744 57.044872,57.956848 0 0 1 -8.49126,80.06136"
+       d="m 136.94452,197.19352 a 57.044872,57.956848 0 0 1 -77.487577,-16.9235 57.044872,57.956848 0 0 1 13.951016,-79.26754 57.044872,57.956848 0 0 1 78.458401,11.40744 57.044872,57.956848 0 0 1 -8.49126,80.06136"
        sodipodi:open="true" />
     <rect
        style="opacity:0.98000004;fill:#27ddff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.66821063;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect4556"
        width="63.009686"
        height="65.623093"
-       x="48.721134"
+       x="49.779469"
        y="90.017456"
        ry="5.669641" />
   </g>

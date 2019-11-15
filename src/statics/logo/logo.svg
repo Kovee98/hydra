@@ -9,14 +9,14 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="95mm"
+   height="95mm"
+   viewBox="0 0 95 95"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="logo.svg"
-   inkscape:export-filename="E:\Projects\hydra\assets\img\logo\logo.png"
+   inkscape:export-filename="E:\Projects\hydra-2\src\statics\logo\logo.png"
    inkscape:export-xdpi="200"
    inkscape:export-ydpi="200">
   <defs
@@ -28,17 +28,21 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="365.99452"
-     inkscape:cy="646.91062"
+     inkscape:zoom="0.7"
+     inkscape:cx="167.44268"
+     inkscape:cy="-20.392739"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
-     inkscape:window-x="1912"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -47,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,7 +59,8 @@
      inkscape:label="Background"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:none">
+     style="display:none"
+     transform="translate(-71.984757,-68.85025)">
     <path
        style="opacity:0.969;fill:#232323;fill-opacity:1;stroke:none;stroke-width:1.0040127;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="path825"
@@ -72,10 +77,11 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Drop">
+     inkscape:label="Drop"
+     transform="translate(-71.984757,-68.85025)">
     <path
        style="fill:#27ddff;fill-opacity:1;stroke:#27ddff;stroke-width:2.23162985;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 104.25829,71.686748 C 77.812246,91.514355 72.7781,114.78109 73.115876,128.69878 c 0.434774,16.40245 14.901816,34.07185 32.507394,34.03407 18.00239,0.17516 35.34062,-14.08276 35.44361,-35.48115 -0.46475,-28.272478 -21.17377,-23.6141 -36.80859,-55.564952 z"
+       d="M 116.95837,71.157581 C 90.512254,90.985188 85.478108,114.25192 85.815884,128.16961 c 0.434774,16.40245 14.901816,34.07185 32.507466,34.03407 18.00239,0.17516 35.34062,-14.08276 35.44361,-35.48115 -0.46475,-28.272475 -21.17377,-23.6141 -36.80859,-55.564949 z"
        id="path815"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
@@ -84,14 +90,15 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Shine"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(-71.984757,-68.85025)">
     <rect
        style="opacity:0.969;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:3.69860101;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect819"
        width="9.3751249"
        height="1.7328399"
-       x="159.38976"
-       y="0.33127031"
+       x="167.11237"
+       y="-8.396595"
        transform="matrix(0.76615996,0.64264992,-0.77719512,0.62925968,0,0)" />
   </g>
 </svg>

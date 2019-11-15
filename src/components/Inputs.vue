@@ -6,13 +6,15 @@
         <div class="col">
             <q-input filled v-model="url" label="URL" class="text-h6">
                 <template v-slot:append>
-                    <q-icon v-if="url" name="fas fa-times" @click="url = ''" class="cursor-pointer q-px-md" />
+                    <q-btn v-if="url" dense flat @click="url = ''">
+                        <q-icon name="clear" />
+                    </q-btn>
                 </template>
             </q-input>
         </div>
         <div class="set-width">
             <q-btn filled @click="send" color="primary" class="no-border-radius no-shadow fit">
-                <q-icon v-if="!isLoading" name="fas fa-arrow-right" />
+                <q-icon v-if="!isLoading" size="lg" name="double_arrow" />
                 <q-spinner v-if="isLoading" color="white" />
             </q-btn>
         </div>

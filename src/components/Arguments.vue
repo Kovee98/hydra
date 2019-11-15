@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col q-px-md q-py-sm">
                     <q-btn flat size="large" @click="addArg" color="primary" class="q-pa-sm full-width">
-                        <q-icon size="xs" name="fas fa-plus" />
+                        <q-icon size="md" name="add" />
                     </q-btn>
                 </div>
             </div>

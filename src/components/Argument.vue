@@ -4,14 +4,14 @@
             <q-input filled dense @input="updateArg" v-model="key" />
         </div>
         <div class="col-1 text-center">
-            <q-icon name="fas fa-equals" class="text-grey-6" />
+            <q-icon name="drag_handle" size="sm" />
         </div>
         <div class="col">
             <q-input filled dense @input="updateArg" v-model="value" />
         </div>
         <div class="col-1">
             <q-btn flat dense @click="removeArg" color="red" tabindex="-1">
-                <q-icon size="xs" name="fas fa-minus" />
+                <q-icon name="remove" />
             </q-btn>
         </div>
     </div>

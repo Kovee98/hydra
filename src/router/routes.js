@@ -27,6 +27,14 @@ const routes = [
         children: [
             { path: '', component: () => import('pages/Response.vue') }
         ]
+    },
+    {
+        path: '/auth',
+        component: () => import('layouts/Layout.vue'),
+        children: [
+            { path: 'basic', component: () => import('pages/auth/Basic.vue') },
+            { path: 'bearer', component: () => import('pages/auth/Bearer.vue') }
+        ]
     }
 ];
 

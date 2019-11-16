@@ -5,5 +5,11 @@ export default {
     headers: [
         { key: '', value: '', active: true }
     ],
-    body: ''
+    body: '',
+    auth: {
+        basic: {
+            username: '',
+            password: ''
+        }
+    }
 };

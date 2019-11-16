@@ -41,6 +41,7 @@ export default {
     },
     computed: {
         ...mapFields('request', [
+            'auth',
             'body',
             'params',
             'headers'
@@ -75,7 +76,8 @@ export default {
                 url: this.url || '',
                 data: this.body,
                 params: params,
-                headers: headers
+                headers: headers,
+                auth: this.auth.basic
             }).then(res => {
                 this.handleRequest(res);
                 notify({ msg: 'Success!' });

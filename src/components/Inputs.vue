@@ -68,17 +68,28 @@ export default {
                 }
             });
 
+            if (this.auth.bearer.active) {
+                headers['Authorization'] = `${this.auth.bearer.prefix} ${this.auth.bearer.token}`;
+            }
+
+            let auth = {
+                username: this.auth.basic.username,
+                password: this.auth.basic.password
+            };
+
             this.isLoading = true;
             this.startTime = performance.now();
 
-            this.$axios({
+            let config = {
                 method: this.method,
-                url: this.url || '',
+                url: this.url,
                 data: this.body,
                 params: params,
                 headers: headers,
-                auth: this.auth.basic
-            }).then(res => {
+                auth: this.auth.basic.active ? auth : null
+            };
+
+            this.$axios(config).then(res => {
                 this.handleRequest(res);
                 notify({ msg: 'Success!' });
             }).catch(err => {

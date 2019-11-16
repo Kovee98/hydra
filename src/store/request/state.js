@@ -1,15 +1,29 @@
 export default {
+    body: '',
     params: [
-        { key: '', value: '', active: true }
+        {
+            key: '',
+            value: '',
+            active: true
+        }
     ],
     headers: [
-        { key: '', value: '', active: true }
+        {
+            key: '',
+            value: '',
+            active: true
+        }
     ],
-    body: '',
     auth: {
         basic: {
             username: '',
-            password: ''
+            password: '',
+            active: false
+        },
+        bearer: {
+            prefix: 'bearer',
+            token: '',
+            active: false
         }
     }
 };

@@ -3,18 +3,22 @@
         <q-icon name="img:statics/logo/logo.svg"/>
         <q-btn size="medium" flat dense no-caps>
             File
-            <q-menu auto-close>
+            <q-menu v-model="fileMenu">
                 <q-list :style="menu">
-                    <q-item clickable>
+                    <q-item clickable v-close-popup>
                         <q-item-section>New</q-item-section>
                     </q-item>
-                    <q-item clickable>
+                    <q-item clickable v-close-popup>
                         <q-item-section>Open...</q-item-section>
                     </q-item>
                     <q-separator />
+                    <q-item clickable @click="showPreferences">
+                        <q-item-section>Preferences</q-item-section>
+                        <settings v-if="showPrefs" />
+                    </q-item>
                     <settings />
                     <q-separator />
-                    <q-item clickable @click="closeApp">
+                    <q-item clickable @click="closeApp" v-close-popup>
                         <q-item-section>Quit</q-item-section>
                     </q-item>
                 </q-list>
@@ -61,10 +65,16 @@ export default {
     components: { Settings, About },
     data () {
         return {
+            fileMenu: false,
+            showPrefs: false,
             issuesUrl: 'https://github.com/Kovee98/hydra-2/issues/new'
         };
     },
     methods: {
+        showPreferences () {
+            this.fileMenu = false;
+            this.showPrefs = true;
+        },
         suggestFeature () {
             openURL(this.issuesUrl);
         },

@@ -1,62 +1,56 @@
 <template>
-    <div>
-        <!-- <q-item clickable @click="show = true">
-            <q-item-section>Preferences</q-item-section>
-        </q-item> -->
+    <q-dialog v-model="show" persistent maximized transition-show="slide-up" transition-hide="slide-down">
+        <q-card>
+            <q-bar class="q-pa-xs">
+                <q-space />
+                <q-btn dense flat icon="close" @click="show = false" />
+            </q-bar>
 
-        <q-dialog v-model="show" persistent maximized transition-show="slide-up" transition-hide="slide-down">
-            <q-card>
-                <q-bar class="q-pa-xs">
-                    <q-space />
-                    <q-btn dense flat icon="close" v-close-popup />
-                </q-bar>
+            <q-card-section>
+                <div class="text-h4">Settings</div>
+            </q-card-section>
 
-                <q-card-section>
-                    <div class="text-h4">Settings</div>
-                </q-card-section>
-
-                <q-scroll-area class="q-px-xl q-mx-xl fill">
-                    <div class="column q-gutter-lg q-px-xl q-mx-xl">
-                        <q-card-section class="col q-ml-none">
-                            <span class="text-h6">Syntax Highlighting</span>
-                            <div class="q-py-lg">
-                                <syntax-color v-for="(color, i) in colors"
-                                              :key="i"
-                                              v-model="colors[i]" />
-                            </div>
-                        </q-card-section>
-                        <q-card-section class="col q-ml-none">
-                            <span class="text-h6">History</span>
-                            <div class="q-py-lg">
-                                <q-checkbox dense v-model="mostRecent" label="Save most recent" color="primary" />
-                            </div>
-                        </q-card-section>
-                        <q-card-section class="col q-ml-none">
-                            <span class="text-h6">Notifications</span>
-                            <div class="column q-col-gutter-md q-py-lg">
-                                <q-checkbox dense v-model="notifyResponseSuccess" label="On response success" />
-                                <q-checkbox dense v-model="notifyResponseError" label="On response error" />
-                                <q-checkbox dense v-model="notifySettingsUpdate" label="On settings update" />
-                            </div>
-                        </q-card-section>
-                    </div>
-                </q-scroll-area>
-
-                <div class="fixed-bottom">
-                    <q-separator />
-                    <q-card-actions align="right" class="q-px-md q-gutter-md">
-                        <confirm :btn="'Restore'"
-                                 :msg="'restore the default settings?'"
-                                 :action="restore" />
-                        <confirm :btn="'Save'"
-                                 :msg="'save settings?'"
-                                 :action="save"
-                                 :color="'primary'" />
-                    </q-card-actions>
+            <q-scroll-area class="q-px-xl q-mx-xl fill">
+                <div class="column q-gutter-lg q-px-xl q-mx-xl">
+                    <q-card-section class="col q-ml-none">
+                        <span class="text-h6">Syntax Hisghlighting</span>
+                        <div class="q-py-lg">
+                            <syntax-color v-for="(color, i) in colors"
+                                          :key="i"
+                                          v-model="colors[i]" />
+                        </div>
+                    </q-card-section>
+                    <q-card-section class="col q-ml-none">
+                        <span class="text-h6">History</span>
+                        <div class="q-py-lg">
+                            <q-checkbox dense v-model="mostRecent" label="Save most recent" color="primary" />
+                        </div>
+                    </q-card-section>
+                    <q-card-section class="col q-ml-none">
+                        <span class="text-h6">Notifications</span>
+                        <div class="column q-col-gutter-md q-py-lg">
+                            <q-checkbox dense v-model="notifyResponseSuccess" label="On response success" />
+                            <q-checkbox dense v-model="notifyResponseError" label="On response error" />
+                            <q-checkbox dense v-model="notifySettingsUpdate" label="On settings update" />
+                        </div>
+                    </q-card-section>
                 </div>
-            </q-card>
-        </q-dialog>
-    </div>
+            </q-scroll-area>
+
+            <div class="fixed-bottom">
+                <q-separator />
+                <q-card-actions align="right" class="q-px-md q-gutter-md">
+                    <confirm :btn="'Restore'"
+                             :msg="'restore the default settings?'"
+                             :action="restore" />
+                    <confirm :btn="'Save'"
+                             :msg="'save settings?'"
+                             :action="save"
+                             :color="'primary'" />
+                </q-card-actions>
+            </div>
+        </q-card>
+    </q-dialog>
 </template>
 
 <script>
@@ -69,10 +63,10 @@ import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
 import { defaults } from '../js/settings/defaults.js';
 
 export default {
+    props: ['value'],
     components: { Confirm, SyntaxColor },
     data () {
         return {
-            show: false,
             settingsFile: path.join(remote.app.getPath('userData'), 'settings.json')
         };
     },
@@ -83,7 +77,15 @@ export default {
             'notifications.notifyResponseError',
             'notifications.notifySettingsUpdate'
         ]),
-        ...mapMultiRowFields('settings', ['colors'])
+        ...mapMultiRowFields('settings', ['colors']),
+        show: {
+            get () {
+                return this.value;
+            },
+            set (value) {
+                this.$emit('input', value);
+            }
+        }
     },
     methods: {
         restore () {

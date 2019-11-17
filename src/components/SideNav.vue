@@ -1,25 +1,29 @@
 <template>
-    <q-drawer v-model="menu" side="left" mini behavior="desktop">
-        <q-list class="q-gutter-sm q-my-sm">
+    <q-drawer v-model="menu" side="left" behavior="desktop" :width="175">
+        <q-list>
             <q-item :class="item" clickable to="/" exact>
                 <q-item-section avatar>
                     <div class="text-h6">{ ; }</div>
                 </q-item-section>
+                <q-item-section>Body</q-item-section>
             </q-item>
             <q-item :class="item" clickable to="/params" exact>
                 <q-item-section avatar>
                     <q-icon name="storage" size="md" />
                 </q-item-section>
+                <q-item-section>Params</q-item-section>
             </q-item>
             <q-item :class="item" clickable to="/headers" exact>
                 <q-item-section avatar>
-                    <q-icon name="language" size="md" />
+                    <q-icon name="web_asset" size="md" />
                 </q-item-section>
+                <q-item-section>Headers</q-item-section>
             </q-item>
             <q-item :class="item" clickable :active="$route.path.includes('/auth')">
                 <q-item-section avatar>
                     <q-icon name="lock" size="md" />
                 </q-item-section>
+                <q-item-section>Auth</q-item-section>
                 <q-menu auto-close anchor="top right" self="top left">
                     <q-list style="min-width: 100px">
                         <q-item clickable to="/auth/basic">
@@ -31,16 +35,28 @@
                     </q-list>
                 </q-menu>
             </q-item>
+            <q-separator />
+            <q-item class="q-my-md" clickable @click="showSettings = true">
+                <q-item-section avatar>
+                    <q-icon name="settings" size="md" />
+                </q-item-section>
+                <q-item-section clickable>Settings</q-item-section>
+                <settings v-model="showSettings" />
+            </q-item>
         </q-list>
     </q-drawer>
 </template>
 
 <script>
+import Settings from 'components/Settings';
+
 export default {
+    components: { Settings },
     data () {
         return {
+            showSettings: false,
             menu: true,
-            item: 'q-py-md'
+            item: 'q-my-md'
         };
     }
 };

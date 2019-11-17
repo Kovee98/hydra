@@ -12,12 +12,6 @@
                         <q-item-section>Open...</q-item-section>
                     </q-item>
                     <q-separator />
-                    <q-item clickable @click="showPreferences">
-                        <q-item-section>Preferences</q-item-section>
-                        <settings v-if="showPrefs" />
-                    </q-item>
-                    <settings />
-                    <q-separator />
                     <q-item clickable @click="closeApp" v-close-popup>
                         <q-item-section>Quit</q-item-section>
                     </q-item>
@@ -26,20 +20,23 @@
         </q-btn>
         <q-btn size="medium" flat dense no-caps>
             Help
-            <q-menu auto-close>
+            <q-menu>
                 <q-list :style="menu">
-                    <q-item clickable>
-                        <q-item-section @click="suggestFeature">Suggest feature</q-item-section>
+                    <q-item clickable @click="suggestFeature">
+                        <q-item-section>Suggest feature</q-item-section>
                     </q-item>
-                    <q-item clickable>
-                        <q-item-section @click="reportBug">Report a bug</q-item-section>
+                    <q-item clickable @click="reportBug">
+                        <q-item-section>Report a bug</q-item-section>
                     </q-item>
                     <q-separator />
                     <q-item clickable>
                         <q-item-section>Check for updates...</q-item-section>
                     </q-item>
                     <q-separator />
-                    <about />
+                    <q-item clickable @click="showAbout = true">
+                        <q-item-section>About</q-item-section>
+                        <about v-model="showAbout" />
+                    </q-item>
                 </q-list>
             </q-menu>
         </q-btn>
@@ -57,16 +54,15 @@
 </template>
 
 <script>
-import Settings from 'components/Settings';
 import About from 'components/About';
 import { openURL } from 'quasar';
 
 export default {
-    components: { Settings, About },
+    components: { About },
     data () {
         return {
             fileMenu: false,
-            showPrefs: false,
+            showAbout: false,
             issuesUrl: 'https://github.com/Kovee98/hydra-2/issues/new'
         };
     },

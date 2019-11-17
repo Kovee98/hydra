@@ -9,19 +9,19 @@
             </q-item>
             <q-item :class="item" clickable to="/params" exact>
                 <q-item-section avatar>
-                    <q-icon name="storage" size="md" />
+                    <q-icon name="storage" />
                 </q-item-section>
                 <hint :label="'Parameters'" />
             </q-item>
             <q-item :class="item" clickable to="/headers" exact>
                 <q-item-section avatar>
-                    <q-icon name="web_asset" size="md" />
+                    <q-icon name="web_asset" />
                 </q-item-section>
                 <hint :label="'Headers'" />
             </q-item>
             <q-item :class="item" clickable :active="$route.path.includes('/auth')">
                 <q-item-section avatar>
-                    <q-icon name="lock" size="md" />
+                    <q-icon name="lock" />
                 </q-item-section>
                 <hint :label="'Authentication'" />
                 <q-menu auto-close anchor="top right" self="top left">
@@ -38,7 +38,7 @@
             <q-separator />
             <q-item :class="item" clickable @click="showSettings = true">
                 <q-item-section avatar>
-                    <q-icon name="settings" size="md" />
+                    <q-icon name="settings" />
                 </q-item-section>
                 <hint :label="'Settings'" />
                 <settings v-model="showSettings" />
@@ -57,7 +57,7 @@ export default {
         return {
             showSettings: false,
             menu: true,
-            item: 'q-my-md'
+            item: 'q-py-md'
         };
     }
 };

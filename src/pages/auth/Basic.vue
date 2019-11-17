@@ -3,14 +3,7 @@
         <div class="text-h4">
             Basic
             <q-checkbox v-model="active">
-                <q-tooltip anchor="center right"
-                           self="center left"
-                           :offset="[0, 0]"
-                           transition-show="scale"
-                           transition-hide="scale"
-                           content-class="tooltip">
-                    {{ active ? 'enabled' : 'disabled' }}
-                </q-tooltip>
+                <hint :label="active ? 'enabled' : 'disabled'" />
             </q-checkbox>
         </div>
         <q-input filled v-model="username" label="Username" class="col" />
@@ -23,9 +16,11 @@
 </template>
 
 <script>
+import Hint from 'components/Hint';
 import { mapFields } from 'vuex-map-fields';
 
 export default {
+    components: { Hint },
     data () {
         return {
             isPassword: true

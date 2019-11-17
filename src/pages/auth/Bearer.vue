@@ -3,14 +3,7 @@
         <div class="text-h4">
             Bearer
             <q-checkbox v-model="active">
-                <q-tooltip anchor="center right"
-                           self="center left"
-                           :offset="[0, 0]"
-                           transition-show="scale"
-                           transition-hide="scale"
-                           content-class="tooltip">
-                    {{ active ? 'enabled' : 'disabled' }}
-                </q-tooltip>
+                <hint :label="active ? 'enabled' : 'disabled'" />
             </q-checkbox>
         </div>
         <q-input filled v-model="prefix" label="Prefix" class="col" />
@@ -19,9 +12,11 @@
 </template>
 
 <script>
+import Hint from 'components/Hint';
 import { mapFields } from 'vuex-map-fields';
 
 export default {
+    components: { Hint },
     computed: {
         ...mapFields('request', [
             'auth.bearer.prefix',

@@ -1,21 +1,18 @@
 <template>
     <q-dialog v-model="show" persistent maximized transition-show="slide-up" transition-hide="slide-down">
-        <q-card>
-            <q-bar class="q-pa-xs">
+        <q-card class="justify-center">
+            <q-bar :style="bar">
+                <div class="q-pa-sm">Settings</div>
                 <q-space />
                 <q-btn dense flat icon="close" @click="show = false" />
             </q-bar>
-
-            <q-card-section>
-                <div class="text-h4">Settings</div>
-            </q-card-section>
-
-            <q-scroll-area class="q-px-xl q-mx-xl fill">
-                <div class="column q-gutter-lg q-px-xl q-mx-xl">
+            <q-scroll-area class="fill q-pt-lg q-pt-xl"
+                           :thumb-style="thumbStyle">
+                <div class="column q-gutter-lg q-mx-auto" :style="{ maxWidth: '50vw' }">
                     <q-card-section class="col q-ml-none">
-                        <span class="text-h6">Syntax Hisghlighting</span>
+                        <span class="text-h6">Syntax Highlighting</span>
                         <div class="q-py-lg">
-                            <syntax-color v-for="(color, i) in colors"
+                            <color-picker v-for="(color, i) in colors"
                                           :key="i"
                                           v-model="colors[i]" />
                         </div>
@@ -55,7 +52,7 @@
 
 <script>
 import Confirm from 'components/Confirm';
-import SyntaxColor from 'components/SyntaxColor';
+import ColorPicker from 'components/ColorPicker';
 import { notify } from '../js/util.js';
 import path from 'path';
 import { remote } from 'electron';
@@ -64,7 +61,7 @@ import { defaults } from '../js/settings/defaults.js';
 
 export default {
     props: ['value'],
-    components: { Confirm, SyntaxColor },
+    components: { Confirm, ColorPicker },
     data () {
         return {
             settingsFile: path.join(remote.app.getPath('userData'), 'settings.json')
@@ -85,6 +82,17 @@ export default {
             set (value) {
                 this.$emit('input', value);
             }
+        },
+        thumbStyle () {
+            return {
+                width: '12px',
+                right: '10px'
+            };
+        },
+        bar () {
+            return {
+                height: '40px'
+            };
         }
     },
     methods: {

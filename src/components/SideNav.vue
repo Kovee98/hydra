@@ -1,29 +1,57 @@
 <template>
-    <q-drawer v-model="menu" side="left" behavior="desktop" :width="175">
+    <q-drawer v-model="menu" mini side="left" behavior="desktop" :width="150">
         <q-list>
             <q-item :class="item" clickable to="/" exact>
                 <q-item-section avatar>
                     <div class="text-h6">{ ; }</div>
                 </q-item-section>
-                <q-item-section>Body</q-item-section>
+                <q-tooltip anchor="center right"
+                           self="center left"
+                           :offset="[0, 0]"
+                           transition-show="fade"
+                           transition-hide="fade"
+                           :delay="750">
+                    Body
+                </q-tooltip>
             </q-item>
             <q-item :class="item" clickable to="/params" exact>
                 <q-item-section avatar>
                     <q-icon name="storage" size="md" />
                 </q-item-section>
-                <q-item-section>Params</q-item-section>
+                <q-tooltip anchor="center right"
+                           self="center left"
+                           :offset="[0, 0]"
+                           transition-show="fade"
+                           transition-hide="fade"
+                           :delay="750">
+                    Params
+                </q-tooltip>
             </q-item>
             <q-item :class="item" clickable to="/headers" exact>
                 <q-item-section avatar>
                     <q-icon name="web_asset" size="md" />
                 </q-item-section>
-                <q-item-section>Headers</q-item-section>
+                <q-tooltip anchor="center right"
+                           self="center left"
+                           :offset="[0, 0]"
+                           transition-show="fade"
+                           transition-hide="fade"
+                           :delay="750">
+                    Headers
+                </q-tooltip>
             </q-item>
             <q-item :class="item" clickable :active="$route.path.includes('/auth')">
                 <q-item-section avatar>
                     <q-icon name="lock" size="md" />
                 </q-item-section>
-                <q-item-section>Auth</q-item-section>
+                <q-tooltip anchor="center right"
+                           self="center left"
+                           :offset="[0, 0]"
+                           transition-show="fade"
+                           transition-hide="fade"
+                           :delay="750">
+                    Authentication
+                </q-tooltip>
                 <q-menu auto-close anchor="top right" self="top left">
                     <q-list style="min-width: 100px">
                         <q-item clickable to="/auth/basic">
@@ -36,7 +64,7 @@
                 </q-menu>
             </q-item>
             <q-separator />
-            <q-item class="q-my-md" clickable @click="showSettings = true">
+            <q-item :class="item" clickable @click="showSettings = true">
                 <q-item-section avatar>
                     <q-icon name="settings" size="md" />
                 </q-item-section>

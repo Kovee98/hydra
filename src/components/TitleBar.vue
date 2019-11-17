@@ -8,8 +8,16 @@
                     <q-item clickable v-close-popup>
                         <q-item-section>New</q-item-section>
                     </q-item>
+                    <q-separator />
                     <q-item clickable v-close-popup>
                         <q-item-section>Open...</q-item-section>
+                    </q-item>
+                    <q-separator />
+                    <q-item clickable v-close-popup>
+                        <q-item-section>Save</q-item-section>
+                    </q-item>
+                    <q-item clickable v-close-popup>
+                        <q-item-section>Save as...</q-item-section>
                     </q-item>
                     <q-separator />
                     <q-item clickable @click="closeApp" v-close-popup>

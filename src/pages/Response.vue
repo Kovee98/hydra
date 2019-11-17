@@ -1,7 +1,8 @@
 <template>
-    <q-scroll-area class="fill q-pa-md overflow-wrap">
+    <q-scroll-area class="fill q-pa-md"
+                   :thumb-style="thumbStyle">
         <div v-html="style" />
-        <div v-html="data" class="code q-ma-none text-grey-6 overflow-wrap" />
+        <div v-html="data" class="code text-grey-6" />
     </q-scroll-area>
 </template>
 
@@ -23,6 +24,12 @@ export default {
         },
         data () {
             return colorize(this.$store.getters['response/get'].data);
+        },
+        thumbStyle () {
+            return {
+                width: '12px',
+                right: '10px'
+            };
         }
     }
 };

@@ -9,14 +9,14 @@
                         <q-item-section>New</q-item-section>
                     </q-item>
                     <q-separator />
-                    <q-item clickable v-close-popup>
+                    <q-item clickable v-close-popup @click="openFile">
                         <q-item-section>Open...</q-item-section>
                     </q-item>
                     <q-separator />
                     <q-item clickable v-close-popup>
                         <q-item-section>Save</q-item-section>
                     </q-item>
-                    <q-item clickable v-close-popup>
+                    <q-item clickable v-close-popup @click="saveAsFile">
                         <q-item-section>Save as...</q-item-section>
                     </q-item>
                     <q-separator />
@@ -64,6 +64,9 @@
 <script>
 import About from 'components/About';
 import { openURL } from 'quasar';
+import { open, saveAs } from '../js/file.js';
+import jsonfile from 'jsonfile';
+import { notify } from '../js/util.js';
 
 export default {
     components: { About },
@@ -75,6 +78,19 @@ export default {
         };
     },
     methods: {
+        openFile () {
+            open().then((filePath) => {
+                jsonfile.readFile(filePath)
+                    .then(request => {
+                        debugger;
+                    });
+            }).catch((err) => notify({ msg: err, isOk: false }));
+        },
+        saveAsFile () {
+            saveAs().then((filePath) => {
+                debugger;
+            }).catch((err) => notify({ msg: err, isOk: false }));
+        },
         showPreferences () {
             this.fileMenu = false;
             this.showPrefs = true;

@@ -5,7 +5,7 @@
             File
             <q-menu v-model="fileMenu">
                 <q-list :style="menu">
-                    <q-item clickable v-close-popup>
+                    <q-item clickable v-close-popup @click="newFile">
                         <q-item-section>New</q-item-section>
                     </q-item>
                     <q-separator />
@@ -77,6 +77,9 @@ export default {
         };
     },
     methods: {
+        newFile () {
+            this.$store.dispatch('request/clear');
+        },
         openFile () {
             open().then((filePath) => {
                 this.$jsonfile.readFile(filePath)

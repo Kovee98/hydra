@@ -2,8 +2,8 @@ export function update (context, payload) {
     context.commit('update', payload);
 }
 
-export function updateParam (context, payload) {
-    context.commit('updateParam', payload);
+export function clear (context) {
+    context.commit('clear');
 }
 
 export function removeParam (context, payload) {
@@ -20,8 +20,4 @@ export function removeHeader (context, payload) {
 
 export function addHeader (context, payload) {
     context.commit('addHeader', payload);
-}
-
-export function updateHeader (context, payload) {
-    context.commit('updateHeader', payload);
 }

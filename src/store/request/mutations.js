@@ -7,6 +7,18 @@ export function update (state, request) {
     state.auth = request.auth;
 }
 
+export function clear (state) {
+    state.method = '';
+    state.url = '';
+    state.body = '';
+    state.params = [];
+    state.headers = [];
+    state.auth = {
+        basic: {},
+        bearer: {}
+    };
+}
+
 export function removeParam (state, index) {
     state.params.splice(index, 1);
 }

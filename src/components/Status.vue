@@ -1,10 +1,12 @@
 <template>
     <div>
-        <q-chip square :color="status.color || 'secondary'" icon="code">
-            <div v-if="status.code">{{status.code}}</div>
+        <q-chip square :color="status.color || 'secondary'">
+            <q-icon name="code" size="xs" />
+            <div v-if="status.code" class="q-ml-sm">{{status.code}}</div>
         </q-chip>
-        <q-chip square color="secondary" text-color="white" icon="timer">
-            <div v-if="status.time">{{status.time}} {{status.units}}</div>
+        <q-chip square color="secondary" text-color="white">
+            <q-icon name="timer" size="xs" />
+            <div v-if="status.time" class="q-ml-sm">{{status.time}} {{status.units}}</div>
         </q-chip>
     </div>
 </template>

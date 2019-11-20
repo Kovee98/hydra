@@ -65,7 +65,6 @@
 import About from 'components/About';
 import { openURL } from 'quasar';
 import { open, saveAs } from '../js/file.js';
-import jsonfile from 'jsonfile';
 import { notify } from '../js/util.js';
 
 export default {
@@ -80,15 +79,20 @@ export default {
     methods: {
         openFile () {
             open().then((filePath) => {
-                jsonfile.readFile(filePath)
+                this.$jsonfile.readFile(filePath)
                     .then(request => {
-                        debugger;
+                        this.$store.dispatch('request/update', request);
                     });
             }).catch((err) => notify({ msg: err, isOk: false }));
         },
         saveAsFile () {
             saveAs().then((filePath) => {
-                debugger;
+                let currentRequest = this.$store.getters['request/get'];
+                this.$jsonfile.writeFile(filePath, currentRequest, { spaces: 4 })
+                    .then(() => {
+                        notify({ msg: 'Request has been saved' });
+                    })
+                    .catch(err => notify({ msg: err.toString(), isOk: false }));
             }).catch((err) => notify({ msg: err, isOk: false }));
         },
         showPreferences () {

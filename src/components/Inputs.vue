@@ -31,20 +31,20 @@ export default {
     data () {
         return {
             isLoading: false,
-            method: 'GET',
             options: [
                 'GET', 'POST', 'PUT', 'PATCH', 'DELETE'
             ],
-            url: 'https://my-json-server.typicode.com/kovee98/json-server/posts',
             startTime: 0
         };
     },
     computed: {
         ...mapFields('request', [
-            'auth',
+            'method',
+            'url',
             'body',
             'params',
-            'headers'
+            'headers',
+            'auth'
         ])
     },
     methods: {

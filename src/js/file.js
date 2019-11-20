@@ -2,7 +2,7 @@ import electron from 'electron';
 const dialog = electron.remote.dialog;
 
 const dialogOpts = {
-    defaultPath: 'c:/',
+    defaultPath: 'request',
     filters: [
         { name: 'JSON', extensions: ['json'] }
     ],
@@ -22,9 +22,9 @@ var open = () => {
 
 var saveAs = () => {
     return new Promise((resolve, reject) => {
-        dialog.showSaveDialog((filePath) => {
+        dialog.showSaveDialog(dialogOpts, (filePath) => {
             if (filePath === undefined) {
-                return reject('No file selected');
+                return reject('File not saved');
             }
             return resolve(filePath);
         });

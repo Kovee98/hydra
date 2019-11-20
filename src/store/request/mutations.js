@@ -1,11 +1,10 @@
-export function update (state, { body, params, headers }) {
-    state.body = body;
-    state.params = params;
-    state.headers = headers;
-}
-
-export function updateParam (state, param) {
-    state.params[param.index] = param.arg;
+export function update (state, request) {
+    state.method = request.method;
+    state.url = request.url;
+    state.body = request.body;
+    state.params = request.params;
+    state.headers = request.headers;
+    state.auth = request.auth;
 }
 
 export function removeParam (state, index) {
@@ -22,8 +21,4 @@ export function removeHeader (state, index) {
 
 export function addHeader (state, header) {
     state.headers.push(header);
-}
-
-export function updateHeader (state, header) {
-    state.headers[header.index] = header.arg;
 }

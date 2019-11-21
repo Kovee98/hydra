@@ -1,30 +1,25 @@
 {
     "method": "GET",
-    "url": "https://my-json-server.typicode.com/kovee98/json-server/posts",
+    "url": "https://my-json-server.typicode.com/kovee98/json-server/postss",
     "body": "",
     "params": [
         {
-            "key": "asdf",
-            "value": "asdf",
-            "active": true
-        },
-        {
-            "key": "sd",
-            "value": "sdf",
+            "key": "",
+            "value": "",
             "active": true
         }
     ],
     "headers": [
         {
-            "key": "sdf",
-            "value": "sdf",
+            "key": "",
+            "value": "",
             "active": true
         }
     ],
     "auth": {
         "basic": {
-            "username": "jkovalchik",
-            "password": "password",
+            "username": "",
+            "password": "",
             "active": false
         },
         "bearer": {

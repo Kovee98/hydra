@@ -13,7 +13,7 @@
                         <q-item-section>Open...</q-item-section>
                     </q-item>
                     <q-separator />
-                    <q-item clickable v-close-popup>
+                    <q-item clickable v-close-popup @click="saveFile">
                         <q-item-section>Save</q-item-section>
                     </q-item>
                     <q-item clickable v-close-popup @click="saveAsFile">
@@ -49,6 +49,8 @@
             </q-menu>
         </q-btn>
         <q-space />
+        <div>{{name}}</div>
+        <q-space />
         <q-btn size="small" dense flat @click="minimize">
             <q-icon size="sm" name="minimize" />
         </q-btn>
@@ -66,6 +68,7 @@ import About from 'components/About';
 import { openURL } from 'quasar';
 import { open, saveAs } from '../js/file.js';
 import { notify } from '../js/util.js';
+import { mapFields } from 'vuex-map-fields';
 
 export default {
     components: { About },
@@ -88,11 +91,24 @@ export default {
                     });
             }).catch((err) => notify({ msg: err, isOk: false }));
         },
+        saveFile () {
+            if (this.currFile) {
+                let currentRequest = this.$store.getters['request/get'];
+                this.$jsonfile.writeFile(this.currFile, currentRequest, { spaces: 4 })
+                    .then((res) => {
+                        notify({ msg: 'Request has been saved' });
+                    })
+                    .catch(err => notify({ msg: err.toString(), isOk: false }));
+            } else {
+                this.saveAsFile();
+            }
+        },
         saveAsFile () {
             saveAs().then((filePath) => {
                 let currentRequest = this.$store.getters['request/get'];
                 this.$jsonfile.writeFile(filePath, currentRequest, { spaces: 4 })
-                    .then(() => {
+                    .then((res) => {
+                        this.currFile = filePath;
                         notify({ msg: 'Request has been saved' });
                     })
                     .catch(err => notify({ msg: err.toString(), isOk: false }));
@@ -140,7 +156,15 @@ export default {
             return {
                 height: '35px'
             };
-        }
+        },
+        name () {
+            let filename = this.$path.basename(this.currFile);
+            debugger;
+            return filename;
+        },
+        ...mapFields([
+            'currFile'
+        ])
     }
 };
 </script>

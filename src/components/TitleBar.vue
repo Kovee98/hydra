@@ -114,10 +114,6 @@ export default {
                     .catch(err => notify({ msg: err.toString(), isOk: false }));
             }).catch((err) => notify({ msg: err, isOk: false }));
         },
-        showPreferences () {
-            this.fileMenu = false;
-            this.showPrefs = true;
-        },
         suggestFeature () {
             openURL(this.issuesUrl);
         },

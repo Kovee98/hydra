@@ -1,6 +1,7 @@
 {
+    "saveLoc": "E:\\Projects\\hydra-2\\request.json",
     "method": "GET",
-    "url": "https://my-json-server.typicode.com/kovee98/json-server/postss",
+    "url": "https://my-json-server.typicode.com/kovee98/json-server/posts",
     "body": "",
     "params": [
         {

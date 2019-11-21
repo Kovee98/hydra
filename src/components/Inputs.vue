@@ -39,16 +39,22 @@ export default {
     },
     computed: {
         ...mapFields('request', [
+            'saveLoc',
             'method',
             'url',
             'body',
             'params',
             'headers',
             'auth'
+        ]),
+        ...mapFields([
+            'lastRequest'
         ])
     },
     methods: {
         send () {
+            this.lastRequest = this.saveLoc;
+
             if (!isValidUrl(this.url)) {
                 notify({ msg: 'The url is invalid', isOk: false });
                 return;

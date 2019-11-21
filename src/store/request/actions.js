@@ -1,9 +1,24 @@
+import jsonfile from 'jsonfile';
+import path from 'path';
+import { remote } from 'electron';
+
 export function update (context, payload) {
     context.commit('update', payload);
 }
 
 export function clear (context) {
     context.commit('clear');
+}
+
+export function load (context) {
+    return new Promise((resolve) => {
+        let requestFilePath = path.join(remote.app.getPath('userData'), 'history.json');
+        jsonfile.readFile(requestFilePath)
+            .then(request => {
+                context.commit('update', request);
+                resolve(request);
+            });
+    });
 }
 
 export function removeParam (context, payload) {

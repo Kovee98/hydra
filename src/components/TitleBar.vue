@@ -49,7 +49,7 @@
             </q-menu>
         </q-btn>
         <q-space />
-        <div>{{name}}</div>
+        <div>{{ $path.basename(saveLoc, '.json') || 'Untitled' }}{{ isUnsaved ? '*' : '' }}</div>
         <q-space />
         <q-btn size="small" dense flat @click="minimize">
             <q-icon size="sm" name="minimize" />
@@ -69,6 +69,7 @@ import { openURL } from 'quasar';
 import { open, saveAs } from '../js/file.js';
 import { notify } from '../js/util.js';
 import { mapFields } from 'vuex-map-fields';
+const fs = require('fs');
 
 export default {
     components: { About },
@@ -92,9 +93,9 @@ export default {
             }).catch((err) => notify({ msg: err, isOk: false }));
         },
         saveFile () {
-            if (this.currFile) {
+            if (this.saveLoc) {
                 let currentRequest = this.$store.getters['request/get'];
-                this.$jsonfile.writeFile(this.currFile, currentRequest, { spaces: 4 })
+                this.$jsonfile.writeFile(this.saveLoc, currentRequest, { spaces: 4 })
                     .then((res) => {
                         notify({ msg: 'Request has been saved' });
                     })
@@ -108,7 +109,7 @@ export default {
                 let currentRequest = this.$store.getters['request/get'];
                 this.$jsonfile.writeFile(filePath, currentRequest, { spaces: 4 })
                     .then((res) => {
-                        this.currFile = filePath;
+                        this.saveLoc = filePath;
                         notify({ msg: 'Request has been saved' });
                     })
                     .catch(err => notify({ msg: err.toString(), isOk: false }));
@@ -153,13 +154,14 @@ export default {
                 height: '35px'
             };
         },
-        name () {
-            let filename = this.$path.basename(this.currFile);
-            debugger;
-            return filename;
+        isUnsaved () {
+            return this.lastRequest === null || fs.existsSync(this.lastRequest);
         },
+        ...mapFields('request', [
+            'saveLoc'
+        ]),
         ...mapFields([
-            'currFile'
+            'lastRequest'
         ])
     }
 };

@@ -98,6 +98,14 @@ export default {
                 this.$jsonfile.writeFile(this.saveLoc, currentRequest, { spaces: 4 })
                     .then((res) => {
                         notify({ msg: 'Request has been saved' });
+
+                        this.$jsonfile.writeFile(this.$config.file.history, this.saveLoc, { spaces: 4 })
+                            .then((res) => {
+                                debugger;
+                            }).catch((err) => {
+                                console.log(err);
+                                debugger;
+                            });
                     })
                     .catch(err => notify({ msg: err.toString(), isOk: false }));
             } else {

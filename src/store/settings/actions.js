@@ -1,6 +1,5 @@
 import jsonfile from 'jsonfile';
-import path from 'path';
-import { remote } from 'electron';
+import config from '../../js/config.js';
 
 export function update (context, payload) {
     return new Promise((resolve) => {
@@ -11,8 +10,7 @@ export function update (context, payload) {
 
 export function load (context) {
     return new Promise((resolve) => {
-        let settingsFile = path.join(remote.app.getPath('userData'), 'settings.json');
-        jsonfile.readFile(settingsFile)
+        jsonfile.readFile(config.file.settings)
             .then(settings => {
                 context.commit('update', settings);
                 resolve(settings);

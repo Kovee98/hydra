@@ -12,17 +12,21 @@
                 <q-list :style="menu">
                     <q-item clickable v-close-popup @click="newFile">
                         <q-item-section>New</q-item-section>
+                        <q-item-section class="text-right">Ctrl+N</q-item-section>
                     </q-item>
                     <q-separator />
                     <q-item clickable v-close-popup @click="openFile">
                         <q-item-section>Open...</q-item-section>
+                        <q-item-section class="text-right">Ctrl+O</q-item-section>
                     </q-item>
                     <q-separator />
                     <q-item clickable v-close-popup @click="saveFile">
                         <q-item-section>Save</q-item-section>
+                        <q-item-section class="text-right">Ctrl+S</q-item-section>
                     </q-item>
                     <q-item clickable v-close-popup @click="saveAsFile">
                         <q-item-section>Save as...</q-item-section>
+                        <q-item-section class="text-right">Ctrl+Shift+S</q-item-section>
                     </q-item>
                     <q-separator />
                     <q-item clickable @click="closeApp" v-close-popup>
@@ -141,7 +145,7 @@ export default {
         },
         menu () {
             return {
-                minWidth: '150px'
+                minWidth: '200px'
             };
         },
         title () {

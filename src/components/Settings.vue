@@ -88,7 +88,7 @@ export default {
         },
         bar () {
             return {
-                height: '40px'
+                height: '30px'
             };
         }
     },

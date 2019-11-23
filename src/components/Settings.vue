@@ -54,8 +54,6 @@
 import Confirm from 'components/Confirm';
 import ColorPicker from 'components/ColorPicker';
 import { notify } from '../js/util.js';
-import path from 'path';
-import { remote } from 'electron';
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
 import { defaults } from '../js/settings/defaults.js';
 
@@ -64,7 +62,6 @@ export default {
     components: { Confirm, ColorPicker },
     data () {
         return {
-            settingsFile: path.join(remote.app.getPath('userData'), 'settings.json')
         };
     },
     computed: {
@@ -99,28 +96,17 @@ export default {
         restore () {
             this.$store.dispatch('settings/update', defaults)
                 .then(() => {
-                    this.$jsonfile.writeFile(this.settingsFile, defaults, { spaces: 4 })
+                    this.$file.settings.restore(defaults)
                         .then(() => {
                             this.show = false;
-                            notify({ msg: 'Default settings have been restored' });
-                        })
-                        .catch(err => notify({ msg: err.toString(), isOk: false }));
-                })
-                .catch(err => notify({ msg: err.toString(), isOk: false }));
+                        });
+                }).catch((err) => {
+                    notify({ msg: err.toString(), isOk: false });
+                });
         },
         save () {
-            this.$jsonfile.writeFile(this.settingsFile, this.$store.getters['settings/get'], { spaces: 4 })
-                .then(() => {
-                    this.show = false;
-                    notify({ msg: 'Settings have been saved successfully' });
-                })
-                .catch(err => notify({ msg: err.toString(), isOk: false }));
+            this.$file.settings.save(this.$store.getters['settings/get']);
         }
-    },
-    mounted () {
-        this.$store.dispatch('settings/load')
-            .then((loadedSettings) => {
-            });
     }
 };
 </script>

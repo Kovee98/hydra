@@ -49,7 +49,7 @@
             </q-menu>
         </q-btn>
         <q-space />
-        <div>{{ $path.basename(saveLoc, '.json') || 'Untitled' }}{{ isUnsaved ? '*' : '' }}</div>
+        <div>{{ $path.basename(lastRequest || '', '.json') || 'Untitled' }}{{ isUnsaved ? '*' : '' }}</div>
         <q-space />
         <q-btn size="small" dense flat @click="minimize">
             <q-icon size="sm" name="minimize" />
@@ -66,9 +66,8 @@
 <script>
 import About from 'components/About';
 import { openURL } from 'quasar';
-import { open, saveAs } from '../js/file.js';
-import { notify } from '../js/util.js';
 import { mapFields } from 'vuex-map-fields';
+
 const fs = require('fs');
 
 export default {
@@ -85,43 +84,23 @@ export default {
             this.$store.dispatch('request/clear');
         },
         openFile () {
-            open().then((filePath) => {
-                this.$jsonfile.readFile(filePath)
-                    .then(request => {
-                        this.$store.dispatch('request/update', request);
-                    });
-            }).catch((err) => notify({ msg: err, isOk: false }));
+            this.$file.request.open()
+                .then((req) => {
+                    this.$store.dispatch('request/update', req.data);
+                    this.lastRequest = req.path;
+                });
         },
         saveFile () {
-            if (this.saveLoc) {
-                let currentRequest = this.$store.getters['request/get'];
-                this.$jsonfile.writeFile(this.saveLoc, currentRequest, { spaces: 4 })
-                    .then((res) => {
-                        notify({ msg: 'Request has been saved' });
-
-                        this.$jsonfile.writeFile(this.$config.file.history, this.saveLoc, { spaces: 4 })
-                            .then((res) => {
-                                debugger;
-                            }).catch((err) => {
-                                console.log(err);
-                                debugger;
-                            });
-                    })
-                    .catch(err => notify({ msg: err.toString(), isOk: false }));
-            } else {
-                this.saveAsFile();
-            }
+            this.$file.request.save(this.lastRequest, this.currReq)
+                .then((req) => {
+                    this.lastRequest = req.path;
+                });
         },
         saveAsFile () {
-            saveAs().then((filePath) => {
-                let currentRequest = this.$store.getters['request/get'];
-                this.$jsonfile.writeFile(filePath, currentRequest, { spaces: 4 })
-                    .then((res) => {
-                        this.saveLoc = filePath;
-                        notify({ msg: 'Request has been saved' });
-                    })
-                    .catch(err => notify({ msg: err.toString(), isOk: false }));
-            }).catch((err) => notify({ msg: err, isOk: false }));
+            this.$file.request.saveAs(this.currReq)
+                .then((req) => {
+                    this.lastRequest = req.path;
+                });
         },
         suggestFeature () {
             openURL(this.issuesUrl);
@@ -152,6 +131,9 @@ export default {
         }
     },
     computed: {
+        currReq () {
+            return this.$store.getters['request/get'];
+        },
         menu () {
             return {
                 minWidth: '150px'
@@ -165,9 +147,6 @@ export default {
         isUnsaved () {
             return this.lastRequest === null || fs.existsSync(this.lastRequest);
         },
-        ...mapFields('request', [
-            'saveLoc'
-        ]),
         ...mapFields([
             'lastRequest'
         ])

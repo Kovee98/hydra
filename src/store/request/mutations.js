@@ -1,5 +1,4 @@
 export function update (state, request) {
-    state.saveLoc = request.saveLoc;
     state.method = request.method;
     state.url = request.url;
     state.body = request.body;
@@ -9,7 +8,6 @@ export function update (state, request) {
 }
 
 export function clear (state) {
-    state.saveLoc = '';
     state.method = '';
     state.url = '';
     state.body = '';

@@ -1,5 +1,4 @@
 export default {
-    saveLoc: '',
     method: 'GET',
     url: 'https://my-json-server.typicode.com/kovee98/json-server/posts',
     body: '',

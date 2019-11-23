@@ -1,5 +1,4 @@
-import jsonfile from 'jsonfile';
-import config from '../../js/config.js';
+import { file } from '../../js/file.js';
 
 export function update (context, payload) {
     context.commit('update', payload);
@@ -11,11 +10,10 @@ export function clear (context) {
 
 export function load (context) {
     return new Promise((resolve) => {
-        jsonfile.readFile(config.file.history)
-            .then(request => {
-                context.commit('update', request);
-                resolve(request);
-            });
+        file.request.load().then((req) => {
+            context.commit('update', req.data);
+            return resolve(req.path);
+        });
     });
 }
 

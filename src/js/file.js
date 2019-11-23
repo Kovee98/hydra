@@ -91,17 +91,13 @@ var file = {
     },
     settings: {
         save: (settings) => {
-            return new Promise((resolve, reject) => {
-                jsonfile.writeFile(file.path.settings, settings, { spaces: 4 })
-                    .then(() => {
-                        notify({ msg: 'Settings have been saved successfully' });
-                        return resolve();
-                    })
-                    .catch(err => {
-                        notify({ msg: err.toString(), isOk: false });
-                        return reject();
-                    });
-            });
+            jsonfile.writeFile(file.path.settings, settings, { spaces: 4 })
+                .then(() => {
+                    notify({ msg: 'Settings have been saved successfully' });
+                })
+                .catch(err => {
+                    notify({ msg: err.toString(), isOk: false });
+                });
         },
         open: () => {
             return new Promise((resolve, reject) => {
@@ -129,10 +125,8 @@ var file = {
                 lastRequest: lastRequest
             };
             jsonfile.writeFile(file.path.history, history, { spaces: 4 })
-                .then(() => {
-                    console.log('history saved successfully');
-                }).catch((err) => {
-                    console.log(err);
+                .catch((err) => {
+                    notify({ msg: err.toString(), isOk: false });
                 });
         },
         load: () => {

@@ -1,7 +1,7 @@
 <template>
     <q-layout view="hHh lpR fFf">
         <top-bar />
-        <side-nav />
+        <side-bar />
         <q-page-container>
             <q-splitter v-model="splitter" class="fill">
                 <template v-slot:before>
@@ -19,11 +19,11 @@
 <script>
 import TopBar from 'components/TopBar';
 import Response from 'pages/Response';
-import SideNav from 'components/SideNav';
+import SideBar from 'components/SideBar';
 import BottomBar from 'components/BottomBar';
 
 export default {
-    components: { TopBar, Response, SideNav, BottomBar },
+    components: { TopBar, Response, SideBar, BottomBar },
     data () {
         return {
             splitter: 50

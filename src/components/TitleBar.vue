@@ -1,5 +1,10 @@
 <template>
     <q-bar class="q-electron-drag text-grey-5 q-pr-none inner-space" :style="title">
+        <span v-shortkey.once="['ctrl', 'n']" @shortkey="newFile()"/>
+        <span v-shortkey.once="['ctrl', 'o']" @shortkey="openFile()"/>
+        <span v-shortkey.once="['ctrl', 's']" @shortkey="saveFile()"/>
+        <span v-shortkey.once="['ctrl', 'shift', 's']" @shortkey="saveAsFile()"/>
+
         <q-icon name="img:statics/logo/logo.svg"/>
         <q-btn size="medium" flat dense no-caps>
             File
@@ -49,7 +54,7 @@
             </q-menu>
         </q-btn>
         <q-space />
-        <div>{{ $path.basename(lastRequest || '', '.json') || 'Untitled' }}{{ isUnsaved ? '*' : '' }}</div>
+        <div>{{ reqName }}{{ isUnsaved ? '*' : '' }}</div>
         <q-space />
         <q-btn size="small" dense flat @click="minimize">
             <q-icon size="sm" name="minimize" />
@@ -92,14 +97,14 @@ export default {
         },
         saveFile () {
             this.$file.request.save(this.lastRequest, this.currReq)
-                .then((req) => {
-                    this.lastRequest = req.path;
+                .then((loc) => {
+                    this.lastRequest = loc;
                 });
         },
         saveAsFile () {
             this.$file.request.saveAs(this.currReq)
-                .then((req) => {
-                    this.lastRequest = req.path;
+                .then((loc) => {
+                    this.lastRequest = loc;
                 });
         },
         suggestFeature () {
@@ -145,7 +150,10 @@ export default {
             };
         },
         isUnsaved () {
-            return this.lastRequest === null || fs.existsSync(this.lastRequest);
+            return !(this.lastRequest && fs.existsSync(this.lastRequest));
+        },
+        reqName () {
+            return this.$path.basename(this.lastRequest || '', '.json') || 'Untitled';
         },
         ...mapFields([
             'lastRequest'

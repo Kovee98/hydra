@@ -114,17 +114,13 @@ var file = {
             });
         },
         restore: (defaults) => {
-            return new Promise((resolve, reject) => {
-                jsonfile.writeFile(file.path.settings, defaults, { spaces: 4 })
-                    .then(() => {
-                        notify({ msg: 'Default settings have been restored' });
-                        return resolve();
-                    })
-                    .catch((err) => {
-                        notify({ msg: err.toString(), isOk: false });
-                        return reject();
-                    });
-            });
+            jsonfile.writeFile(file.path.settings, defaults, { spaces: 4 })
+                .then(() => {
+                    notify({ msg: 'Default settings have been restored' });
+                })
+                .catch((err) => {
+                    notify({ msg: err.toString(), isOk: false });
+                });
         }
     },
     history: {

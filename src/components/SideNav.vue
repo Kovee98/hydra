@@ -35,14 +35,23 @@
                     </q-list>
                 </q-menu>
             </q-item>
-            <q-separator />
+            <!-- <q-separator />
             <q-item :class="item" clickable @click="showSettings = true">
                 <q-item-section avatar>
                     <q-icon name="settings" />
                 </q-item-section>
                 <hint :label="'Settings'" />
                 <settings v-model="showSettings" />
-            </q-item>
+            </q-item> -->
+            <div class="fixed-bottom">
+                <q-item :class="item" clickable @click="showSettings = true">
+                    <q-item-section avatar>
+                        <q-icon name="settings" />
+                    </q-item-section>
+                    <hint :label="'Settings'" />
+                    <settings v-model="showSettings" />
+                </q-item>
+            </div>
         </q-list>
     </q-drawer>
 </template>

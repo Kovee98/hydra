@@ -6,10 +6,10 @@
         <span v-shortkey.once="['ctrl', 'shift', 's']" @shortkey="saveAsFile()"/>
 
         <q-icon name="img:statics/logo/logo.svg"/>
-        <q-btn size="medium" flat dense no-caps>
+        <q-btn size="small" flat dense no-caps>
             File
             <q-menu v-model="fileMenu">
-                <q-list :style="menu">
+                <q-list dense :style="menu">
                     <q-item clickable v-close-popup @click="newFile">
                         <q-item-section>New</q-item-section>
                         <q-item-section class="text-right">Ctrl+N</q-item-section>
@@ -35,10 +35,10 @@
                 </q-list>
             </q-menu>
         </q-btn>
-        <q-btn size="medium" flat dense no-caps>
+        <q-btn size="small" flat dense no-caps>
             Help
             <q-menu>
-                <q-list :style="menu">
+                <q-list dense :style="menu">
                     <q-item clickable @click="suggestFeature">
                         <q-item-section>Suggest feature</q-item-section>
                     </q-item>
@@ -61,13 +61,13 @@
         <div>{{ reqName }}{{ isUnsaved ? '*' : '' }}</div>
         <q-space />
         <q-btn size="small" dense flat @click="minimize">
-            <q-icon size="sm" name="minimize" />
+            <q-icon size="xs" name="minimize" />
         </q-btn>
         <q-btn size="small" dense flat @click="maximize">
-            <q-icon size="sm" name="crop_square" />
+            <q-icon size="xs" name="crop_square" />
         </q-btn>
         <q-btn size="small" dense flat @click="closeApp">
-            <q-icon size="sm" name="close" />
+            <q-icon size="xs" name="close" />
         </q-btn>
     </q-bar>
 </template>
@@ -150,7 +150,7 @@ export default {
         },
         title () {
             return {
-                height: '35px'
+                height: '30px'
             };
         },
         isUnsaved () {

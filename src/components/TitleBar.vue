@@ -1,56 +1,56 @@
 <template>
-    <q-bar class="q-electron-drag text-grey-5 q-pr-none inner-space" :style="title">
+    <q-bar class="q-electron-drag text-grey-5 q-pr-none q-pl-sm inner-space" :style="title">
         <span v-shortkey.once="['ctrl', 'n']" @shortkey="newFile()"/>
         <span v-shortkey.once="['ctrl', 'o']" @shortkey="openFile()"/>
         <span v-shortkey.once="['ctrl', 's']" @shortkey="saveFile()"/>
         <span v-shortkey.once="['ctrl', 'shift', 's']" @shortkey="saveAsFile()"/>
 
-        <q-icon name="img:statics/logo/logo.svg"/>
-        <q-btn size="small" flat dense no-caps>
+        <q-icon name="img:statics/logo/logo.svg" class="q-mr-xs" />
+        <q-btn size="small" :style="barBtn" flat dense no-caps :class="barBtnClass">
             File
             <q-menu v-model="fileMenu">
-                <q-list dense :style="menu">
-                    <q-item clickable v-close-popup @click="newFile">
+                <q-list dense :style="menu" class="q-py-xs">
+                    <q-item clickable v-close-popup @click="newFile" :class="qItemClass">
                         <q-item-section>New</q-item-section>
                         <q-item-section class="text-right">Ctrl+N</q-item-section>
                     </q-item>
-                    <q-separator />
-                    <q-item clickable v-close-popup @click="openFile">
+                    <q-separator inset class="q-my-xs" />
+                    <q-item clickable v-close-popup @click="openFile" :class="qItemClass">
                         <q-item-section>Open...</q-item-section>
                         <q-item-section class="text-right">Ctrl+O</q-item-section>
                     </q-item>
-                    <q-separator />
-                    <q-item clickable v-close-popup @click="saveFile">
+                    <q-separator inset class="q-my-xs" />
+                    <q-item clickable v-close-popup @click="saveFile" :class="qItemClass">
                         <q-item-section>Save</q-item-section>
                         <q-item-section class="text-right">Ctrl+S</q-item-section>
                     </q-item>
-                    <q-item clickable v-close-popup @click="saveAsFile">
+                    <q-item clickable v-close-popup @click="saveAsFile" :class="qItemClass">
                         <q-item-section>Save as...</q-item-section>
                         <q-item-section class="text-right">Ctrl+Shift+S</q-item-section>
                     </q-item>
-                    <q-separator />
-                    <q-item clickable @click="closeApp" v-close-popup>
+                    <q-separator inset class="q-my-xs" />
+                    <q-item clickable @click="closeApp" v-close-popup :class="qItemClass">
                         <q-item-section>Quit</q-item-section>
                     </q-item>
                 </q-list>
             </q-menu>
         </q-btn>
-        <q-btn size="small" flat dense no-caps>
+        <q-btn size="small" :style="barBtn" flat dense no-caps :class="barBtnClass">
             Help
             <q-menu>
-                <q-list dense :style="menu">
-                    <q-item clickable @click="suggestFeature">
+                <q-list dense :style="menu" class="q-py-xs">
+                    <q-item clickable @click="suggestFeature" :class="qItemClass">
                         <q-item-section>Suggest feature</q-item-section>
                     </q-item>
-                    <q-item clickable @click="reportBug">
+                    <q-item clickable @click="reportBug" :class="qItemClass">
                         <q-item-section>Report a bug</q-item-section>
                     </q-item>
-                    <q-separator />
-                    <q-item clickable>
+                    <q-separator inset class="q-my-xs" />
+                    <q-item clickable :class="qItemClass">
                         <q-item-section>Check for updates...</q-item-section>
                     </q-item>
-                    <q-separator />
-                    <q-item clickable @click="showAbout = true">
+                    <q-separator inset class="q-my-xs" />
+                    <q-item clickable @click="showAbout = true" :class="qItemClass">
                         <q-item-section>About</q-item-section>
                         <about v-model="showAbout" />
                     </q-item>
@@ -60,13 +60,13 @@
         <q-space />
         <div>{{ reqName }}{{ isUnsaved ? '*' : '' }}</div>
         <q-space />
-        <q-btn size="small" dense flat @click="minimize">
+        <q-btn size="small" :style="barBtn" dense flat @click="minimize" :class="barBtnClass">
             <q-icon size="xs" name="minimize" />
         </q-btn>
-        <q-btn size="small" dense flat @click="maximize">
+        <q-btn size="small" :style="barBtn" dense flat @click="maximize" :class="barBtnClass">
             <q-icon size="xs" name="crop_square" />
         </q-btn>
-        <q-btn size="small" dense flat @click="closeApp">
+        <q-btn size="small" :style="barBtn" dense flat @click="closeApp" :class="barBtnClass">
             <q-icon size="xs" name="close" />
         </q-btn>
     </q-bar>
@@ -140,6 +140,18 @@ export default {
         }
     },
     computed: {
+        barBtn () {
+            return {
+                minWidth: '45px',
+                margin: '0'
+            };
+        },
+        barBtnClass () {
+            return 'full-height no-border-radius';
+        },
+        qItemClass () {
+            return 'no-pointer';
+        },
         currReq () {
             return this.$store.getters['request/get'];
         },

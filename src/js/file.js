@@ -5,21 +5,11 @@ import { notify } from '../js/util.js';
 
 const remote = electron.remote;
 const dialog = remote.dialog;
-
 const opts = {
-    open: {
-        filters: [
-            { name: 'JSON', extensions: ['json'] }
-        ],
-        properties: ['openFile']
-    },
-    save: {
-        defaultPath: 'request',
-        filters: [
-            { name: 'JSON', extensions: ['json'] }
-        ],
-        properties: ['openFile']
-    }
+    filters: [
+        { name: 'JSON', extensions: ['json'] }
+    ],
+    properties: ['openFile']
 };
 
 var file = {
@@ -46,10 +36,8 @@ var file = {
         },
         saveAs: (req) => {
             return new Promise((resolve) => {
-                dialog.showSaveDialog(opts.save, (loc) => {
-                    if (!loc) {
-                        notify('File not saved');
-                    } else {
+                dialog.showSaveDialog(opts, (loc) => {
+                    if (loc) {
                         jsonfile.writeFile(loc, req, { spaces: 4 })
                             .then(() => {
                                 notify({ msg: 'Request has been saved' });
@@ -63,15 +51,20 @@ var file = {
             });
         },
         open: () => {
-            return new Promise((resolve, reject) => {
-                dialog.showOpenDialog(opts.open, (filePaths) => {
-                    jsonfile.readFile(filePaths[0])
-                        .then((req) => {
-                            file.history.save(filePaths[0]);
-                            return resolve({ data: req, path: filePaths[0] });
-                        }).catch((err) => {
-                            return reject(err);
-                        });
+            return new Promise((resolve) => {
+                dialog.showOpenDialog(opts, (filePaths) => {
+                    if (filePaths) {
+                        let loc = filePaths[0];
+                        jsonfile.readFile(loc)
+                            .then((req) => {
+                                if (isValid(req)) {
+                                    file.history.save(loc);
+                                    return resolve({ data: req, path: loc });
+                                } else {
+                                    notify({ msg: 'Request file is malformed', isOk: false });
+                                }
+                            });
+                    }
                 });
             });
         },
@@ -141,6 +134,19 @@ var file = {
         }
     }
 };
+
+function isValid (req) {
+    if (!req.hasOwnProperty('method') ||
+        !req.hasOwnProperty('url') ||
+        !req.hasOwnProperty('body') ||
+        !req.hasOwnProperty('params') ||
+        !req.hasOwnProperty('headers') ||
+        !req.hasOwnProperty('auth')) {
+        return false;
+    }
+
+    return true;
+}
 
 export {
     file

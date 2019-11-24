@@ -1,10 +1,10 @@
 <template>
     <q-dialog v-model="show" persistent maximized transition-show="slide-up" transition-hide="slide-down">
         <q-card class="justify-center">
-            <q-bar :style="bar">
+            <q-bar :style="bar" class="q-pa-none">
                 <div class="q-pa-sm">Settings</div>
                 <q-space />
-                <q-btn dense flat icon="close" @click="show = false" />
+                <q-btn dense flat icon="close" @click="show = false" class="full-height no-border-radius" />
             </q-bar>
             <q-scroll-area class="fill q-pt-lg q-pt-xl"
                            :thumb-style="thumbStyle">

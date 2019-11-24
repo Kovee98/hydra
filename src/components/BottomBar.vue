@@ -14,3 +14,9 @@ export default {
     components: { Status }
 };
 </script>
+
+<style lang="scss">
+    .q-toolbar {
+        min-height: 40px;
+    }
+</style>

@@ -1,7 +1,6 @@
 // app global css in SCSS form
-
 .fill {
-    height: calc(100vh - 131px);
+    height: calc(100vh - 110px);
 }
 .code {
     font-family: 'Consolas';
@@ -17,4 +16,17 @@
 }
 .tooltip {
     font-size: 1.05em;
+}
+.no-pointer {
+    cursor: default !important;
+}
+.q-bar {
+    * {
+        cursor: default;
+    }
+
+    > button {
+        min-width: 50px;
+        margin: 0;
+    }
 }

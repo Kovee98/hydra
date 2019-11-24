@@ -2,10 +2,10 @@
     <q-toolbar class="q-pa-none">
         <div class="row full-width">
             <div class="select">
-                <q-select dense transition-show="flip-left" transition-hide="flip-right" filled v-model="method" :options="options" label="Method" class="text-h6" />
+                <q-select dense square transition-show="flip-left" transition-hide="flip-right" filled v-model="method" :options="options" label="Method" class="text-h6" />
             </div>
             <div class="col">
-                <q-input dense filled v-model="url" label="URL" class="text-h6">
+                <q-input dense square filled v-model="url" label="URL" class="text-h6">
                     <template v-slot:append>
                         <q-btn v-if="url" dense flat @click="url = ''">
                             <q-icon name="clear" />
@@ -143,6 +143,6 @@ export default {
         width: 110px;
     }
     .send {
-        width: 100px;
+        width: 95px;
     }
 </style>

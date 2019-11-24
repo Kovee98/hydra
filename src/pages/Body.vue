@@ -1,18 +1,13 @@
 <template>
-    <q-scroll-area class="fill">
-        <codemirror ref="body"
-                    :options="opts"
-                    class="cursor-text" />
-        <!-- <q-input borderless autogrow
-                 @keydown.tab.prevent="tabber"
-                 v-model="body"
-                 class="text-body1"
-                 placeholder="{...}" /> -->
-    </q-scroll-area>
+    <div class="cursor-text" @click="focusEditor">
+        <q-scroll-area class="fill cursor-text">
+            <codemirror ref="editor" :options="opts" />
+        </q-scroll-area>
+    </div>
 </template>
 
 <script>
-import { mapFields } from 'vuex-map-fields';
+import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
 import { codemirror } from 'vue-codemirror';
 import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/lib/codemirror.css';
@@ -25,27 +20,32 @@ export default {
             opts: {
                 tabSize: 4,
                 mode: 'text/javascript',
-                theme: 'base16-dark',
+                // theme: 'base16-dark',
                 lineNumbers: true,
-                line: true,
                 smartIndent: false,
                 cursorHeight: 0.85
             }
         };
     },
     computed: {
-        ...mapFields('request', ['body'])
+        ...mapMultiRowFields('settings', ['colors']),
+        ...mapFields('request', ['body']),
+        style () {
+            let style = `
+                span.cm-number { color: ${this.colors} }
+            `;
+            return style;
+        },
+        editor () {
+            return this.$refs.editor.codemirror;
+        }
     },
     methods: {
-        tabber (e) {
-            let text = this.body;
-            let originalSelectionStart = e.target.selectionStart;
-            let textStart = text.slice(0, originalSelectionStart);
-            let textEnd = text.slice(originalSelectionStart);
-
-            this.body = `${textStart}\u00A0\u00A0\u00A0\u00A0${textEnd}`;
-            e.target.value = this.body; // required to make the cursor stay in place.
-            e.target.selectionEnd = e.target.selectionStart = originalSelectionStart + 4;
+        focusEditor () {
+            this.editor.focus();
+        },
+        getColor (type) {
+            return this.colors.filter((color) => color.type === type);
         }
     }
 };
@@ -54,5 +54,19 @@ export default {
 <style lang="scss">
     .CodeMirror {
         height: auto;
+        color: #e0e0e0;
+        background: transparent;
+    }
+    .CodeMirror-guttermarker, .CodeMirror-guttermarker-subtle {
+        color: transparent;
+    }
+    .CodeMirror-gutters {
+        background: transparent;
+    }
+    .CodeMirror-cursor {
+        border-left: 1px solid #b0b0b0;
+    }
+    .CodeMirror-linenumber {
+        color: #505050;
     }
 </style>

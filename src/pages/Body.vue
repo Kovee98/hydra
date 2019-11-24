@@ -1,8 +1,8 @@
 <template>
-    <q-scroll-area class="code fill q-px-md">
+    <q-scroll-area class="fill">
         <codemirror ref="body"
-                    :options="opts">
-        </codemirror>
+                    :options="opts"
+                    class="cursor-text" />
         <!-- <q-input borderless autogrow
                  @keydown.tab.prevent="tabber"
                  v-model="body"
@@ -27,7 +27,9 @@ export default {
                 mode: 'text/javascript',
                 theme: 'base16-dark',
                 lineNumbers: true,
-                line: true
+                line: true,
+                smartIndent: false,
+                cursorHeight: 0.85
             }
         };
     },

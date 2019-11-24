@@ -1,6 +1,6 @@
 <template>
-    <q-footer class="bg-dark">
-        <q-toolbar>
+    <q-footer class="bg-grey-10">
+        <q-toolbar class="q-px-none">
             <q-space />
             <status />
         </q-toolbar>

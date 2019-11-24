@@ -55,7 +55,7 @@ import Confirm from 'components/Confirm';
 import ColorPicker from 'components/ColorPicker';
 import { notify } from '../js/util.js';
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
-import { defaults } from '../js/settings/defaults.js';
+import { mapState } from 'vuex';
 
 export default {
     props: ['value'],
@@ -72,6 +72,7 @@ export default {
             'notifications.notifySettingsUpdate'
         ]),
         ...mapMultiRowFields('settings', ['colors']),
+        ...mapState(['settings']),
         show: {
             get () {
                 return this.value;
@@ -94,18 +95,18 @@ export default {
     },
     methods: {
         restore () {
-            this.$store.dispatch('settings/update', defaults)
+            this.$store.dispatch('settings/restore')
                 .then(() => {
-                    this.$file.settings.restore(defaults)
-                        .then(() => {
-                            this.show = false;
-                        });
+                    this.show = false;
                 }).catch((err) => {
                     notify({ msg: err.toString(), isOk: false });
                 });
         },
         save () {
-            this.$file.settings.save(this.$store.getters['settings/get']);
+            this.$file.settings.save(this.settings)
+                .then(() => {
+                    this.show = false;
+                });
         }
     }
 };

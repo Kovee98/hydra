@@ -17,6 +17,6 @@ export default {
 
 <style lang="scss">
     .q-toolbar {
-        min-height: 40px;
+        min-height: 30px;
     }
 </style>

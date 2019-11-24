@@ -1,19 +1,34 @@
 <template>
     <q-scroll-area class="code fill q-px-md">
-        <q-input borderless autogrow
+        <codemirror ref="body"
+                    :options="opts">
+        </codemirror>
+        <!-- <q-input borderless autogrow
                  @keydown.tab.prevent="tabber"
                  v-model="body"
                  class="text-body1"
-                 placeholder="{...}" />
+                 placeholder="{...}" /> -->
     </q-scroll-area>
 </template>
 
 <script>
 import { mapFields } from 'vuex-map-fields';
+import { codemirror } from 'vue-codemirror';
+import 'codemirror/mode/javascript/javascript.js';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/base16-dark.css';
 
 export default {
+    components: { codemirror },
     data () {
         return {
+            opts: {
+                tabSize: 4,
+                mode: 'text/javascript',
+                theme: 'base16-dark',
+                lineNumbers: true,
+                line: true
+            }
         };
     },
     computed: {

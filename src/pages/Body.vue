@@ -1,5 +1,6 @@
 <template>
     <div class="cursor-text" @click="focusEditor">
+        <div v-html="style" />
         <q-scroll-area class="fill cursor-text">
             <codemirror ref="editor" :options="opts" />
         </q-scroll-area>
@@ -22,8 +23,7 @@ export default {
                 mode: 'text/javascript',
                 // theme: 'base16-dark',
                 lineNumbers: true,
-                smartIndent: false,
-                cursorHeight: 0.85
+                smartIndent: false
             }
         };
     },
@@ -31,10 +31,9 @@ export default {
         ...mapMultiRowFields('settings', ['colors']),
         ...mapFields('request', ['body']),
         style () {
-            let style = `
-                span.cm-number { color: ${this.colors} }
-            `;
-            return style;
+            return '<style> span.cm-number { color: ' + this.getColor('Number') + '}' +
+                'span.cm-string { color: ' + this.getColor('String') + '}' +
+                'span.cm-keyword { color:' + this.getColor('Key') + '} </style>';
         },
         editor () {
             return this.$refs.editor.codemirror;
@@ -53,8 +52,9 @@ export default {
 
 <style lang="scss">
     .CodeMirror {
+        // font-size: 1.15em;
         height: auto;
-        color: #e0e0e0;
+        color: $grey-6;
         background: transparent;
     }
     .CodeMirror-guttermarker, .CodeMirror-guttermarker-subtle {
@@ -62,6 +62,7 @@ export default {
     }
     .CodeMirror-gutters {
         background: transparent;
+        border-right: none;
     }
     .CodeMirror-cursor {
         border-left: 1px solid #b0b0b0;

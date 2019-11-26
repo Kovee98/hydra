@@ -1,7 +1,7 @@
 <template>
     <div class="cursor-text" @click="focusEditor">
         <div v-html="style" />
-        <q-scroll-area class="fill cursor-text q-pa-sm">
+        <q-scroll-area id="body" class="fill q-pa-sm">
             <codemirror ref="editor" :options="opts" :value="exBody" class="code" />
         </q-scroll-area>
     </div>
@@ -21,7 +21,10 @@ export default {
                 tabSize: 4,
                 mode: 'text/javascript',
                 lineNumbers: true,
-                smartIndent: false
+                smartIndent: false,
+                lineWrapping: true,
+                lineWiseCopyCut: false,
+                readOnly: true
             }
         };
     },
@@ -59,22 +62,38 @@ export default {
 </script>
 
 <style lang="scss">
-    .CodeMirror {
+    #body .CodeMirror {
         height: auto;
         color: $grey-6;
         background: transparent;
     }
-    .CodeMirror-guttermarker, .CodeMirror-guttermarker-subtle {
+    #body div.CodeMirror-selected {
+        background: #303030;
+    }
+    #body .CodeMirror-line::selection, #body .CodeMirror-line > span::selection, #body .CodeMirror-line > span > span::selection {
+        background: rgba(48, 48, 48, .99);
+    }
+    #body .CodeMirror-line::-moz-selection, #body .CodeMirror-line > span::-moz-selection, #body .CodeMirror-line > span > span::-moz-selection {
+        background: rgba(48, 48, 48, .99);
+    }
+    #body .CodeMirror-guttermarker, .CodeMirror-guttermarker-subtle {
         color: transparent;
     }
-    .CodeMirror-gutters {
+    #body .CodeMirror-gutters {
         background: transparent;
         border-right: none;
     }
-    .CodeMirror-cursor {
+    #body .CodeMirror-cursor {
         border-left: 1px solid #b0b0b0;
     }
-    .CodeMirror-linenumber {
+    #body .CodeMirror-linenumber {
         color: #505050;
+    }
+    #body > .CodeMirror-activeline-background {
+        background: #202020;
+    }
+    #body .CodeMirror-matchingbracket {
+        text-decoration: underline;
+        color: white;
     }
 </style>

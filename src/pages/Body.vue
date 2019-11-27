@@ -2,7 +2,10 @@
     <div id="outside" class="cursor-text" @click="focusEditor">
         <div v-html="style" />
         <q-scroll-area id="body" class="fill q-pa-sm">
-            <codemirror ref="editor" :options="opts" :value="exBody" class="code" />
+            <codemirror v-model="body"
+                        :options="opts"
+                        ref="editor"
+                        class="code" />
         </q-scroll-area>
     </div>
 </template>
@@ -16,7 +19,6 @@ export default {
     components: { codemirror },
     data () {
         return {
-            exBody: '{\n\titem: \'thing\'\n\tnumber: 5\n\tvalue: null\n\tboolean: true\n}',
             opts: {
                 tabSize: 4,
                 mode: 'text/javascript',

@@ -1,5 +1,5 @@
 <template>
-    <div class="cursor-text" @click="focusEditor">
+    <div id="outside" class="cursor-text" @click="focusEditor">
         <div v-html="style" />
         <q-scroll-area id="body" class="fill q-pa-sm">
             <codemirror ref="editor" :options="opts" :value="exBody" class="code" />
@@ -24,7 +24,9 @@ export default {
                 smartIndent: false,
                 lineWrapping: true,
                 lineWiseCopyCut: false,
-                readOnly: true
+                cursorHeight: 0.85,
+                scrollbarStyle: 'null',
+                showCursorWhenSelecting: true
             }
         };
     },
@@ -49,8 +51,11 @@ export default {
         }
     },
     methods: {
-        focusEditor () {
-            this.editor.focus();
+        focusEditor (e) {
+            if (e.target.classList.contains('scroll')) {
+                this.editor.focus();
+                this.editor.execCommand('goDocEnd');
+            }
         },
         getColor (type) {
             return this.colors.filter((color) => {

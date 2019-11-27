@@ -21,7 +21,10 @@ export default {
         return {
             opts: {
                 tabSize: 4,
-                mode: 'text/javascript',
+                mode: {
+                    name: 'javascript',
+                    json: true
+                },
                 lineNumbers: true,
                 smartIndent: false,
                 lineWrapping: true,
@@ -44,7 +47,7 @@ export default {
             return '<style>' +
                 'span.cm-number { color: ' + number.color + ' !important }' +
                 'span.cm-string { color: ' + string.color + ' !important }' +
-                'span.cm-keyword, span.cm-variable { color: ' + key.color + ' !important }' +
+                'span.cm-keyword, span.cm-variable, span.cm-property { color: ' + key.color + ' !important }' +
                 'span.cm-atom { color: ' + nullVal.color + ' !important }' +
                 '</style>';
         },
@@ -67,40 +70,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss">
-    #body .CodeMirror {
-        height: auto;
-        color: $grey-6;
-        background: transparent;
-    }
-    #body div.CodeMirror-selected {
-        background: #303030;
-    }
-    #body .CodeMirror-line::selection, #body .CodeMirror-line > span::selection, #body .CodeMirror-line > span > span::selection {
-        background: rgba(48, 48, 48, .99);
-    }
-    #body .CodeMirror-line::-moz-selection, #body .CodeMirror-line > span::-moz-selection, #body .CodeMirror-line > span > span::-moz-selection {
-        background: rgba(48, 48, 48, .99);
-    }
-    #body .CodeMirror-guttermarker, .CodeMirror-guttermarker-subtle {
-        color: transparent;
-    }
-    #body .CodeMirror-gutters {
-        background: transparent;
-        border-right: none;
-    }
-    #body .CodeMirror-cursor {
-        border-left: 1px solid #b0b0b0;
-    }
-    #body .CodeMirror-linenumber {
-        color: #505050;
-    }
-    #body > .CodeMirror-activeline-background {
-        background: #202020;
-    }
-    #body .CodeMirror-matchingbracket {
-        text-decoration: underline;
-        color: white;
-    }
-</style>

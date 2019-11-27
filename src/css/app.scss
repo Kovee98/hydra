@@ -33,3 +33,40 @@
         margin: 0;
     }
 }
+
+
+
+.CodeMirror {
+    height: auto !important;
+    color: $grey-6 !important;
+    background: transparent !important;
+}
+div.CodeMirror-selected {
+    background: #303030 !important;
+}
+.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection {
+    background: rgba(48, 48, 48, .99) !important;
+}
+.CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection {
+    background: rgba(48, 48, 48, .99) !important;
+}
+.CodeMirror-guttermarker, .CodeMirror-guttermarker-subtle {
+    color: transparent !important;
+}
+.CodeMirror-gutters {
+    background: transparent !important;
+    border-right: none !important;
+}
+.CodeMirror-cursor {
+    border-left: 1px solid #b0b0b0 !important;
+}
+.CodeMirror-linenumber {
+    color: #505050 !important;
+}
+> .CodeMirror-activeline-background {
+    background: #202020 !important;
+}
+.CodeMirror-matchingbracket {
+    text-decoration: underline !important;
+    color: white !important;
+}

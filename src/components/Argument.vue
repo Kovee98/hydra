@@ -5,13 +5,13 @@
                 <q-checkbox size="lg" v-model="value.active" />
             </div>
             <div class="col">
-                <q-input filled v-model="value.key" />
+                <q-input dense filled v-model="value.key" />
             </div>
             <div class="col-1 text-center">
                 <div class="text-h5">=</div>
             </div>
             <div class="col">
-                <q-input filled v-model="value.value" />
+                <q-input dense filled v-model="value.value" />
             </div>
             <div class="col-1 text-center">
                 <transition appear

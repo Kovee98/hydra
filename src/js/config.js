@@ -5,7 +5,6 @@ var codemirror = {
     smartIndent: true,
     lineWrapping: true,
     lineWiseCopyCut: false,
-    cursorHeight: 0.85,
     scrollbarStyle: 'null',
     showCursorWhenSelecting: true,
     autoCloseBrackets: true,

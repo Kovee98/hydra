@@ -88,7 +88,7 @@ export default {
             let config = {
                 method: this.method,
                 url: this.url,
-                data: this.body,
+                data: JSON.parse(this.body),
                 params: params,
                 headers: headers,
                 auth: this.auth.basic.active ? auth : null

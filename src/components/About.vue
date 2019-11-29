@@ -9,7 +9,6 @@
                 <q-space />
                 <q-btn icon="close" flat round dense @click="show = false" />
             </q-card-section>
-
             <q-card-section v-for="info in infos" :key="info.id">
                 <div>{{info.label}}: {{info.desc}}</div>
             </q-card-section>

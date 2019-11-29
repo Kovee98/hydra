@@ -13,26 +13,14 @@
 <script>
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
 import { codemirror } from 'vue-codemirror';
+import config from '../js/config.js';
 import 'codemirror/mode/javascript/javascript.js';
 
 export default {
     components: { codemirror },
     data () {
         return {
-            opts: {
-                tabSize: 2,
-                mode: {
-                    name: 'javascript',
-                    json: true
-                },
-                lineNumbers: true,
-                smartIndent: false,
-                lineWrapping: true,
-                lineWiseCopyCut: false,
-                cursorHeight: 0.85,
-                scrollbarStyle: 'null',
-                showCursorWhenSelecting: true
-            }
+            opts: config.codemirror
         };
     },
     computed: {

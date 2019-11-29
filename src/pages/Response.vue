@@ -13,6 +13,7 @@
 import { codemirror } from 'vue-codemirror';
 import 'codemirror/mode/javascript/javascript.js';
 import { colorize } from '../js/util.js';
+import config from '../js/config.js';
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
 
 export default {
@@ -20,18 +21,7 @@ export default {
     data () {
         return {
             opts: {
-                tabSize: 2,
-                mode: {
-                    name: 'javascript',
-                    json: true
-                },
-                lineNumbers: true,
-                smartIndent: true,
-                lineWrapping: true,
-                lineWiseCopyCut: false,
-                cursorHeight: 0.85,
-                scrollbarStyle: 'null',
-                showCursorWhenSelecting: true,
+                ...config.codemirror,
                 readOnly: true
             }
         };

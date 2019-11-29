@@ -48,16 +48,15 @@ export default {
             set () {}
         },
         style () {
-            let number = this.getColor('Number')[0];
-            let string = this.getColor('String')[0];
             let key = this.getColor('Key')[0];
-            let nullVal = this.getColor('Null')[0];
-
+            let string = this.getColor('String')[0];
+            let number = this.getColor('Number')[0];
+            let atom = this.getColor('Null/Boolean')[0];
             return '<style>' +
-                'span.cm-number { color: ' + number.color + ' !important }' +
                 'span.cm-string { color: ' + string.color + ' !important }' +
+                'span.cm-number { color: ' + number.color + ' !important }' +
+                'span.cm-atom { color: ' + atom.color + ' !important }' +
                 'span.cm-keyword, span.cm-variable, span.cm-property { color: ' + key.color + ' !important }' +
-                'span.cm-atom { color: ' + nullVal.color + ' !important }' +
                 '</style>';
         },
         logoStyle () {

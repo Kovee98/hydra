@@ -26,9 +26,10 @@
                     <q-card-section class="col q-ml-none">
                         <span class="text-h6">Notifications</span>
                         <div class="column q-col-gutter-md q-py-lg">
-                            <q-checkbox dense v-model="notifyResponseSuccess" label="On response success" />
-                            <q-checkbox dense v-model="notifyResponseError" label="On response error" />
-                            <q-checkbox dense v-model="notifySettingsUpdate" label="On settings update" />
+                            <q-checkbox dense v-model="responseSuccess" label="On response success" />
+                            <q-checkbox dense v-model="settingsSave" label="On settings save" />
+                            <q-checkbox dense v-model="settingsRestore" label="On settings restore" />
+                            <q-checkbox dense v-model="requestSave" label="On request save" />
                         </div>
                     </q-card-section>
                 </div>
@@ -67,9 +68,10 @@ export default {
         ...mapFields(['settings']),
         ...mapFields('settings', [
             'history.mostRecent',
-            'notifications.notifyResponseSuccess',
-            'notifications.notifyResponseError',
-            'notifications.notifySettingsUpdate'
+            'notify.responseSuccess',
+            'notify.settingsSave',
+            'notify.settingsRestore',
+            'notify.requestSave'
         ]),
         ...mapMultiRowFields('settings', ['colors']),
         show: {
@@ -97,6 +99,7 @@ export default {
             this.$store.dispatch('settings/restore')
                 .then(() => {
                     this.show = false;
+                    notify({ msg: 'Settings restored' });
                 }).catch((err) => {
                     notify({ msg: err.toString(), isOk: false });
                 });
@@ -105,6 +108,9 @@ export default {
             this.$file.settings.save(this.settings)
                 .then(() => {
                     this.show = false;
+                    notify({ msg: 'Settings saved' });
+                }).catch((err) => {
+                    notify({ msg: err.toString(), isOk: false });
                 });
         }
     }

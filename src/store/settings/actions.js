@@ -17,19 +17,19 @@ export function restore (context) {
     return new Promise((resolve) => {
         let defaults = {
             colors: [
-                { type: 'Key', color: '#98e22b' },
+                { type: 'Key', color: '#80ff00' },
                 { type: 'String', color: '#e7db74' },
                 { type: 'Number', color: '#ac80ff' },
-                { type: 'Boolean', color: '#0a49cc' },
-                { type: 'Null', color: '#ac80ff' }
+                { type: 'Null/Boolean', color: '#ac80ff' }
             ],
             history: {
                 mostRecent: true
             },
-            notifications: {
-                notifyResponseSuccess: true,
-                notifyResponseError: true,
-                notifySettingsUpdate: true
+            notify: {
+                responseSuccess: true,
+                settingsSave: true,
+                settingsRestore: true,
+                requestSave: true
             }
         };
         context.commit('update', defaults);

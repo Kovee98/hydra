@@ -55,7 +55,7 @@ export default {
     methods: {
         send () {
             if (!isValidUrl(this.url)) {
-                notify({ msg: 'The url is invalid', isOk: false });
+                notify({ msg: 'URL is invalid', isOk: false });
                 return;
             }
 
@@ -103,7 +103,7 @@ export default {
             this.$axios(config).then((res) => {
                 this.handleRequest(res);
                 notify({ msg: 'Success!' });
-            }).catch(err => {
+            }).catch((err) => {
                 err.response.msg = err.message;
                 throw err.response;
             }).catch((res) => {

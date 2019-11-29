@@ -22,21 +22,14 @@ var file = {
             return new Promise((resolve, reject) => {
                 if (!loc) {
                     file.request.saveAs(req)
-                        .then((loc) => {
-                            return resolve(loc);
-                        }).catch((err) => {
-                            return reject(err);
-                        });
+                        .then((loc) => resolve(loc))
+                        .catch((err) => reject(err));
                 } else {
                     jsonfile.writeFile(loc, req, { spaces: 4 })
                         .then(() => {
-                            notify({ msg: 'Request has been saved' });
                             file.history.save(loc);
                             return resolve(loc);
-                        }).catch((err) => {
-                            notify({ msg: err.toString(), isOk: false });
-                            return reject();
-                        });
+                        }).catch((err) => reject(err));
                 }
             });
         },
@@ -47,31 +40,25 @@ var file = {
                         Promise.all([
                             jsonfile.writeFile(loc, req, { spaces: 4 }),
                             file.history.save(loc)
-                        ]).then(() => {
-                            notify({ msg: 'Request has been saved' });
-                            return resolve(loc);
-                        }).catch((err) => {
-                            notify({ msg: err.toString(), isOk: false });
-                            return reject(err);
-                        });
+                        ]).then(() => resolve(loc))
+                            .catch((err) => reject(err));
                     }
                 });
             });
         },
         open: () => {
-            return new Promise((resolve) => {
+            return new Promise((resolve, reject) => {
                 dialog.showOpenDialog(opts, (filePaths) => {
                     if (filePaths) {
                         let loc = filePaths[0];
-                        jsonfile.readFile(loc)
-                            .then((req) => {
-                                if (isValid(req)) {
-                                    file.history.save(loc);
-                                    return resolve({ data: req, path: loc });
-                                } else {
-                                    notify({ msg: 'Request file is malformed', isOk: false });
-                                }
-                            });
+                        jsonfile.readFile(loc).then((req) => {
+                            if (isValid(req)) {
+                                file.history.save(loc);
+                                return resolve({ data: req, path: loc });
+                            } else {
+                                return reject('Request file is malformed');
+                            }
+                        }).catch((err) => reject(err));
                     }
                 });
             });
@@ -84,6 +71,7 @@ var file = {
                             file.history.save(lastRequest);
                             return resolve({ data: req, path: lastRequest });
                         }).catch((err) => {
+                            notify({ msg: err.toString(), isOk: false });
                             return reject(err);
                         });
                 });
@@ -94,23 +82,15 @@ var file = {
         save: (settings) => {
             return new Promise((resolve, reject) => {
                 jsonfile.writeFile(file.path.settings, settings, { spaces: 4 })
-                    .then(() => {
-                        notify({ msg: 'Settings have been saved successfully' });
-                        return resolve();
-                    }).catch(err => {
-                        notify({ msg: err.toString(), isOk: false });
-                        return reject(err);
-                    });
+                    .then(() => resolve())
+                    .catch((err) => reject(err));
             });
         },
         open: () => {
             return new Promise((resolve, reject) => {
                 jsonfile.readFile(file.path.settings)
-                    .then((settings) => {
-                        resolve(settings);
-                    }).catch((err) => {
-                        reject(err);
-                    });
+                    .then((settings) => resolve(settings))
+                    .catch((err) => reject(err));
             });
         }
     },
@@ -118,9 +98,8 @@ var file = {
         save: (lastRequest) => {
             return new Promise((resolve, reject) => {
                 jsonfile.writeFile(file.path.history, { lastRequest: lastRequest }, { spaces: 4 })
-                    .then(() => {
-                        return resolve();
-                    }).catch((err) => {
+                    .then(() => resolve())
+                    .catch((err) => {
                         notify({ msg: err.toString(), isOk: false });
                         return reject();
                     });
@@ -129,10 +108,10 @@ var file = {
         load: () => {
             return new Promise((resolve, reject) => {
                 jsonfile.readFile(file.path.history)
-                    .then((history) => {
-                        resolve(history.lastRequest);
-                    }).catch((err) => {
-                        reject(err);
+                    .then((history) => resolve(history.lastRequest))
+                    .catch((err) => {
+                        notify({ msg: err.toString(), isOk: false });
+                        return reject(err);
                     });
             });
         }

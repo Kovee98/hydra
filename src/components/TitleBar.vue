@@ -79,7 +79,7 @@ import UpdateCheck from 'components/UpdateCheck';
 import { openURL } from 'quasar';
 import { mapFields } from 'vuex-map-fields';
 import info from '../js/info.js';
-import { compareVersions } from '../js/util.js';
+import { notify, compareVersions } from '../js/util.js';
 
 const fs = require('fs');
 
@@ -127,20 +127,28 @@ export default {
                     this.lastRequest = req.path;
                     this.isUnsaved = false;
                     this.data = '';
+                }).catch((err) => {
+                    notify({ msg: err.toString(), isOk: false });
                 });
         },
         saveFile () {
             this.$file.request.save(this.lastRequest, this.currReq)
                 .then((loc) => {
+                    notify({ msg: 'Request saved' });
                     this.lastRequest = loc;
                     this.isUnsaved = false;
+                }).catch((err) => {
+                    notify({ msg: err.toString(), isOk: false });
                 });
         },
         saveAsFile () {
             this.$file.request.saveAs(this.currReq)
                 .then((loc) => {
+                    notify({ msg: 'Request saved' });
                     this.lastRequest = loc;
                     this.isUnsaved = false;
+                }).catch((err) => {
+                    notify({ msg: err.toString(), isOk: false });
                 });
         },
         suggestFeature () {
@@ -182,7 +190,7 @@ export default {
             return 'full-height no-border-radius';
         },
         qItemClass () {
-            return 'no-pointer';
+            return 'no-pointer non-selectable';
         },
         currReq () {
             return this.$store.getters['request/get'];

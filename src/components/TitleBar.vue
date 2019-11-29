@@ -91,6 +91,9 @@ export default {
     methods: {
         newFile () {
             this.$store.dispatch('request/clear');
+            this.lastRequest = '';
+            this.isUnsaved = true;
+            this.data = '';
         },
         openFile () {
             this.$file.request.open()
@@ -172,11 +175,14 @@ export default {
             return this.isUnsaved || !(this.lastRequest && fs.existsSync(this.lastRequest));
         },
         reqName () {
-            return this.$path.basename(this.lastRequest || '', '.json') || 'Untitled';
+            return this.$path.basename(this.lastRequest) || 'Untitled';
         },
         ...mapFields([
             'lastRequest',
             'isUnsaved'
+        ]),
+        ...mapFields('response', [
+            'data'
         ])
     }
 };

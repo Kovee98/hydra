@@ -19,9 +19,14 @@ var file = {
     },
     request: {
         save: (loc, req) => {
-            return new Promise((resolve) => {
+            return new Promise((resolve, reject) => {
                 if (!loc) {
-                    file.request.saveAs(req);
+                    file.request.saveAs(req)
+                        .then((loc) => {
+                            return resolve(loc);
+                        }).catch((err) => {
+                            return reject(err);
+                        });
                 } else {
                     jsonfile.writeFile(loc, req, { spaces: 4 })
                         .then(() => {
@@ -30,22 +35,25 @@ var file = {
                             return resolve(loc);
                         }).catch((err) => {
                             notify({ msg: err.toString(), isOk: false });
+                            return reject();
                         });
                 }
             });
         },
         saveAs: (req) => {
-            return new Promise((resolve) => {
+            return new Promise((resolve, reject) => {
                 dialog.showSaveDialog(opts, (loc) => {
                     if (loc) {
-                        jsonfile.writeFile(loc, req, { spaces: 4 })
-                            .then(() => {
-                                notify({ msg: 'Request has been saved' });
-                                file.history.save(loc);
-                                return resolve(loc);
-                            }).catch((err) => {
-                                notify({ msg: err.toString(), isOk: false });
-                            });
+                        Promise.all([
+                            jsonfile.writeFile(loc, req, { spaces: 4 }),
+                            file.history.save(loc)
+                        ]).then(() => {
+                            notify({ msg: 'Request has been saved' });
+                            return resolve(loc);
+                        }).catch((err) => {
+                            notify({ msg: err.toString(), isOk: false });
+                            return reject(err);
+                        });
                     }
                 });
             });
@@ -108,13 +116,15 @@ var file = {
     },
     history: {
         save: (lastRequest) => {
-            let history = {
-                lastRequest: lastRequest
-            };
-            jsonfile.writeFile(file.path.history, history, { spaces: 4 })
-                .catch((err) => {
-                    notify({ msg: err.toString(), isOk: false });
-                });
+            return new Promise((resolve, reject) => {
+                jsonfile.writeFile(file.path.history, { lastRequest: lastRequest }, { spaces: 4 })
+                    .then(() => {
+                        return resolve();
+                    }).catch((err) => {
+                        notify({ msg: err.toString(), isOk: false });
+                        return reject();
+                    });
+            });
         },
         load: () => {
             return new Promise((resolve, reject) => {

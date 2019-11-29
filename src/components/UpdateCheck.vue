@@ -22,7 +22,7 @@ export default {
     props: ['value'],
     data () {
         return {
-            releasesUrl: 'https://github.com/Kovee98/hydra-2/releases/tag/'
+            releasesUrl: 'https://github.com/Kovee98/hydra/releases/tag/'
         };
     },
     methods: {

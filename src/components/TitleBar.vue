@@ -95,12 +95,12 @@ export default {
                 isUpToDate: true,
                 latest: ''
             },
-            issuesUrl: 'https://github.com/Kovee98/hydra-2/issues/new'
+            issuesUrl: 'https://github.com/Kovee98/hydra/issues/new'
         };
     },
     methods: {
         checkForUpdates () {
-            this.$axios.get('https://api.github.com/repos/Kovee98/hydra-2/releases')
+            this.$axios.get('https://api.github.com/repos/Kovee98/hydra/releases')
                 .then((res) => res.data)
                 .then((res) => {
                     let currentVersion = info.versions.app;

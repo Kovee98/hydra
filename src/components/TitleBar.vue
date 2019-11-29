@@ -46,8 +46,9 @@
                         <q-item-section>Report a bug</q-item-section>
                     </q-item>
                     <q-separator inset class="q-my-xs" />
-                    <q-item clickable :class="qItemClass">
+                    <q-item clickable @click="checkForUpdates" :class="qItemClass">
                         <q-item-section>Check for updates...</q-item-section>
+                        <update-check v-model="updateCheck" />
                     </q-item>
                     <q-separator inset class="q-my-xs" />
                     <q-item clickable @click="showAbout = true" :class="qItemClass">
@@ -58,7 +59,7 @@
             </q-menu>
         </q-btn>
         <q-space />
-        <div>{{ reqName }}{{ isUnsaved ? '*' : '' }}</div>
+        <div :style="{ fontSize: '.8em' }">{{ reqName }}{{ isUnsaved ? '*' : '' }}</div>
         <q-space />
         <q-btn size="small" :style="barBtn" dense flat @click="minimize" :class="barBtnClass">
             <q-icon size="xs" name="minimize" />
@@ -74,21 +75,45 @@
 
 <script>
 import About from 'components/About';
+import UpdateCheck from 'components/UpdateCheck';
 import { openURL } from 'quasar';
 import { mapFields } from 'vuex-map-fields';
+import info from '../js/info.js';
+import { compareVersions } from '../js/util.js';
 
 const fs = require('fs');
 
 export default {
-    components: { About },
+    components: { About, UpdateCheck },
     data () {
         return {
             fileMenu: false,
             showAbout: false,
+            updateCheck: {
+                msg: 'You are running the most recent version!',
+                show: false,
+                isUpToDate: true,
+                latest: ''
+            },
             issuesUrl: 'https://github.com/Kovee98/hydra-2/issues/new'
         };
     },
     methods: {
+        checkForUpdates () {
+            this.$axios.get('https://api.github.com/repos/Kovee98/hydra-2/releases')
+                .then((res) => res.data)
+                .then((res) => {
+                    let currentVersion = info.versions.app;
+                    let tags = res.map((release) => release['tag_name']);
+                    let latestVersion = tags[0];
+                    this.updateCheck.latest = latestVersion;
+                    if (compareVersions(latestVersion, currentVersion) > 0) {
+                        this.updateCheck.isUpToDate = false;
+                        this.updateCheck.msg = 'Looks like you aren\'t running the most recent version. Check out the latest version below.';
+                    }
+                    this.updateCheck.show = true;
+                });
+        },
         newFile () {
             this.$store.dispatch('request/clear');
             this.lastRequest = '';
@@ -101,6 +126,7 @@ export default {
                     this.$store.dispatch('request/update', req.data);
                     this.lastRequest = req.path;
                     this.isUnsaved = false;
+                    this.data = '';
                 });
         },
         saveFile () {

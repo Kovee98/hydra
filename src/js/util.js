@@ -30,30 +30,63 @@ var isValidUrl = (str) => {
     return !!pattern.test(str);
 };
 
-var colorize = (json) => {
-    if (typeof json !== 'string') {
-        json = JSON.stringify(json, undefined, 2);
+/*
+    returns:
+        - 0 if equal
+        - negative integer if v1 < v2
+        - positive integer if v1 > v2
+        - NaN if either version string is in the wrong format
+*/
+var compareVersions = (v1, v2, opts) => {
+    let lexicographical = opts && opts.lexicographical,
+        zeroExtend = opts && opts.zeroExtend,
+        v1parts = v1.split('.'),
+        v2parts = v2.split('.');
+    var isValidPart = (x) => (lexicographical ? /^\d+[A-Za-z]*$/ : /^\d+$/).test(x);
+
+    if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
+        return NaN;
     }
-    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, function (match) {
-        var cls = 'number';
-        if (/^"/.test(match)) {
-            if (/:$/.test(match)) {
-                cls = 'key';
-            } else {
-                cls = 'string';
-            }
-        } else if (/true|false/.test(match)) {
-            cls = 'boolean';
-        } else if (/null/.test(match)) {
-            cls = 'null';
+
+    if (zeroExtend) {
+        while (v1parts.length < v2parts.length) v1parts.push('0');
+        while (v2parts.length < v1parts.length) v2parts.push('0');
+    }
+
+    if (!lexicographical) {
+        v1parts = v1parts.map(Number);
+        v2parts = v2parts.map(Number);
+    }
+
+    for (var i = 0; i < v1parts.length; ++i) {
+        if (v2parts.length === i) {
+            return 1;
         }
-        return '<span class="' + cls + '">' + match + '</span>';
-    });
+
+        if (v1parts[i] === v2parts[i]) {
+            continue;
+        } else if (v1parts[i] > v2parts[i]) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    if (v1parts.length !== v2parts.length) {
+        return -1;
+    }
+
+    return 0;
 };
 
 export {
-    colorize,
+    compareVersions,
     isValidUrl,
     notify
+};
+
+export default {
+    compareVersions: compareVersions,
+    isValidUrl: isValidUrl,
+    notify: notify
 };

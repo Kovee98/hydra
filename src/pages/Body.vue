@@ -1,7 +1,7 @@
 <template>
     <div id="outside" class="cursor-text" @click="focusEditor">
         <div v-html="style" />
-        <q-scroll-area class="fill q-pa-sm">
+        <q-scroll-area class="fill q-py-sm">
             <codemirror v-model="body"
                         :options="opts"
                         ref="editor" />

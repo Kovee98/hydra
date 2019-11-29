@@ -1,6 +1,6 @@
 <template>
     <div>
-        <q-scroll-area v-if="data" id="response" class="fill q-pa-sm" :thumb-style="thumbStyle">
+        <q-scroll-area v-if="data" class="fill q-py-sm" :thumb-style="thumbStyle">
             <div v-html="style" />
             <codemirror v-model="res" :options="opts" />
         </q-scroll-area>

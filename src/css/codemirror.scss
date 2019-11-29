@@ -29,7 +29,7 @@ div.CodeMirror-selected {
 > .CodeMirror-activeline-background {
     background: #202020 !important;
 }
-.CodeMirror-matchingbracket {
+.CodeMirror-matchingbracket, .CodeMirror-nonmatchingbracket {
     text-decoration: underline !important;
-    color: white !important;
+    color: $grey-6 !important;
 }

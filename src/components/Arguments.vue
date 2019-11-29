@@ -2,7 +2,7 @@
     <div>
         <q-scroll-area class="fill q-pa-md">
             <div class="column q-gutter-lg">
-                <div class="row items-center justify-around q-col-gutter-md">
+                <div class="row items-center justify-around q-col-gutter-md non-selectable">
                     <div class="col-1" />
                     <div class="col">
                         <div class="text-body1">Key</div>

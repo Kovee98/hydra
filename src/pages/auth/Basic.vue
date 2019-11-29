@@ -1,6 +1,6 @@
 <template>
     <div class="column q-pa-xl q-gutter-lg">
-        <div class="text-h4">
+        <div class="text-h4 non-selectable">
             Basic
             <q-checkbox @input="update" v-model="active">
                 <hint :label="active ? 'enabled' : 'disabled'" />

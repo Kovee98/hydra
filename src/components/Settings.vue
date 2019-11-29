@@ -55,7 +55,6 @@ import Confirm from 'components/Confirm';
 import ColorPicker from 'components/ColorPicker';
 import { notify } from '../js/util.js';
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
-import { mapState } from 'vuex';
 
 export default {
     props: ['value'],
@@ -65,6 +64,7 @@ export default {
         };
     },
     computed: {
+        ...mapFields(['settings']),
         ...mapFields('settings', [
             'history.mostRecent',
             'notifications.notifyResponseSuccess',
@@ -72,7 +72,6 @@ export default {
             'notifications.notifySettingsUpdate'
         ]),
         ...mapMultiRowFields('settings', ['colors']),
-        ...mapState(['settings']),
         show: {
             get () {
                 return this.value;

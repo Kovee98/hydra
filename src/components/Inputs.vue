@@ -88,13 +88,19 @@ export default {
             let config = {
                 method: this.method,
                 url: this.url,
-                data: JSON.parse(this.body),
                 params: params,
                 headers: headers,
                 auth: this.auth.basic.active ? auth : null
             };
 
-            this.$axios(config).then(res => {
+            if (this.body) {
+                config = {
+                    ...config,
+                    data: JSON.parse(this.body)
+                };
+            }
+
+            this.$axios(config).then((res) => {
                 this.handleRequest(res);
                 notify({ msg: 'Success!' });
             }).catch(err => {

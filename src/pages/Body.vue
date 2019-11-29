@@ -20,7 +20,7 @@ export default {
     data () {
         return {
             opts: {
-                tabSize: 4,
+                tabSize: 2,
                 mode: {
                     name: 'javascript',
                     json: true

@@ -26,6 +26,7 @@ export default {
     computed: {
         ...mapMultiRowFields('settings', ['colors']),
         ...mapFields('request', ['body']),
+        ...mapFields(['isUnsaved']),
         style () {
             let number = this.getColor('Number')[0];
             let string = this.getColor('String')[0];
@@ -54,6 +55,11 @@ export default {
             return this.colors.filter((color) => {
                 return color.type === type;
             });
+        }
+    },
+    watch: {
+        body () {
+            this.isUnsaved = true;
         }
     }
 };

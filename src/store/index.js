@@ -11,7 +11,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        lastRequest: ''
+        lastRequest: '',
+        isUnsaved: false
     },
     getters: {
         getField,

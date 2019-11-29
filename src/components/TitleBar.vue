@@ -97,18 +97,21 @@ export default {
                 .then((req) => {
                     this.$store.dispatch('request/update', req.data);
                     this.lastRequest = req.path;
+                    this.isUnsaved = false;
                 });
         },
         saveFile () {
             this.$file.request.save(this.lastRequest, this.currReq)
                 .then((loc) => {
                     this.lastRequest = loc;
+                    this.isUnsaved = false;
                 });
         },
         saveAsFile () {
             this.$file.request.saveAs(this.currReq)
                 .then((loc) => {
                     this.lastRequest = loc;
+                    this.isUnsaved = false;
                 });
         },
         suggestFeature () {
@@ -124,7 +127,7 @@ export default {
         },
         maximize () {
             if (process.env.MODE === 'electron') {
-                const win = this.$q.electron.remote.BrowserWindow.getFocusedWindow();
+                let win = this.$q.electron.remote.BrowserWindow.getFocusedWindow();
 
                 if (win.isMaximized()) {
                     win.unmaximize();
@@ -166,13 +169,14 @@ export default {
             };
         },
         isUnsaved () {
-            return !(this.lastRequest && fs.existsSync(this.lastRequest));
+            return this.isUnsaved || !(this.lastRequest && fs.existsSync(this.lastRequest));
         },
         reqName () {
             return this.$path.basename(this.lastRequest || '', '.json') || 'Untitled';
         },
         ...mapFields([
-            'lastRequest'
+            'lastRequest',
+            'isUnsaved'
         ])
     }
 };

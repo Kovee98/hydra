@@ -2,16 +2,16 @@
     <div class="column" @mouseenter="show = true" @mouseleave="show = false">
         <div class="row items-center justify-around q-gutter-xs">
             <div class="col-1 text-center">
-                <q-checkbox size="lg" v-model="value.active" />
+                <q-checkbox size="lg" @input="update" v-model="value.active" />
             </div>
             <div class="col">
-                <q-input dense filled v-model="value.key" />
+                <q-input dense filled @input="update" v-model="value.key" />
             </div>
             <div class="col-1 text-center">
                 <div class="text-h5">=</div>
             </div>
             <div class="col">
-                <q-input dense filled v-model="value.value" />
+                <q-input dense filled @input="update" v-model="value.value" />
             </div>
             <div class="col-1 text-center">
                 <transition appear
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { mapFields } from 'vuex-map-fields';
+
 export default {
     props: ['value', 'remove'],
     data () {
@@ -36,8 +38,15 @@ export default {
     },
     methods: {
         removeArg () {
-            this.$store.dispatch(this.remove, this.i);
+            this.$store.dispatch(this.remove, this.$vnode.key);
+            this.isUnsaved = true;
+        },
+        update () {
+            this.isUnsaved = true;
         }
+    },
+    computed: {
+        ...mapFields(['isUnsaved'])
     }
 };
 </script>

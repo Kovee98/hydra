@@ -35,6 +35,7 @@
 
 <script>
 import Argument from 'components/Argument';
+import { mapFields } from 'vuex-map-fields';
 
 export default {
     props: ['value', 'remove', 'add'],
@@ -42,7 +43,11 @@ export default {
     methods: {
         addArg () {
             this.$store.dispatch(this.add, { key: '', value: '', active: true });
+            this.isUnsaved = true;
         }
+    },
+    computed: {
+        ...mapFields(['isUnsaved'])
     }
 };
 </script>

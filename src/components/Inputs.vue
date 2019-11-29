@@ -45,7 +45,12 @@ export default {
             'params',
             'headers',
             'auth'
-        ])
+        ]),
+        ...mapFields(['isUnsaved'])
+    },
+    watch: {
+        method () { this.isUnsaved = true; },
+        url () { this.isUnsaved = true; }
     },
     methods: {
         send () {

@@ -7,7 +7,7 @@
                         ref="response"
                         class="code" />
         </q-scroll-area>
-        <div v-if="!data" class="fill row items-center">
+        <div v-if="!data" class="fill row items-center non-selectable">
             <div class="full-width text-center">
                 <q-img :src="logo" :style="logoStyle" />
                 <div class="text-grey-10 text-h4">Send a request</div>
@@ -18,7 +18,6 @@
 
 <script>
 import { codemirror } from 'vue-codemirror';
-import 'codemirror/mode/javascript/javascript.js';
 import { colorize } from '../js/util.js';
 import config from '../js/config.js';
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields';

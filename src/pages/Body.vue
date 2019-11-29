@@ -14,7 +14,6 @@
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
 import { codemirror } from 'vue-codemirror';
 import config from '../js/config.js';
-import 'codemirror/mode/javascript/javascript.js';
 
 export default {
     components: { codemirror },

@@ -1,6 +1,6 @@
 export default {
-    method: 'GET',
-    url: 'https://my-json-server.typicode.com/kovee98/json-server/posts',
+    method: '',
+    url: '',
     body: '',
     params: [
         {

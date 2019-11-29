@@ -8,8 +8,11 @@ export function update (context, payload) {
 }
 
 export function load (context) {
-    file.settings.open().then((settings) => {
-        context.commit('update', settings);
+    return new Promise((resolve, reject) => {
+        file.settings.open().then((settings) => {
+            context.commit('update', settings);
+            return resolve(settings);
+        });
     });
 }
 

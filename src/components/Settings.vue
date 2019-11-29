@@ -20,7 +20,7 @@
                     <q-card-section class="col q-ml-none">
                         <span class="text-h6">History</span>
                         <div class="q-py-lg">
-                            <q-checkbox dense v-model="mostRecent" label="Save most recent" color="primary" />
+                            <q-checkbox dense v-model="mostRecent" label="Load last request on startup" color="primary" />
                         </div>
                     </q-card-section>
                     <q-card-section class="col q-ml-none">

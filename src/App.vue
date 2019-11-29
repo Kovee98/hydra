@@ -13,15 +13,19 @@ export default {
         this.$q.dark.set(true);
     },
     mounted () {
-        this.$store.dispatch('request/load')
-            .then((lastRequest) => {
-                this.lastRequest = lastRequest;
-            });
-        this.$store.dispatch('settings/load');
+        this.$store.dispatch('settings/load').then(() => {
+            if (this.settings.history.mostRecent) {
+                this.$store.dispatch('request/load')
+                    .then((lastRequest) => {
+                        this.lastRequest = lastRequest;
+                    });
+            }
+        });
     },
     computed: {
         ...mapFields([
-            'lastRequest'
+            'lastRequest',
+            'settings'
         ])
     }
 };

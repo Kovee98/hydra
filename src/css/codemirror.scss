@@ -33,3 +33,6 @@ div.CodeMirror-selected {
     text-decoration: underline !important;
     color: $grey-6 !important;
 }
+.CodeMirror-activeline-background {
+    background: $dark !important;
+}

@@ -1,11 +1,10 @@
 <template>
     <div id="outside" class="cursor-text" @click="focusEditor">
         <div v-html="style" />
-        <q-scroll-area id="body" class="fill q-pa-sm">
+        <q-scroll-area class="fill q-pa-sm">
             <codemirror v-model="body"
                         :options="opts"
-                        ref="editor"
-                        class="code" />
+                        ref="editor" />
         </q-scroll-area>
     </div>
 </template>
@@ -19,7 +18,10 @@ export default {
     components: { codemirror },
     data () {
         return {
-            opts: config.codemirror
+            opts: {
+                ...config.codemirror,
+                styleActiveLine: true
+            }
         };
     },
     computed: {

@@ -1,11 +1,8 @@
 <template>
     <div>
-        <q-scroll-area v-if="data" class="fill q-pa-sm" :thumb-style="thumbStyle">
+        <q-scroll-area v-if="data" id="response" class="fill q-pa-sm" :thumb-style="thumbStyle">
             <div v-html="style" />
-            <codemirror v-model="res"
-                        :options="opts"
-                        ref="response"
-                        class="code" />
+            <codemirror v-model="res" :options="opts" />
         </q-scroll-area>
         <div v-if="!data" class="fill row items-center non-selectable">
             <div class="full-width text-center">
@@ -18,7 +15,6 @@
 
 <script>
 import { codemirror } from 'vue-codemirror';
-import { colorize } from '../js/util.js';
 import config from '../js/config.js';
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields';
 
@@ -29,12 +25,13 @@ export default {
             logo: 'statics/logo/logo.svg',
             opts: {
                 ...config.codemirror,
-                readOnly: true
+                readOnly: true,
+                matchBrackets: false,
+                cursorBlinkRate: -1
             }
         };
     },
     methods: {
-        colorize: colorize,
         getColor (type) {
             return this.colors.filter((color) => {
                 return color.type === type;

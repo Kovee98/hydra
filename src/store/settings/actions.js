@@ -26,7 +26,7 @@ export function restore (context) {
                 mostRecent: true
             },
             notify: {
-                responseSuccess: true,
+                responseSuccess: false,
                 settingsSave: true,
                 settingsRestore: true,
                 requestSave: true

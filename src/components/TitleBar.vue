@@ -134,7 +134,9 @@ export default {
         saveFile () {
             this.$file.request.save(this.lastRequest, this.currReq)
                 .then((loc) => {
-                    notify({ msg: 'Request saved' });
+                    if (this.settings.notify.requestSave) {
+                        notify({ msg: 'Request saved' });
+                    }
                     this.lastRequest = loc;
                     this.isUnsaved = false;
                 }).catch((err) => {
@@ -144,7 +146,9 @@ export default {
         saveAsFile () {
             this.$file.request.saveAs(this.currReq)
                 .then((loc) => {
-                    notify({ msg: 'Request saved' });
+                    if (this.settings.notify.requestSave) {
+                        notify({ msg: 'Request saved' });
+                    }
                     this.lastRequest = loc;
                     this.isUnsaved = false;
                 }).catch((err) => {
@@ -211,6 +215,7 @@ export default {
         reqName () {
             return this.$path.basename(this.lastRequest) || 'Untitled';
         },
+        ...mapFields(['settings']),
         ...mapFields([
             'lastRequest',
             'isUnsaved'

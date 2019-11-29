@@ -46,6 +46,7 @@ export default {
             'headers',
             'auth'
         ]),
+        ...mapFields(['settings']),
         ...mapFields(['isUnsaved'])
     },
     watch: {
@@ -102,7 +103,9 @@ export default {
 
             this.$axios(config).then((res) => {
                 this.handleRequest(res);
-                notify({ msg: 'Success!' });
+                if (this.settings.notify.responseSuccess) {
+                    notify({ msg: 'Success!' });
+                }
             }).catch((err) => {
                 err.response.msg = err.message;
                 throw err.response;

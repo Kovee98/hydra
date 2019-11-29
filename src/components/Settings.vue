@@ -96,10 +96,13 @@ export default {
     },
     methods: {
         restore () {
+            let settingsRestore = this.settingsRestore;
             this.$store.dispatch('settings/restore')
                 .then(() => {
                     this.show = false;
-                    notify({ msg: 'Settings restored' });
+                    if (settingsRestore) {
+                        notify({ msg: 'Settings restored' });
+                    }
                 }).catch((err) => {
                     notify({ msg: err.toString(), isOk: false });
                 });
@@ -108,7 +111,9 @@ export default {
             this.$file.settings.save(this.settings)
                 .then(() => {
                     this.show = false;
-                    notify({ msg: 'Settings saved' });
+                    if (this.settingsSave) {
+                        notify({ msg: 'Settings saved' });
+                    }
                 }).catch((err) => {
                     notify({ msg: err.toString(), isOk: false });
                 });

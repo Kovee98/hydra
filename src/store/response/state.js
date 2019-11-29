@@ -1,5 +1,5 @@
 export default {
-    data: 'No response (send a request)',
+    data: '',
     status: {
         code: '',
         text: '',

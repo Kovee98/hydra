@@ -7,24 +7,26 @@
     "capacitorId": "",
     "author": "Joshua Kovalchik",
     "private": true,
+    "main": "src-electron/main-process/electron-main.js",
     "scripts": {
         "lint": "eslint --ext .js,.vue . --fix",
         "test": "echo \"No test specified\" && exit 0",
+        "build": "quasar build -m electron",
         "dev": "quasar dev -m electron",
-        "start": "yarn run dev"
+        "start": "npm run dev"
     },
     "dependencies": {
-        "@quasar/extras": "^1.0.0",
+        "@quasar/extras": "^1.3.3",
         "axios": "^0.18.1",
         "jsonfile": "^5.0.0",
-        "quasar": "^1.0.0",
+        "quasar": "^1.5.2",
         "vue-codemirror": "^4.0.6",
         "vue-prism-editor": "^0.3.0",
         "vue-shortkey": "^3.1.7",
         "vuex-map-fields": "^1.3.6"
     },
     "devDependencies": {
-        "@quasar/app": "^1.0.0",
+        "@quasar/app": "^1.3.1",
         "@quasar/quasar-app-extension-icon-genie": "^1.1.2",
         "@vue/eslint-config-standard": "^4.0.0",
         "babel-eslint": "^10.0.1",
@@ -32,6 +34,7 @@
         "electron": "^5.0.0",
         "electron-debug": "^3.0.0",
         "electron-devtools-installer": "^2.2.4",
+        "electron-packager": "^14.1.1",
         "eslint": "^5.10.0",
         "eslint-loader": "^2.1.1",
         "eslint-plugin-vue": "^5.0.0"

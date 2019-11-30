@@ -148,30 +148,25 @@ module.exports = function (ctx) {
 
         // https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
         electron: {
-            // bundler: 'builder', // or 'packager'
-
-            extendWebpack (cfg) {
-                // do something with Electron main process Webpack cfg
-                // chainWebpack also available besides this extendWebpack
-            },
-
+            bundler: 'packager',
             packager: {
                 // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
-
+                dir: 'src-electron',
+                arch: 'all',
+                platform: 'all'
                 // OS X / Mac App Store
-                // appBundleId: '',
-                // appCategoryType: '',
+                // appBundleId: 'com.jkovalchik.hydra',
+                // appCategoryType: 'app-category-type=public.app-category.developer-tools'
                 // osxSign: '',
                 // protocol: 'myapp://path',
 
                 // Windows only
                 // win32metadata: { ... }
             },
-
             builder: {
                 // https://www.electron.build/configuration/configuration
 
-                // appId: 'hydra',
+                // appId: 'com.jkovalchik.hydra',
             }
         }
     };

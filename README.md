@@ -1,23 +1,4 @@
+<p align="center"><img src="https://github.com/Kovee98/hydra/blob/master/app-icon.png" width="200" /></p>
+
 # Hydra
-
-A minimal Http client.
-
-## Install the dependencies
-```bash
-yarn
-```
-
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-yarn start | yarn run dev | quasar dev
-```
-
-### Lint the files
-```bash
-yarn run lint
-```
-
-### Build the app for production
-```bash
-quasar build
-```
+An Http client.

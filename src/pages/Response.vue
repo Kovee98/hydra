@@ -7,7 +7,7 @@
         <div v-if="!data" class="fill row items-center non-selectable">
             <div class="full-width text-center">
                 <q-img :src="logo" :style="logoStyle" />
-                <div class="text-grey-10 text-h4">Send a request</div>
+                <div class="text-grey-10 text-h4 q-pt-md">Send a request</div>
             </div>
         </div>
     </div>

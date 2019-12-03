@@ -62,7 +62,7 @@ export default {
         logoStyle () {
             return {
                 width: '150px',
-                filter: 'contrast(20%) sepia(100%) hue-rotate(195deg) saturate(0%) brightness(20%)',
+                filter: 'contrast(30%) sepia(100%) hue-rotate(195deg) saturate(0%) brightness(20%)',
                 opacity: '1'
             };
         },

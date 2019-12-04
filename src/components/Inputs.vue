@@ -60,6 +60,11 @@ export default {
                 return;
             }
 
+            if (!this.method) {
+                notify({ msg: 'Method is required', isOk: false });
+                return;
+            }
+
             let params = {};
             this.params.forEach((param) => {
                 if (param.active && param.key && param.value) {

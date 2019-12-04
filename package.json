@@ -1,6 +1,6 @@
 {
     "name": "hydra",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A minimal Http client.",
     "productName": "Hydra",
     "cordovaId": "com.jkovalchik.hydra",

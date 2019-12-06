@@ -12,6 +12,8 @@ export function load (context) {
         file.settings.open().then((settings) => {
             context.commit('update', settings);
             return resolve(settings);
+        }).catch((err) => {
+            console.log('err:', err);
         });
     });
 }

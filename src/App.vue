@@ -18,8 +18,12 @@ export default {
                 this.$store.dispatch('request/load')
                     .then((lastRequest) => {
                         this.lastRequest = lastRequest;
+                    }).catch((err) => {
+                        console.log('err:', err);
                     });
             }
+        }).catch((err) => {
+            console.log('err:', err);
         });
     },
     computed: {

@@ -71,9 +71,12 @@ var file = {
                             file.history.save(lastRequest);
                             return resolve({ data: req, path: lastRequest });
                         }).catch((err) => {
-                            notify({ msg: err.toString(), isOk: false });
+                            console.log('err:', err);
+                            // notify({ msg: err.toString(), isOk: false });
                             return reject(err);
                         });
+                }).catch((err) => {
+                    console.log('err:', err);
                 });
             });
         }
@@ -110,7 +113,8 @@ var file = {
                 jsonfile.readFile(file.path.history)
                     .then((history) => resolve(history.lastRequest))
                     .catch((err) => {
-                        notify({ msg: err.toString(), isOk: false });
+                        console.log('err:', err);
+                        // notify({ msg: err.toString(), isOk: false });
                         return reject(err);
                     });
             });

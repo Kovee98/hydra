@@ -59,7 +59,7 @@
             </q-menu>
         </q-btn>
         <q-space />
-        <div :style="{ fontSize: '.8em' }">{{ reqName }}{{ isUnsaved ? '*' : '' }}</div>
+        <div :style="{ fontSize: '.8em' }">{{ isUnsaved ? '*' : '' }}{{ reqName }} - Hydra</div>
         <q-space />
         <q-btn size="small" :style="barBtn" dense flat @click="minimize" :class="barBtnClass">
             <q-icon size="xs" name="minimize" />

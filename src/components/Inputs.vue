@@ -24,7 +24,8 @@
 </template>
 
 <script>
-import { isValidUrl, notify } from '../js/util.js';
+import { isUrl, notify } from '../js/util.js';
+import opts from '../js/config.js';
 import { mapFields } from 'vuex-map-fields';
 
 export default {
@@ -55,7 +56,8 @@ export default {
     },
     methods: {
         send () {
-            if (!isValidUrl(this.url)) {
+            let url = this.url.replace(/^(https?:\/\/)?/i, (a) => a || 'http://');
+            if (!isUrl(url, opts.url)) {
                 notify({ msg: 'URL is invalid', isOk: false });
                 return;
             }

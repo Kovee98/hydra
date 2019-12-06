@@ -1,3 +1,5 @@
+import isUrl from 'validator/es/lib/isUrl';
+
 /*
     General utility methods
 */
@@ -18,11 +20,6 @@ var notify = ({ msg, isOk = true }) => {
             }
         ]
     });
-};
-
-var isValidUrl = (url) => {
-    let pattern = new RegExp('^http://\\w+(.\\w+)(:[0-9]+)?/?(/[.\\w])*$');
-    return pattern.test(url);
 };
 
 /*
@@ -76,12 +73,12 @@ var compareVersions = (v1, v2, opts) => {
 
 export {
     compareVersions,
-    isValidUrl,
+    isUrl,
     notify
 };
 
 export default {
     compareVersions: compareVersions,
-    isValidUrl: isValidUrl,
+    isUrl: isUrl,
     notify: notify
 };

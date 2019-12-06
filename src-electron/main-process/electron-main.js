@@ -21,7 +21,8 @@ function createWindow () {
         useContentSize: true,
         icon: path.join(__dirname, '../icons/icon.ico'),
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            webSecurity: false
         },
         frame: false
     });

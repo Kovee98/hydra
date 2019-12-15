@@ -1,5 +1,3 @@
-import isUrl from 'validator/es/lib/isUrl';
-
 /*
     General utility methods
 */
@@ -73,12 +71,10 @@ var compareVersions = (v1, v2, opts) => {
 
 export {
     compareVersions,
-    isUrl,
     notify
 };
 
 export default {
     compareVersions: compareVersions,
-    isUrl: isUrl,
     notify: notify
 };

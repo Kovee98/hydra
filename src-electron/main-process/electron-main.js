@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron';
+const windowStateKeeper = require('electron-window-state');
 const path = require('path');
 
 /**
@@ -12,13 +13,13 @@ if (process.env.PROD) {
 let mainWindow;
 
 function createWindow () {
-    /**
-   * Initial window options
-   */
+    let windowState = windowStateKeeper({
+        defaultWidth: 1000,
+        defaultHeight: 750
+    });
+
     mainWindow = new BrowserWindow({
-        width: 1400,
-        height: 835,
-        useContentSize: true,
+        ...windowState,
         icon: path.join(__dirname, '../icons/icon.ico'),
         webPreferences: {
             nodeIntegration: true,
@@ -34,6 +35,8 @@ function createWindow () {
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
+
+    windowState.manage(mainWindow);
 }
 
 app.on('ready', createWindow);

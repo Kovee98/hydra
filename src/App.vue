@@ -6,7 +6,7 @@
 
 <script>
 import { mapFields } from 'vuex-map-fields';
-import { notify } from './js/util.js';
+// import { notify } from './js/util.js';
 
 export default {
     name: 'App',
@@ -14,33 +14,20 @@ export default {
         this.$q.dark.set(true);
     },
     mounted () {
-        Promise.all([
-            this.ensureSettingsExists(),
-            this.ensureHistoryExists()
-        ]).then(() => {
+        this.ensureSettingsExists().then(() => {
             this.$store.dispatch('settings/load').then(() => {
                 if (this.settings.history.mostRecent) {
                     this.$store.dispatch('request/load').then((lastRequest) => {
                         this.lastRequest = lastRequest;
                     }).catch(() => {
-                        notify({ msg: 'Error loading last request', isOk: false });
+                        this.lastRequest = '';
+                        this.isUnsaved = true;
                     });
                 }
             });
         });
     },
     methods: {
-        ensureHistoryExists () {
-            return new Promise((resolve) => {
-                this.$file.history.exists().then(() => {
-                    this.$file.request.exists().then(() => resolve()).catch(() => {
-                        this.$file.request.save({ req: this.request }).then(() => resolve());
-                    });
-                }).catch(() => {
-                    this.$file.request.save({ req: this.request }).then(() => resolve());
-                });
-            });
-        },
         ensureSettingsExists () {
             return new Promise((resolve) => {
                 this.$file.settings.exists().then(() => resolve()).catch(() => {
@@ -53,6 +40,7 @@ export default {
     computed: {
         ...mapFields([
             'lastRequest',
+            'isUnsaved',
             'settings',
             'request'
         ])

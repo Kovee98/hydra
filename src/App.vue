@@ -19,6 +19,7 @@ export default {
                 if (this.settings.history.mostRecent) {
                     this.$store.dispatch('request/load').then((lastRequest) => {
                         this.lastRequest = lastRequest;
+                        this.isUnsaved = false;
                     }).catch(() => {
                         this.lastRequest = '';
                         this.isUnsaved = true;

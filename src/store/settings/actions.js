@@ -13,7 +13,7 @@ export function load (context) {
             context.commit('update', settings);
             return resolve(settings);
         }).catch((err) => {
-            console.log('err:', err);
+            return reject(err);
         });
     });
 }

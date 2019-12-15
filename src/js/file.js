@@ -1,10 +1,11 @@
 import electron from 'electron';
 import path from 'path';
 import jsonfile from 'jsonfile';
-import { notify } from '../js/util.js';
 
+const fs = require('fs');
 const remote = electron.remote;
 const dialog = remote.dialog;
+const baseDir = remote.app.getPath('userData');
 const opts = {
     filters: [
         { name: 'JSON', extensions: ['json'] }
@@ -14,11 +15,11 @@ const opts = {
 
 var file = {
     path: {
-        history: path.join(remote.app.getPath('userData'), 'history.json'),
-        settings: path.join(remote.app.getPath('userData'), 'settings.json')
+        history: path.join(baseDir, 'history.json'),
+        settings: path.join(baseDir, 'settings.json')
     },
     request: {
-        save: (loc, req) => {
+        save: ({ loc = path.join(baseDir, 'request.json'), req }) => {
             return new Promise((resolve, reject) => {
                 if (!loc) {
                     file.request.saveAs(req)
@@ -66,17 +67,29 @@ var file = {
         load: () => {
             return new Promise((resolve, reject) => {
                 file.history.load().then((lastRequest) => {
-                    jsonfile.readFile(lastRequest)
-                        .then((req) => {
+                    if (fs.existsSync(lastRequest)) {
+                        jsonfile.readFile(lastRequest).then((req) => {
                             file.history.save(lastRequest);
                             return resolve({ data: req, path: lastRequest });
                         }).catch((err) => {
-                            console.log('err:', err);
-                            // notify({ msg: err.toString(), isOk: false });
                             return reject(err);
                         });
+                    } else {
+                        return reject();
+                    }
                 }).catch((err) => {
-                    console.log('err:', err);
+                    return reject(err);
+                });
+            });
+        },
+        exists: () => {
+            return new Promise((resolve, reject) => {
+                file.history.load().then((lastRequest) => {
+                    if (fs.existsSync(lastRequest)) {
+                        return resolve();
+                    } else {
+                        return reject();
+                    }
                 });
             });
         }
@@ -95,6 +108,15 @@ var file = {
                     .then((settings) => resolve(settings))
                     .catch((err) => reject(err));
             });
+        },
+        exists: () => {
+            return new Promise((resolve, reject) => {
+                if (fs.existsSync(file.path.settings)) {
+                    return resolve();
+                } else {
+                    return reject();
+                }
+            });
         }
     },
     history: {
@@ -103,8 +125,7 @@ var file = {
                 jsonfile.writeFile(file.path.history, { lastRequest: lastRequest }, { spaces: 4 })
                     .then(() => resolve())
                     .catch((err) => {
-                        notify({ msg: err.toString(), isOk: false });
-                        return reject();
+                        return reject(err);
                     });
             });
         },
@@ -112,11 +133,16 @@ var file = {
             return new Promise((resolve, reject) => {
                 jsonfile.readFile(file.path.history)
                     .then((history) => resolve(history.lastRequest))
-                    .catch((err) => {
-                        console.log('err:', err);
-                        // notify({ msg: err.toString(), isOk: false });
-                        return reject(err);
-                    });
+                    .catch((err) => reject(err));
+            });
+        },
+        exists: () => {
+            return new Promise((resolve, reject) => {
+                if (fs.existsSync(file.path.history)) {
+                    return resolve();
+                } else {
+                    return reject();
+                }
             });
         }
     }

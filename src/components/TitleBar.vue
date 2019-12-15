@@ -132,7 +132,7 @@ export default {
                 });
         },
         saveFile () {
-            this.$file.request.save(this.lastRequest, this.currReq)
+            this.$file.request.save({ loc: this.lastRequest, req: this.currReq })
                 .then((loc) => {
                     if (this.settings.notify.requestSave) {
                         notify({ msg: 'Request saved' });

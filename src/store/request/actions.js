@@ -9,12 +9,13 @@ export function clear (context) {
 }
 
 export function load (context) {
-    return new Promise((resolve) => {
-        file.request.load()
-            .then((req) => {
-                context.commit('update', req.data);
-                return resolve(req.path);
-            });
+    return new Promise((resolve, reject) => {
+        file.request.load().then((req) => {
+            context.commit('update', req.data);
+            return resolve(req.path);
+        }).catch((err) => {
+            return reject(err);
+        });
     });
 }
 

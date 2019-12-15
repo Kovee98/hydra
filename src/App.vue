@@ -34,12 +34,10 @@ export default {
             return new Promise((resolve) => {
                 this.$file.history.exists().then(() => {
                     this.$file.request.exists().then(() => resolve()).catch(() => {
-                        this.$file.request.save({ req: this.request });
-                        return resolve();
+                        this.$file.request.save({ req: this.request }).then(() => resolve());
                     });
                 }).catch(() => {
-                    this.$file.request.save({ req: this.request });
-                    return resolve();
+                    this.$file.request.save({ req: this.request }).then(() => resolve());
                 });
             });
         },

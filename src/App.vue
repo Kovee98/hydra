@@ -24,6 +24,8 @@ export default {
                         this.lastRequest = '';
                         this.isUnsaved = true;
                     });
+                } else {
+                    this.isUnsaved = true;
                 }
             });
         });

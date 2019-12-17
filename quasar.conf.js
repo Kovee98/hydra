@@ -148,7 +148,7 @@ module.exports = function (ctx) {
 
         // https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
         electron: {
-            bundler: 'packager',
+            // bundler: 'packager',
             packager: {
                 // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
                 dir: 'src-electron',

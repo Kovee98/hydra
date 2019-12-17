@@ -19,19 +19,19 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "packageManager": "npm",
+        "icon": "./app-icon.png"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "my_app"
-          }
+          "config": {}
         },
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin",
-            "linux"
+            "darwin"
           ]
         },
         {

@@ -1,6 +1,6 @@
 {
   "name": "hydra",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A minimal Http client.",
   "productName": "Hydra",
   "cordovaId": "com.jkovalchik.hydra",
@@ -14,39 +14,9 @@
     "build": "quasar build -m electron",
     "dev": "quasar dev -m electron",
     "start": "npm run dev",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
-  },
-  "config": {
-    "forge": {
-      "packagerConfig": {
-        "packageManager": "npm",
-        "icon": "./app-icon.png"
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
-      ]
-    }
+    "zip": "for i in */; do zip -r '${i%/}.zip' '$i'; done"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "@quasar/extras": "^1.3.3",
     "axios": "^0.18.1",
     "electron-window-state": "^5.0.3",
@@ -58,11 +28,6 @@
     "vuex-map-fields": "^1.3.6"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.46",
-    "@electron-forge/maker-deb": "^6.0.0-beta.46",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.46",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.46",
-    "@electron-forge/maker-zip": "^6.0.0-beta.46",
     "@quasar/app": "^1.3.1",
     "@quasar/quasar-app-extension-icon-genie": "^1.1.2",
     "@vue/eslint-config-standard": "^4.0.0",
@@ -74,7 +39,9 @@
     "electron-packager": "^14.1.1",
     "eslint": "^5.10.0",
     "eslint-loader": "^2.1.1",
-    "eslint-plugin-vue": "^5.0.0"
+    "eslint-plugin-vue": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.0.1"
   },
   "engines": {
     "node": ">= 8.9.0",

@@ -140,33 +140,11 @@ module.exports = function (ctx) {
             }
         },
 
-        // https://quasar.dev/quasar-cli/developing-cordova-apps/configuring-cordova
-        cordova: {
-            // id: 'org.cordova.quasar.app',
-            // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
-        },
-
-        // https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
         electron: {
-            // bundler: 'packager',
+            bundler: 'packager',
             packager: {
-                // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
                 dir: 'src-electron',
-                arch: 'all',
-                platform: 'all'
-                // OS X / Mac App Store
-                // appBundleId: 'com.jkovalchik.hydra',
-                // appCategoryType: 'app-category-type=public.app-category.developer-tools'
-                // osxSign: '',
-                // protocol: 'myapp://path',
-
-                // Windows only
-                // win32metadata: { ... }
-            },
-            builder: {
-                // https://www.electron.build/configuration/configuration
-
-                // appId: 'com.jkovalchik.hydra',
+                all: true
             }
         }
     };

@@ -8,19 +8,15 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue . --fix",
     "test": "echo \"No test specified\" && exit 0",
-    "build": "quasar build -m electron",
     "dev": "quasar dev -m electron",
     "start": "npm run dev",
-    "zip": "for i in */; do zip -r '${i%/}.zip' '$i'; done",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder -mwl"
+    "dist": "npm run build"
   },
   "config": {
     "forge": "./forge.config.js"
   },
   "build": {
-    "appId": "com.electron.hydra",
-    "productName": "Hydra",
+    "appId": "com.jkovalchik.Hydra",
     "win": {
       "target": "nsis"
     },
@@ -28,10 +24,21 @@
       "oneClick": false
     },
     "linux": {
-      "target": "AppImage"
+      "target": ["AppImage", "deb"]
     },
-    "mac": {
-      "target": "dmg"
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
     }
   },
   "dependencies": {

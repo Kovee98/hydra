@@ -109,24 +109,14 @@ export default {
                     notify({ msg: 'Success!' });
                 }
             }).catch((err) => {
-                err.response.msg = err.message;
-                throw err.response;
-            }).catch((res) => {
-                this.handleRequest(res);
-                notify({ msg: res.msg, isOk: false });
+                this.handleRequest(err);
+                notify({ msg: err.message, isOk: false });
             }).finally(() => {
                 this.isLoading = false;
             });
         },
         handleRequest (res) {
             let endTime = performance.now();
-
-            let color = 'info';
-            if (res.status >= 200 && res.status <= 226) {
-                color = 'positive';
-            } else if (res.status >= 400) {
-                color = 'red';
-            }
 
             let time = (endTime - this.startTime);
             let units = 'ms';
@@ -140,12 +130,11 @@ export default {
             }
 
             this.$store.dispatch('response/update', {
-                data: res.data,
+                data: res.data || {},
                 status: {
-                    code: res.status,
-                    text: res.statusText,
-                    color: color,
-                    time: time.toFixed(2),
+                    code: res.status || '404',
+                    text: res.statusText || 'Not Found',
+                    time: time.toFixed(2) || '0.00',
                     units: units
                 }
             });

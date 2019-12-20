@@ -1,7 +1,7 @@
 {
   "name": "hydra",
   "description": "An Http client.",
-  "version": "0.2.2",
+  "version": "0.2.1",
   "license": "GPL-3.0-only",
   "author": "Joshua Kovalchik",
   "repository": "https://github.com/Kovee98/hydra",
@@ -16,18 +16,21 @@
   },
   "build": {
     "appId": "com.jkovalchik.hydra",
+    "productName": "Hydra",
+    "copyright": "Copyright © 2019 ${author}",
     "publish": "github",
-    "win": {
-      "target": "nsis"
-    },
     "nsis": {
+      "shortcutName": "Hydra",
       "oneClick": false,
-      "license": "LICENSE.md"
-    },
-    "linux": {
-      "target": ["AppImage", "deb"]
+      "allowToChangeInstallationDirectory": true,
+      "license": "LICENSE.md",
+      "installerIcon": "src-electron/icons/icon.ico",
+      "artifactName": "${productName}-setup-${version}.${ext}"
     },
     "dmg": {
+      "icon": "src-electron/icons/icon.icns",
+      "artifactName": "${productName}-setup-${version}.${ext}",
+      "category": "public.app-category.developer-tools",
       "contents": [
         {
           "x": 130,
@@ -42,6 +45,10 @@
       ]
     },
     "appImage": {
+        "executableName": "Hydra",
+        "artifactName": "${productName}-${version}.${ext}",
+        "category": "Development",
+        "icon": "src-electron/icons/linux-32x32.png",
         "license": "LICENSE.md"
     }
   },

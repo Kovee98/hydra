@@ -1,29 +1,32 @@
 {
   "name": "hydra",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "An Http client.",
   "author": "Joshua Kovalchik",
   "repository": "https://github.com/Kovee98/hydra",
   "private": true,
+  "license": "GPL-3.0-only",
   "main": "src-electron/main-process/electron-main.js",
   "scripts": {
     "lint": "eslint --ext .js,.vue . --fix",
-    "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev -m electron",
     "start": "npm run dev",
     "dist": "npm run build",
-    "release": "electron-builder"
+    "release": "electron-builder",
+    "test": "echo success"
   },
   "config": {
     "forge": "./forge.config.js"
   },
   "build": {
-    "appId": "com.jkovalchik.Hydra",
+    "appId": "com.jkovalchik.hydra",
+    "publish": "github",
     "win": {
       "target": "nsis"
     },
     "nsis": {
-      "oneClick": false
+      "oneClick": false,
+      "license": "LICENSE"
     },
     "linux": {
       "target": ["AppImage", "deb"]
@@ -41,6 +44,9 @@
           "path": "/Applications"
         }
       ]
+    },
+    "appImage": {
+        "license": "LICENSE"
     }
   },
   "dependencies": {

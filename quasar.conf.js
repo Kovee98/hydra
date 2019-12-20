@@ -138,27 +138,6 @@ module.exports = function (ctx) {
                     }
                 ]
             }
-        },
-
-        electron: {
-            bundler: 'packager',
-            packager: {
-                dir: 'src-electron',
-                all: true
-            },
-            builder: {
-                appId: 'com.electron.hydra',
-                productName: 'Hydra',
-                win: {
-                    target: 'nsis'
-                },
-                nsis: {
-                    oneClick: false
-                },
-                linux: {
-                    target: 'AppImage, deb, rpm, tar.gz'
-                }
-            }
         }
     };
 };

@@ -20,7 +20,7 @@ function createWindow () {
 
     mainWindow = new BrowserWindow({
         ...windowState,
-        icon: path.join(__dirname, '../icons/icon.ico'),
+        icon: path.join(__dirname, '../icons/icon.png'),
         webPreferences: {
             nodeIntegration: true,
             webSecurity: false

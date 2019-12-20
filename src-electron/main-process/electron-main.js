@@ -1,5 +1,4 @@
-const app = require('electron').app;
-const { BrowserWindow } = require('electron');
+const { app, BrowserWindow } = require('electron');
 const windowStateKeeper = require('electron-window-state');
 const path = require('path');
 

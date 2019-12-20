@@ -27,10 +27,12 @@
       "installerIcon": "src-electron/icons/icon.ico",
       "artifactName": "${productName}-setup-${version}.${ext}"
     },
+    "mac": {
+        "category": "public.app-category.developer-tools",
+        "icon": "src-electron/icons/icon.icns"
+    },
     "dmg": {
-      "icon": "src-electron/icons/icon.icns",
       "artifactName": "${productName}-setup-${version}.${ext}",
-      "category": "public.app-category.developer-tools",
       "contents": [
         {
           "x": 130,
@@ -44,11 +46,13 @@
         }
       ]
     },
-    "appImage": {
+    "linux": {
         "executableName": "Hydra",
+        "icon": "src-electron/icons/linux-32x32.png"
+    },
+    "appImage": {
         "artifactName": "${productName}-${version}.${ext}",
         "category": "Development",
-        "icon": "src-electron/icons/linux-32x32.png",
         "license": "LICENSE.md"
     }
   },

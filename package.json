@@ -54,7 +54,7 @@
     "linux": {
         "target": "AppImage",
         "executableName": "Hydra",
-        "icon": "src-electron/icons/linux-32x32.png"
+        "icon": "src-electron/icons/linux-512x512.png"
     },
     "appImage": {
         "artifactName": "${productName}-${version}.${ext}",

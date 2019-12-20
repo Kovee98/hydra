@@ -30,7 +30,9 @@ function createWindow () {
 
     mainWindow.removeMenu();
 
-    mainWindow.loadURL(process.env.APP_URL);
+    if (process.env.APP_URL) {
+        mainWindow.loadURL(process.env.APP_URL);
+    }
 
     mainWindow.on('closed', () => {
         mainWindow = null;

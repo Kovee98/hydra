@@ -20,8 +20,8 @@
     "copyright": "Copyright © 2019 ${author}",
     "publish": "github",
     "win": {
-        "icon": "src-electron/icons/icon.ico",
-        "target": "nsis"
+      "icon": "src-electron/icons/icon.ico",
+      "target": "nsis"
     },
     "nsis": {
       "shortcutName": "Hydra",
@@ -29,15 +29,15 @@
       "allowToChangeInstallationDirectory": true,
       "license": "LICENSE.md",
       "installerIcon": "src-electron/icons/icon.ico",
-      "artifactName": "${productName}-setup-${version}.${ext}"
+      "artifactName": "hydra-setup-${version}.${ext}"
     },
     "mac": {
-        "target": "dmg",
-        "category": "public.app-category.developer-tools",
-        "icon": "src-electron/icons/icon.icns"
+      "target": "dmg",
+      "category": "public.app-category.developer-tools",
+      "icon": "src-electron/icons/icon.icns"
     },
     "dmg": {
-      "artifactName": "${productName}-setup-${version}.${ext}",
+      "artifactName": "hydra-setup-${version}.${ext}",
       "contents": [
         {
           "x": 130,
@@ -52,14 +52,14 @@
       ]
     },
     "linux": {
-        "target": "AppImage",
-        "executableName": "Hydra",
-        "icon": "src-electron/icons/linux-512x512.png"
+      "target": "AppImage",
+      "executableName": "Hydra",
+      "icon": "src-electron/icons/linux-512x512.png"
     },
     "appImage": {
-        "artifactName": "${productName}-${version}.${ext}",
-        "category": "Development",
-        "license": "LICENSE.md"
+      "artifactName": "hydra-${version}.${ext}",
+      "category": "Development",
+      "license": "LICENSE.md"
     }
   },
   "dependencies": {

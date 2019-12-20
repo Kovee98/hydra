@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron';
+const app = require('electron').app;
+const BrowserWindow = require('electron').BrowserWindow;
 const windowStateKeeper = require('electron-window-state');
 const path = require('path');
 

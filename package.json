@@ -3,6 +3,7 @@
   "version": "0.2.1",
   "description": "An Http client.",
   "author": "Joshua Kovalchik",
+  "repository": "https://github.com/Kovee98/hydra",
   "private": true,
   "main": "src-electron/main-process/electron-main.js",
   "scripts": {
@@ -10,7 +11,8 @@
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev -m electron",
     "start": "npm run dev",
-    "dist": "npm run build"
+    "dist": "npm run build",
+    "release": "electron-builder"
   },
   "config": {
     "forge": "./forge.config.js"

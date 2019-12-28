@@ -3,8 +3,14 @@
 */
 
 import { Notify } from 'quasar';
+import log from './logging.js';
 
 var notify = ({ msg, isOk = true }) => {
+    log.log({
+        level: isOk ? 'info' : 'error',
+        message: msg
+    });
+
     Notify.create({
         message: msg,
         color: isOk ? 'default' : 'red',

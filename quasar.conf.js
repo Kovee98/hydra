@@ -11,7 +11,8 @@ module.exports = function (ctx) {
             'axios',
             'jsonfile',
             'path',
-            'file'
+            'file',
+            'log'
         ],
 
         // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css

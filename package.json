@@ -1,6 +1,6 @@
 {
   "name": "hydra",
-  "description": "An Http client.",
+  "description": "An HTTP client.",
   "version": "0.3.0",
   "license": "GPL-3.0-only",
   "author": "Joshua Kovalchik",

@@ -31,7 +31,7 @@ function createWindow () {
     mainWindow.removeMenu();
 
     console.log('APP_URL:', process.env.APP_URL);
-    mainWindow.loadURL('http://localhost:8080');
+    mainWindow.loadURL(process.env.APP_URL || '/');
     // let file = path.join(__dirname, '../../src/index.template.html');
     // console.log('file:', file);
     // mainWindow.loadFile(file);

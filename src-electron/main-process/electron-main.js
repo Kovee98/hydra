@@ -31,7 +31,7 @@ function createWindow () {
     mainWindow.removeMenu();
 
     console.log('APP_URL:', process.env.APP_URL);
-    mainWindow.loadURL(process.env.APP_URL || '/');
+    mainWindow.loadURL(process.env.APP_URL || 'index.html');
     // let file = path.join(__dirname, '../../src/index.template.html');
     // console.log('file:', file);
     // mainWindow.loadFile(file);

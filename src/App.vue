@@ -6,7 +6,6 @@
 
 <script>
 import { mapFields } from 'vuex-map-fields';
-// import { notify } from './js/util.js';
 
 export default {
     name: 'App',

@@ -7,6 +7,7 @@ const logsDir = path.join(electron.remote.app.getPath('userData'), 'logs');
 
 const errorLog = path.join(logsDir, 'error.log');
 const infoLog = path.join(logsDir, 'info.log');
+const exceptionsLog = path.join(logsDir, 'exceptions.log');
 const fileFormat = printf(({ level, message, label, timestamp }) => {
     return `${timestamp} - ${level.toUpperCase()}: ${message}`;
 });
@@ -22,6 +23,9 @@ var log = createLogger({
     transports: [
         new transports.File({ filename: errorLog, level: 'error' }),
         new transports.File({ filename: infoLog })
+    ],
+    exceptionHandlers: [
+        new transports.File({ filename: exceptionsLog })
     ]
 });
 

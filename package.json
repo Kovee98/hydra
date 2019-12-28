@@ -1,7 +1,7 @@
 {
   "name": "hydra",
   "description": "An Http client.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "GPL-3.0-only",
   "author": "Joshua Kovalchik",
   "repository": "https://github.com/Kovee98/hydra",
